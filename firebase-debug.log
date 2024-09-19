@@ -1,0 +1,19 @@
+[debug] [2024-09-08T18:41:09.527Z] ----------------------------------------------------------------------
+[debug] [2024-09-08T18:41:09.529Z] Command:       /opt/homebrew/Cellar/node/21.7.1/bin/node /opt/homebrew/bin/firebase use --add
+[debug] [2024-09-08T18:41:09.529Z] CLI Version:   13.16.0
+[debug] [2024-09-08T18:41:09.529Z] Platform:      darwin
+[debug] [2024-09-08T18:41:09.529Z] Node Version:  v21.7.1
+[debug] [2024-09-08T18:41:09.529Z] Time:          Sun Sep 08 2024 19:41:09 GMT+0100 (West Africa Standard Time)
+[debug] [2024-09-08T18:41:09.529Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-09-08T18:41:09.564Z] Object "" in "firebase.json" has unknown property: {"additionalProperty":"flutter"}
+[debug] [2024-09-08T18:41:09.566Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-09-08T18:41:09.566Z] > authorizing via signed-in user (sunday.okpoluaefe@gmail.com)
+[debug] [2024-09-08T18:41:09.567Z] > refreshing access token with scopes: []
+[debug] [2024-09-08T18:41:09.568Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2024-09-08T18:41:09.568Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-09-08T18:41:12.200Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2024-09-08T18:41:12.200Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2024-09-08T18:41:12.217Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects pageSize=1000
+[debug] [2024-09-08T18:41:13.056Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects 200
+[debug] [2024-09-08T18:41:13.056Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects [omitted]
