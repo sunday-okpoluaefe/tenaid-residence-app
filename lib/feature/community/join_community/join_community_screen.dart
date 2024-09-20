@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/ds/component/app_scrollview.dart';
 import 'package:tenaid_mobile/ds/component/icon_size.dart';
 import 'package:tenaid_mobile/ds/component/linear_progress_indicator.dart';
+import 'package:tenaid_mobile/ds/component/page_header.dart';
 import 'package:tenaid_mobile/ds/component/primary_button.dart';
 import 'package:tenaid_mobile/ds/component/spacing.dart';
 import 'package:tenaid_mobile/ds/component/text_field.dart';
@@ -56,17 +57,10 @@ class _State extends State<JoinCommunityScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  context.locale.join_community,
-                  style: context.text.headlineSmall,
-                ),
-                Text(
-                  context.locale.search_community_body,
-                  style: context.text.titleMedium?.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withOpacity(0.50)),
+                PageHeader(
+                  title: context.locale.join_community,
+                  description: context.locale.search_community_body,
+                  top: Spacing.extraSmall,
                 ),
                 SizedBox(height: Spacing.medium),
                 TTextField(

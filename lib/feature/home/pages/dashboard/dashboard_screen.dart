@@ -84,17 +84,20 @@ class _State extends State<DashboardScreen> {
                 ],
               ));
 
-  Widget _cards() => CarouselSlider(
-        items: [
-          _banner(Assets.adsInviteCard),
-          _banner(Assets.adsDuesCard),
-          _banner(Assets.adsUtilityCard)
-        ],
-        options: CarouselOptions(
-            height: 120.0,
-            enlargeCenterPage: true,
-            autoPlay: true,
-            viewportFraction: 0.9),
+  Widget _cards() => Padding(
+        padding: EdgeInsets.only(bottom: Spacing.small),
+        child: CarouselSlider(
+          items: [
+            _banner(Assets.adsInviteCard),
+            _banner(Assets.adsDuesCard),
+            _banner(Assets.adsUtilityCard)
+          ],
+          options: CarouselOptions(
+              height: 120.0,
+              enlargeCenterPage: true,
+              autoPlay: true,
+              viewportFraction: 0.9),
+        ),
       );
 
   Widget _banner(SvgGenImage asset) => Padding(
@@ -119,7 +122,8 @@ class _State extends State<DashboardScreen> {
               CommunityRequest(
                 accountCommunity: state.pendingJoin!,
               ),
-            if (state.account?.flags?.joinCommunity == true)
+            if (state.account?.flags?.joinCommunity == true ||
+                state.account?.flags?.createCommunity == true)
               Padding(
                 padding: EdgeInsets.only(
                     bottom: Spacing.extraSmall, top: Spacing.small),
@@ -134,6 +138,13 @@ class _State extends State<DashboardScreen> {
                 title: context.locale.join_community,
                 body: context.locale.join_community_body,
                 onTap: () => _communityNavigator.toJoinCommunity(),
+              ),
+            if (state.account?.flags?.createCommunity == true)
+              StartingBanner(
+                icon: Assets.createCommunity.svg(),
+                title: context.locale.create_community,
+                body: context.locale.create_community_body,
+                onTap: () => _communityNavigator.toCreateCommunity(),
               ),
             _visitors(
                 label: 'Today visitors',

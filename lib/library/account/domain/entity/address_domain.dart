@@ -3,7 +3,16 @@ class AddressDomain {
   final String? city;
   final String? country;
   final String? postalCode;
+  final String? latitude;
+  final String? longitude;
   final String? proofOfAddress;
 
-  AddressDomain({required this.address, required this.city, required this.country, required this.postalCode, required this.proofOfAddress});
+  AddressDomain(
+      {this.address,
+      this.city,
+      this.country,
+      this.postalCode,
+      this.proofOfAddress,
+      this.latitude,
+      this.longitude});
 }

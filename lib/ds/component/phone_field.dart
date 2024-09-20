@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get_it/get_it.dart';
-import 'package:phonecodes/phonecodes.dart' as phone_codes;
 import 'package:tenaid_mobile/ds/component/spacing.dart';
 import 'package:tenaid_mobile/ds/component/text_field.dart';
 import 'package:tenaid_mobile/utils/route_utils/base_navigator.dart';
-import 'package:tenaid_mobile/utils/xts/phone_codes_country_xts.dart';
 
-import '../../library/account/domain/entity/country_domain.dart';
+import '../../utils/country_utils/models/country.dart';
+import '../../utils/country_utils/utils/country_utils.dart';
 
 class PhoneField extends StatefulWidget {
   final String label;
   final String? error;
   final String? supportText;
-  final CountryDomain? defaultCountry;
+  final Country? defaultCountry;
   final String? initialValue;
   final TextEditingController? controller;
   final Function(String) onChanged;
-  final Function(CountryDomain) onCountrySelected;
+  final Function(Country) onCountrySelected;
 
-  late CountryDomain _selectedCountry;
+  late Country _selectedCountry;
 
   PhoneField(
       {super.key,
@@ -34,8 +33,7 @@ class PhoneField extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    _selectedCountry = defaultCountry ??
-        phone_codes.Countries.findByName('Nigeria').toDomain();
+    _selectedCountry = (defaultCountry ?? getCountryFromName('Nigeria')!);
     return _State();
   }
 }
@@ -65,7 +63,7 @@ class _State extends State<PhoneField> {
         child: Row(
           children: [
             Text(
-                '${widget._selectedCountry.flag} ${widget._selectedCountry.dialCode}'),
+                '${widget._selectedCountry.flag} ${widget._selectedCountry.phoneCode}'),
             const Icon(Icons.arrow_drop_down)
           ],
         ),
@@ -85,8 +83,8 @@ class _State extends State<PhoneField> {
 
   String formatNumber(String s) {
     if (s.isEmpty) return s;
-    String code = widget._selectedCountry.dialCode.replaceFirst('+', '');
+    String code = widget._selectedCountry.phoneCode.replaceFirst('+', '');
     String phone = s.replaceFirst(code, '').replaceFirst('0', '');
-    return '${widget._selectedCountry.dialCode}$phone';
+    return '${widget._selectedCountry.phoneCode}$phone';
   }
 }

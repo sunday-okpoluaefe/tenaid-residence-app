@@ -22,6 +22,22 @@ class $AssetsAnimationsGen {
   List<String> get values => [permissionRequired];
 }
 
+class $AssetsJsonGen {
+  const $AssetsJsonGen();
+
+  /// File path: assets/json/city.json
+  String get city => 'assets/json/city.json';
+
+  /// File path: assets/json/country.json
+  String get country => 'assets/json/country.json';
+
+  /// File path: assets/json/state.json
+  String get state => 'assets/json/state.json';
+
+  /// List of all assets
+  List<String> get values => [city, country, state];
+}
+
 class Assets {
   Assets._();
 
@@ -41,6 +57,7 @@ class Assets {
   static const SvgGenImage cancel = SvgGenImage('assets/cancel.svg');
   static const SvgGenImage chevronDown = SvgGenImage('assets/chevron_down.svg');
   static const SvgGenImage clock = SvgGenImage('assets/clock.svg');
+  static const SvgGenImage communities = SvgGenImage('assets/communities.svg');
   static const SvgGenImage copy = SvgGenImage('assets/copy.svg');
   static const SvgGenImage createCommunity =
       SvgGenImage('assets/create_community.svg');
@@ -55,6 +72,7 @@ class Assets {
   static const SvgGenImage icon = SvgGenImage('assets/icon.svg');
   static const SvgGenImage joinCommunity =
       SvgGenImage('assets/join_community.svg');
+  static const $AssetsJsonGen json = $AssetsJsonGen();
   static const SvgGenImage location = SvgGenImage('assets/location.svg');
   static const SvgGenImage lock = SvgGenImage('assets/lock.svg');
   static const SvgGenImage logo = SvgGenImage('assets/logo.svg');
@@ -67,12 +85,15 @@ class Assets {
   static const SvgGenImage navMessage = SvgGenImage('assets/nav_message.svg');
   static const SvgGenImage navNotify = SvgGenImage('assets/nav_notify.svg');
   static const SvgGenImage navPayment = SvgGenImage('assets/nav_payment.svg');
+  static const SvgGenImage noteRemove = SvgGenImage('assets/note_remove.svg');
   static const SvgGenImage nothingFound =
       SvgGenImage('assets/nothing_found.svg');
   static const SvgGenImage nothingFoundDark =
       SvgGenImage('assets/nothing_found_dark.svg');
   static const SvgGenImage notification =
       SvgGenImage('assets/notification.svg');
+  static const SvgGenImage notificationsEmpty =
+      SvgGenImage('assets/notifications_empty.svg');
   static const SvgGenImage passwordChange =
       SvgGenImage('assets/password_change.svg');
   static const SvgGenImage pattern = SvgGenImage('assets/pattern.svg');
@@ -81,6 +102,7 @@ class Assets {
   static const SvgGenImage profile = SvgGenImage('assets/profile.svg');
   static const SvgGenImage qrCode = SvgGenImage('assets/qr_code.svg');
   static const SvgGenImage repeat = SvgGenImage('assets/repeat.svg');
+  static const SvgGenImage routeSquare = SvgGenImage('assets/route_square.svg');
   static const SvgGenImage routing = SvgGenImage('assets/routing.svg');
   static const SvgGenImage search = SvgGenImage('assets/search.svg');
   static const SvgGenImage searchEmpty = SvgGenImage('assets/search_empty.svg');
@@ -116,6 +138,7 @@ class Assets {
         cancel,
         chevronDown,
         clock,
+        communities,
         copy,
         createCommunity,
         dashInvite,
@@ -140,9 +163,11 @@ class Assets {
         navMessage,
         navNotify,
         navPayment,
+        noteRemove,
         nothingFound,
         nothingFoundDark,
         notification,
+        notificationsEmpty,
         passwordChange,
         pattern,
         phone,
@@ -150,6 +175,7 @@ class Assets {
         profile,
         qrCode,
         repeat,
+        routeSquare,
         routing,
         search,
         searchEmpty,

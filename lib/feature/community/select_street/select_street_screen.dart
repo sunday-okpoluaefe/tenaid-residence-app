@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/ds/component/app_widget.dart';
 import 'package:tenaid_mobile/ds/component/list_item.dart';
 import 'package:tenaid_mobile/ds/component/listitem_loader.dart';
+import 'package:tenaid_mobile/ds/component/page_header.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/street_domain.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
@@ -42,6 +43,17 @@ class _State extends State<SelectStreetScreen> {
       builder: (_, SelectStreetScreenState state) => Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      _navigator.back();
+                    },
+                    child: Assets.cancel.svg(),
+                  )
+                ],
+              ),
             ),
             body: SafeArea(
               child: _screen(context, state),
@@ -69,23 +81,9 @@ class _State extends State<SelectStreetScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: Spacing.small),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              context.locale.select_your_street,
-                              style: context.text.headlineSmall,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                _navigator.back();
-                              },
-                              child: Assets.cancel.svg(),
-                            )
-                          ],
-                        ),
+                        PageHeader(title: context.locale.select_your_street),
                         SizedBox(
                           height: Spacing.medium,
                         ),

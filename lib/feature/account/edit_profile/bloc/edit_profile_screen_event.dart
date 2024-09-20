@@ -37,7 +37,7 @@ class OnDobChanged extends EditProfileScreenEvent {
 }
 
 class OnCountryChanged extends EditProfileScreenEvent {
-  final CountryDomain country;
+  final Country country;
 
   OnCountryChanged(this.country);
 

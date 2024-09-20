@@ -8,6 +8,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/feature/account/account_navigator.dart';
 import 'package:tenaid_mobile/feature/home/home_navigator.dart';
+import 'package:tenaid_mobile/utils/country_utils/country_utils.dart';
 import 'package:tenaid_mobile/utils/http_overrides.dart';
 import 'package:tenaid_mobile/utils/network.dart';
 import 'package:tenaid_mobile/utils/notification_service/notification_service.dart';
@@ -50,6 +51,7 @@ Future run() async {
   final HomeScreenBloc home = GetIt.instance.get();
 
   await setupDatabase();
+  await initCountryUtils();
 
   // enable invite work handler
   Workmanager().initialize(callbackDispatcher);

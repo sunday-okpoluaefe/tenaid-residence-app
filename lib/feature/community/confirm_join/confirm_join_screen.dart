@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/ds/component/app_widget.dart';
+import 'package:tenaid_mobile/ds/component/page_header.dart';
 import 'package:tenaid_mobile/feature/home/home_screen.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/account_community_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/community_domain.dart';
@@ -84,17 +85,9 @@ class _State extends State<ConfirmJoinScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  context.locale.confirm_details,
-                  style: context.text.headlineSmall,
-                ),
-                Text(
-                  context.locale.confirm_details_body,
-                  style: context.text.titleMedium?.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withOpacity(0.50)),
+                PageHeader(
+                  title: context.locale.confirm_details,
+                  description: context.locale.confirm_details_body,
                 ),
                 SizedBox(height: Spacing.medium),
                 Text(context.locale.section_community,

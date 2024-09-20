@@ -10,6 +10,8 @@
   "select_country": "Select your country",
   "change_password": "Change password",
   "use_primary": "Use as primary",
+  "select_city": "Select your city",
+  "search_city": "Search city",
   "change_password_success": "Your password has been changed successfully",
   "new_password": "New password",
   "confirm_new_password": "Confirm new password",

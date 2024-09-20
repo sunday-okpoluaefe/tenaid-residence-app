@@ -160,6 +160,10 @@ class _State extends State<TTextField> {
                         child: IntrinsicWidth(child: widget.prefixIcon),
                       )
                     : null,
+                disabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        width: 1, color: context.color.surfaceBright),
+                    borderRadius: BorderRadius.circular(5)),
                 focusedErrorBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(width: 1, color: context.color.primary),

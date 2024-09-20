@@ -15,7 +15,7 @@ abstract class _$SignUpParamCWProxy {
   /// ````
   SignUpParam call({
     String? firstName,
-    CountryDomain? country,
+    Country? country,
     String? lastName,
     String? phone,
     String? password,
@@ -53,7 +53,7 @@ class _$SignUpParamCWProxyImpl implements _$SignUpParamCWProxy {
       country: country == const $CopyWithPlaceholder() || country == null
           ? _value.country
           // ignore: cast_nullable_to_non_nullable
-          : country as CountryDomain,
+          : country as Country,
       lastName: lastName == const $CopyWithPlaceholder() || lastName == null
           ? _value.lastName
           // ignore: cast_nullable_to_non_nullable

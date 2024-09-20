@@ -16,7 +16,7 @@ abstract class _$SignupScreenStateCWProxy {
   SignupScreenState call({
     bool? loading,
     bool? validated,
-    CountryDomain? selectedCountry,
+    Country? selectedCountry,
     bool? lNameValidationError,
     bool? fNameValidationError,
     bool? emailValidationError,
@@ -65,7 +65,7 @@ class _$SignupScreenStateCWProxyImpl implements _$SignupScreenStateCWProxy {
       selectedCountry: selectedCountry == const $CopyWithPlaceholder()
           ? _value.selectedCountry
           // ignore: cast_nullable_to_non_nullable
-          : selectedCountry as CountryDomain?,
+          : selectedCountry as Country?,
       lNameValidationError:
           lNameValidationError == const $CopyWithPlaceholder() ||
                   lNameValidationError == null

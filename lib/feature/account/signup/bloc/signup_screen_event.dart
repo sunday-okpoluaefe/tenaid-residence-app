@@ -66,7 +66,7 @@ class OnPasswordNameChanged extends SignupScreenEvent {
 }
 
 class OnCountryChanged extends SignupScreenEvent {
-  final CountryDomain country;
+  final Country country;
 
   const OnCountryChanged(this.country);
 

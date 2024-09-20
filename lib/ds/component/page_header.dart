@@ -4,14 +4,24 @@ import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 class PageHeader extends StatelessWidget {
   final String title;
+  final double top;
+  final double bottom;
   final String? description;
 
-  const PageHeader({super.key, required this.title, this.description});
+  const PageHeader(
+      {super.key,
+      required this.title,
+      this.description,
+      this.top = 0,
+      this.bottom = 0});
 
   @override
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(
+            height: top,
+          ),
           Text(
             title,
             style: context.text.headlineSmall,
@@ -24,6 +34,9 @@ class PageHeader extends StatelessWidget {
                 style: context.text.bodyMedium?.fade(context),
               ),
             ),
+          SizedBox(
+            height: bottom,
+          ),
         ],
       );
 }

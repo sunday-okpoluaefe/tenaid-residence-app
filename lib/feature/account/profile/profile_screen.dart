@@ -135,6 +135,11 @@ class _State extends AppState<ProfileScreen> {
                                   icon: Assets.moon.svg(),
                                 ),
                                 SettingsItem(
+                                  label: 'Communities',
+                                  onTap: () => navigator.toChangePassword(),
+                                  icon: Assets.communities.svg(),
+                                ),
+                                SettingsItem(
                                   label: 'Change password',
                                   onTap: () => navigator.toChangePassword(),
                                   icon: Assets.passwordChange.svg(),
@@ -142,7 +147,11 @@ class _State extends AppState<ProfileScreen> {
                               ],
                             ),
                           ),
-                          HorizontalLine(),
+                          Padding(
+                            padding:
+                                EdgeInsets.symmetric(vertical: Spacing.small),
+                            child: HorizontalLine(),
+                          ),
                           Padding(
                             padding:
                                 EdgeInsets.symmetric(horizontal: Spacing.small),

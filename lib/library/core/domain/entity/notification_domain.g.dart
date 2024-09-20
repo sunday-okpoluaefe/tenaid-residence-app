@@ -17,6 +17,7 @@ abstract class _$NotificationDomainCWProxy {
     String? title,
     String? body,
     bool? read,
+    DateTime? createdAt,
     String? type,
   });
 }
@@ -39,6 +40,7 @@ class _$NotificationDomainCWProxyImpl implements _$NotificationDomainCWProxy {
     Object? title = const $CopyWithPlaceholder(),
     Object? body = const $CopyWithPlaceholder(),
     Object? read = const $CopyWithPlaceholder(),
+    Object? createdAt = const $CopyWithPlaceholder(),
     Object? type = const $CopyWithPlaceholder(),
   }) {
     return NotificationDomain(
@@ -54,6 +56,10 @@ class _$NotificationDomainCWProxyImpl implements _$NotificationDomainCWProxy {
           ? _value.read
           // ignore: cast_nullable_to_non_nullable
           : read as bool,
+      createdAt: createdAt == const $CopyWithPlaceholder()
+          ? _value.createdAt
+          // ignore: cast_nullable_to_non_nullable
+          : createdAt as DateTime?,
       type: type == const $CopyWithPlaceholder() || type == null
           ? _value.type
           // ignore: cast_nullable_to_non_nullable

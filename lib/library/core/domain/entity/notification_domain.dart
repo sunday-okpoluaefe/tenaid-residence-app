@@ -9,8 +9,7 @@ class NotificationDomain {
   final String body;
   final bool read;
   final String type;
-
-  DateTime get createdAt => DateTime.now();
+  final DateTime? createdAt;
 
   String get id => uniqueId();
 
@@ -18,5 +17,6 @@ class NotificationDomain {
       {required this.title,
       required this.body,
       required this.read,
+      this.createdAt,
       required this.type});
 }

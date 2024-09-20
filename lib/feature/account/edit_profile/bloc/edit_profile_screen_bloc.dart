@@ -1,24 +1,22 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-import 'package:phonecodes/phonecodes.dart' as phone_codes;
 import 'package:tenaid_mobile/core/network/api_error_parser.dart';
 import 'package:tenaid_mobile/library/account/domain/entity/account_domain.dart';
-import 'package:tenaid_mobile/library/account/domain/entity/country_domain.dart';
 import 'package:tenaid_mobile/library/account/domain/entity/update_profile_info_param.dart';
 import 'package:tenaid_mobile/library/account/domain/use_cases/get_account_usecase.dart';
 import 'package:tenaid_mobile/library/account/domain/use_cases/update_info_usecase.dart';
 import 'package:tenaid_mobile/library/account/domain/use_cases/upload_file_usecase.dart';
+import 'package:tenaid_mobile/utils/log.dart';
 import 'package:tenaid_mobile/utils/resettable.dart';
 import 'package:tenaid_mobile/utils/xts/datetime_xts.dart';
-import 'package:tenaid_mobile/utils/xts/phone_codes_country_xts.dart';
 
 import '../../../../utils/app_bloc.dart';
+import '../../../../utils/country_utils/models/country.dart';
+import '../../../../utils/country_utils/utils/country_utils.dart';
 
 part 'edit_profile_screen_bloc.g.dart';
-
 part 'edit_profile_screen_event.dart';
-
 part 'edit_profile_screen_state.dart';
 
 @injectable
@@ -34,7 +32,7 @@ class EditProfileScreenBloc
   String phone = '';
   String imageUrl = '';
   String imagePath = '';
-  late CountryDomain selectedCountry;
+  late Country selectedCountry;
 
   bool get validated =>
       fName.isNotEmpty && lName.isNotEmpty && dob != null && phone.isNotEmpty;
@@ -101,9 +99,10 @@ class EditProfileScreenBloc
         imageUrl = account.photo ?? '';
 
         if (account.country != null && account.phone != null) {
-          selectedCountry =
-              phone_codes.Countries.findByName(account.country!).toDomain();
-          phone = account.phone!.replaceFirst(selectedCountry.dialCode, '0');
+          Country? country = getCountryFromName(account.country!);
+          if (country != null) selectedCountry = country;
+
+          phone = account.phone!.replaceFirst(selectedCountry.phoneCode, '0');
 
           account = account.copyWith(phone: phone);
         }
@@ -114,7 +113,9 @@ class EditProfileScreenBloc
             account: account,
             initializing: false,
             selectedCountry: selectedCountry));
-      } catch (_) {}
+      } catch (error) {
+        Log.e(error);
+      }
     });
   }
 }

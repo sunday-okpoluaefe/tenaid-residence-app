@@ -1,5 +1,6 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
-import 'package:tenaid_mobile/library/account/domain/entity/country_domain.dart';
+
+import '../../../../utils/country_utils/models/country.dart';
 
 part 'signup_param.g.dart';
 
@@ -7,7 +8,7 @@ part 'signup_param.g.dart';
 class SignUpParam {
   final String firstName;
   final String lastName;
-  final CountryDomain country;
+  final Country country;
   final String phone;
   final String password;
   final String email;

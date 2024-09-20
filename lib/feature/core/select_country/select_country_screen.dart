@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:phonecodes/phonecodes.dart';
-import 'package:tenaid_mobile/ds/component/asset_icon.dart';
 import 'package:tenaid_mobile/ds/component/icon_size.dart';
 import 'package:tenaid_mobile/ds/component/list_item.dart';
+import 'package:tenaid_mobile/ds/component/page_header.dart';
 import 'package:tenaid_mobile/ds/component/text_field.dart';
-import 'package:tenaid_mobile/library/account/domain/entity/country_domain.dart';
 import 'package:tenaid_mobile/utils/route_utils/base_navigator.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
-import 'package:tenaid_mobile/utils/xts/phone_codes_country_xts.dart';
 
 import '../../../assets/assets.gen.dart';
 import '../../../ds/component/spacing.dart';
+import '../../../utils/country_utils/models/country.dart';
+import '../../../utils/country_utils/utils/country_utils.dart';
 
 class SelectCountryScreen extends StatefulWidget {
-  final CountryDomain? selected;
-  final Function(CountryDomain country) onSelected;
+  final Country? selected;
+  final Function(Country country) onSelected;
 
   const SelectCountryScreen(
       {super.key, this.selected, required this.onSelected});
@@ -25,16 +24,31 @@ class SelectCountryScreen extends StatefulWidget {
 }
 
 class _State extends State<SelectCountryScreen> {
-  List<CountryDomain> _list = Countries.list.map((c) => c.toDomain()).toList();
-  List<CountryDomain> _countries =
-      Countries.list.map((c) => c.toDomain()).toList();
+  List<Country> _list = getAllCountries();
+  List<Country> _countries = getAllCountries();
 
   final BaseNavigator _navigator = GetIt.instance.get<BaseNavigator>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  _navigator.back();
+                },
+                child: Assets.cancel.svg(),
+              )
+            ],
+          ),
         ),
         body: SafeArea(child: _screen(context)),
       );
@@ -42,24 +56,9 @@ class _State extends State<SelectCountryScreen> {
   _screen(BuildContext context) => Padding(
         padding: EdgeInsets.symmetric(horizontal: Spacing.small),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  context.locale.select_country,
-                  style: context.text.headlineSmall,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    _navigator.back();
-                  },
-                  child: AssetIcon(
-                      size: IconSize.large, asset: 'assets/cancel.svg'),
-                )
-              ],
-            ),
+            PageHeader(title: context.locale.select_country),
             SizedBox(
               height: Spacing.medium,
             ),
@@ -71,13 +70,13 @@ class _State extends State<SelectCountryScreen> {
                 setState(() {
                   _list = _countries
                       .where((country) =>
-                          country.code
+                          country.isoCode
                               .toLowerCase()
                               .contains(s.toLowerCase()) ||
                           country.name
                               .toLowerCase()
                               .contains(s.toLowerCase()) ||
-                          country.dialCode.contains(s))
+                          country.phoneCode.contains(s))
                       .toList();
                 });
               },
@@ -97,6 +96,7 @@ class _State extends State<SelectCountryScreen> {
         ),
       );
 
-  _getItem(CountryDomain country) => ListItemModel(
-      title: '${country.name} (${country.dialCode})', icon: Text(country.flag));
+  _getItem(Country country) => ListItemModel(
+      title: '${country.name} (${country.phoneCode})',
+      icon: Text(country.flag));
 }

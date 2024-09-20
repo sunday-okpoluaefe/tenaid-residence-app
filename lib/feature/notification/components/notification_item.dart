@@ -5,7 +5,6 @@ import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../assets/assets.gen.dart';
-import '../../../ds/component/dot.dart';
 import '../../../library/core/domain/entity/notification_domain.dart';
 
 class NotificationItem extends StatelessWidget {
@@ -33,77 +32,53 @@ class NotificationItem extends StatelessWidget {
       ),
       child: Container(
         padding: EdgeInsets.only(
-            right: Spacing.small, top: Spacing.small, bottom: Spacing.small),
-        color: notification.read
-            ? context.color.surface
-            : context.color.surfaceContainer,
+            left: Spacing.small, right: Spacing.small, bottom: Spacing.small),
         child: Column(
           children: [
-            Stack(
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(left: Spacing.small),
-                  child: Row(
+                  margin: EdgeInsets.only(right: Spacing.small),
+                  child: Assets.navNotify.svg(),
+                ),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Container(
-                        margin: EdgeInsets.only(right: 12),
-                        child: Assets.navNotify.svg(),
+                      Text(
+                        notification.title,
+                        maxLines: 3,
+                        style: context.text.titleMedium,
                       ),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              notification.title,
+                      SizedBox(
+                        height: Spacing.extraExtraSmall,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              notification.body,
                               maxLines: 3,
-                              style: TextStyle(
-                                  fontSize: Spacing.small,
-                                  color: context.color.onSurface,
-                                  fontWeight: FontWeight.w600),
+                              //overflow: TextOverflow.ellipsis,
+                              style: context.text.bodySmall,
                             ),
-                            SizedBox(
-                              height: Spacing.extraExtraSmall,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Flexible(
-                                  child: Text(
-                                    notification.body,
-                                    maxLines: 3,
-                                    //overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        fontSize: 14, color: Colors.black),
-                                  ),
-                                )
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
-                if (!notification.read)
-                  Positioned(
-                      top: 0,
-                      bottom: 0,
-                      left: 5.5,
-                      child: Dot(
-                        size: 5,
-                        color: context.color.primary,
-                      ))
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  timeago.format(notification.createdAt),
-                  style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w500),
+                  timeago.format(notification.createdAt!),
+                  style: context.text.labelSmall,
                 )
               ],
             )

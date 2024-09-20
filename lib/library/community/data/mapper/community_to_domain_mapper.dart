@@ -17,6 +17,8 @@ class CommunityToDomainMapper extends Mapper<Community, CommunityDomain> {
       type: from.type,
       images: from.images ?? [],
       address: AddressDomain(
+          latitude: from.address?.latitude,
+          longitude: from.address?.longitude,
           address: from.address?.address,
           city: from.address?.city,
           country: from.address?.country,

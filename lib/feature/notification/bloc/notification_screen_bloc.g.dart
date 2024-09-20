@@ -16,6 +16,7 @@ abstract class _$NotificationScreenStateCWProxy {
   NotificationScreenState call({
     bool? loading,
     List<NotificationDomain>? notifications,
+    bool? error,
   });
 }
 
@@ -37,6 +38,7 @@ class _$NotificationScreenStateCWProxyImpl
   NotificationScreenState call({
     Object? loading = const $CopyWithPlaceholder(),
     Object? notifications = const $CopyWithPlaceholder(),
+    Object? error = const $CopyWithPlaceholder(),
   }) {
     return NotificationScreenState(
       loading: loading == const $CopyWithPlaceholder() || loading == null
@@ -48,6 +50,10 @@ class _$NotificationScreenStateCWProxyImpl
               ? _value.notifications
               // ignore: cast_nullable_to_non_nullable
               : notifications as List<NotificationDomain>,
+      error: error == const $CopyWithPlaceholder() || error == null
+          ? _value.error
+          // ignore: cast_nullable_to_non_nullable
+          : error as bool,
     );
   }
 }

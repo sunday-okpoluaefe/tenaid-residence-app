@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:tenaid_mobile/ds/component/page_header.dart';
 import 'package:tenaid_mobile/ds/component/tlinear_process_indicator.dart';
 import 'package:tenaid_mobile/feature/community/search_community/bloc/search_community_screen_bloc.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
@@ -33,6 +34,17 @@ class _State extends State<SearchCommunityScreen> {
       builder: (_, SearchCommunityScreenState state) => Scaffold(
             appBar: AppBar(
               automaticallyImplyLeading: false,
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      _navigator.back();
+                    },
+                    child: Assets.cancel.svg(),
+                  )
+                ],
+              ),
             ),
             body: SafeArea(
                 child: Stack(
@@ -61,23 +73,9 @@ class _State extends State<SearchCommunityScreen> {
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: Spacing.small),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              context.locale.search_your_community,
-                              style: context.text.headlineSmall,
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                _navigator.back();
-                              },
-                              child: Assets.cancel.svg(),
-                            )
-                          ],
-                        ),
+                        PageHeader(title: context.locale.search_your_community),
                         SizedBox(
                           height: Spacing.medium,
                         ),

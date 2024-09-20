@@ -9,11 +9,11 @@ import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../../../ds/component/app_bottom_sheet.dart';
 import '../../../../../ds/component/dotted_loader.dart';
+import '../../../../../ds/component/empty_screen.dart';
 import '../../../../../ds/component/spacing.dart';
 import '../../../../../utils/xts/global_notifier.dart';
 import '../../../../visitor/components/visitor_status_bottomsheet.dart';
 import '../components/visitor_list_item.dart';
-import '../components/visitors_empty_screen.dart';
 import 'bloc/visitors_list_screen_bloc.dart';
 
 class VisitorsListScreen extends StatefulWidget {
@@ -97,12 +97,13 @@ class _State extends State<VisitorsListScreen> {
                   firstPageProgressIndicatorBuilder: (_) => _topLoader(context),
                   newPageProgressIndicatorBuilder: (_) => _loader(context),
                   newPageErrorIndicatorBuilder: (_) => SizedBox(),
-                  firstPageErrorIndicatorBuilder: (_) => VisitorsEmptyScreen(
+                  firstPageErrorIndicatorBuilder: (_) => EmptyScreen(
                         hasError: true,
                         onTryAgain: () {},
                       ),
-                  noItemsFoundIndicatorBuilder: (_) =>
-                      VisitorsEmptyScreen(onTryAgain: () {}))),
+                  noItemsFoundIndicatorBuilder: (_) => EmptyScreen(
+                        onTryAgain: () {},
+                      ))),
         ),
       );
 

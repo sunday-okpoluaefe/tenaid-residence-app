@@ -9,6 +9,11 @@ import 'package:tenaid_mobile/library/community/domain/entity/street_domain.dart
 import 'package:tenaid_mobile/utils/route_utils/base_navigator.dart';
 import 'package:tenaid_mobile/utils/route_utils/route_transition.dart';
 
+import '../../library/community/domain/entity/create_community_param.dart';
+import 'community_address/community_address_screen.dart';
+import 'community_image/community_image_screen.dart';
+import 'create_community/create_community_screen.dart';
+
 @injectable
 class CommunityNavigator extends BaseNavigator {
   static const String join = '/community/join';
@@ -43,8 +48,20 @@ class CommunityNavigator extends BaseNavigator {
           ),
           animationType: AnimationType.slideUp);
 
+  Future toCommunityImage({required CreateCommunityParam param}) => toScreen(
+          screen: CommunityImageScreen(
+        param: param,
+      ));
+
   Future toSearchCommunity(Function(CommunityDomain community) onSelected) =>
       toScreen(
           screen: SearchCommunityScreen(onSelected: onSelected),
           animationType: AnimationType.slideUp);
+
+  Future toCreateCommunity() => toScreen(screen: CreateCommunityScreen());
+
+  Future toCommunityAddress({required CreateCommunityParam param}) => toScreen(
+          screen: CommunityAddressScreen(
+        param: param,
+      ));
 }

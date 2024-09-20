@@ -16,7 +16,7 @@ abstract class _$EditProfileScreenStateCWProxy {
   EditProfileScreenState call({
     bool? loading,
     Resettable<ApiException>? error,
-    CountryDomain? selectedCountry,
+    Country? selectedCountry,
     bool? initializing,
     Resettable<bool>? showProfile,
     AccountDomain? account,
@@ -60,7 +60,7 @@ class _$EditProfileScreenStateCWProxyImpl
       selectedCountry: selectedCountry == const $CopyWithPlaceholder()
           ? _value.selectedCountry
           // ignore: cast_nullable_to_non_nullable
-          : selectedCountry as CountryDomain?,
+          : selectedCountry as Country?,
       initializing:
           initializing == const $CopyWithPlaceholder() || initializing == null
               ? _value.initializing

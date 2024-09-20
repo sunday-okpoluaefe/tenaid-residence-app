@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../core/local/database.dart';
 import '../../library/account/domain/account_repository.dart';
 import '../../library/core/data/local_cache.dart';
 import '../../library/core/domain/cache.dart';
@@ -21,6 +22,8 @@ void onTokenUpdated(String? token) async {
 
 @pragma('vm:entry-point')
 Future<void> backgroundHandler(RemoteMessage message) async {
+  // initialise local database
+  await setupDatabase();
   NotificationService.showNotification(message);
 }
 

@@ -1093,14 +1093,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.2"
-  phonecodes:
-    dependency: "direct main"
-    description:
-      name: phonecodes
-      sha256: "094a76b0ba3d8f9c1c83044ae8783d46e6906703c86eb08facd876844c264bf5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.3"
   platform:
     dependency: transitive
     description:

@@ -2,23 +2,30 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:phonecodes/phonecodes.dart' as phone_codes;
 import 'package:tenaid_mobile/core/network/api_error_parser.dart';
 import 'package:tenaid_mobile/library/account/domain/entity/login_param.dart';
 import 'package:tenaid_mobile/library/account/domain/entity/signup_param.dart';
 import 'package:tenaid_mobile/library/account/domain/use_cases/login_usecase.dart';
 import 'package:tenaid_mobile/library/account/domain/use_cases/signup_usecase.dart';
 import 'package:tenaid_mobile/utils/resettable.dart';
-import 'package:tenaid_mobile/utils/xts/phone_codes_country_xts.dart';
 import 'package:tenaid_mobile/utils/xts/string.xts.dart';
 
-import '../../../../library/account/domain/entity/country_domain.dart';
+import '../../../../utils/country_utils/models/country.dart';
 
 part 'signup_screen_bloc.g.dart';
 part 'signup_screen_event.dart';
 part 'signup_screen_state.dart';
 
-const String defaultCountry = 'Nigeria';
+//ngn._("Nigerian Naira", "NGN", "₦"),
+
+Country defaultCountry = Country(
+    name: 'Nigeria',
+    isoCode: 'NG',
+    phoneCode: '+234',
+    flag: '🇳🇬',
+    latitude: '',
+    longitude: '',
+    currency: 'NGN');
 
 extension SignupValidation on SignUpParam {
   bool get isValidated {
@@ -35,8 +42,7 @@ class SignupScreenBloc extends Bloc<SignupScreenEvent, SignupScreenState> {
   final SignUpUseCase _signUp;
   final LoginUseCase _login;
 
-  SignUpParam _param = SignUpParam(
-      country: phone_codes.Countries.findByName(defaultCountry).toDomain());
+  SignUpParam _param = SignUpParam(country: defaultCountry);
 
   void handleUiEvent(SignupScreenEvent event) => add(event);
 
@@ -44,8 +50,7 @@ class SignupScreenBloc extends Bloc<SignupScreenEvent, SignupScreenState> {
       : super(SignupScreenState(
             signUpComplete: Resettable(false),
             errorMessage: Resettable(),
-            selectedCountry:
-                phone_codes.Countries.findByName(defaultCountry).toDomain())) {
+            selectedCountry: defaultCountry)) {
     on<OnFNameChanged>((event, emit) {
       _param = _param.copyWith(firstName: event.name);
       emit(state.copyWith(validated: _param.isValidated));

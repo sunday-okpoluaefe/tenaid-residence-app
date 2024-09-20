@@ -4,7 +4,7 @@ part of 'signup_screen_bloc.dart';
 class SignupScreenState extends Equatable {
   final bool loading;
   final bool validated;
-  final CountryDomain? selectedCountry;
+  final Country? selectedCountry;
   final bool lNameValidationError;
   final bool fNameValidationError;
   final bool emailValidationError;

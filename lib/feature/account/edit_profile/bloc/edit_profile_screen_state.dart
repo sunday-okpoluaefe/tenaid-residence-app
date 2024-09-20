@@ -5,7 +5,7 @@ class EditProfileScreenState extends Equatable {
   final bool loading;
   final bool initializing;
   final bool validated;
-  final CountryDomain? selectedCountry;
+  final Country? selectedCountry;
   final AccountDomain? account;
   final Resettable<ApiException>? error;
   final Resettable<bool>? showProfile;

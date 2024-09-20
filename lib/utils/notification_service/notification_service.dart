@@ -2,7 +2,10 @@ import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:tenaid_mobile/library/core/data/core_repository_impl.dart';
+import 'package:tenaid_mobile/library/core/data/model/app_notification.dart';
 import 'package:tenaid_mobile/utils/route_utils/base_navigator.dart';
+import 'package:tenaid_mobile/utils/worker.dart';
 
 import 'notification_payload.dart';
 
@@ -78,11 +81,24 @@ class NotificationService {
         ?.createNotificationChannel(AppPriorityChannel);
   }
 
+  static Future saveNotification(
+      String title, NotificationPayload notification) async {
+    AppNotification notify = AppNotification(
+        title: title,
+        body: notification.description,
+        read: false,
+        type: notification.type);
+
+    await NotificationBox.put(uniqueId(), jsonEncode(notify.toJson()));
+  }
+
   static void showNotification(RemoteMessage message) {
     RemoteNotification? notification = message.notification;
     if (notification != null && notification.body?.isNotEmpty == true) {
       Map<String, dynamic> json = jsonDecode(notification.body!);
       NotificationPayload payload = NotificationPayload.fromJson(json);
+
+      saveNotification(notification.title ?? "", payload);
 
       flutterLocalNotificationsPlugin.show(
           _notificationId(),

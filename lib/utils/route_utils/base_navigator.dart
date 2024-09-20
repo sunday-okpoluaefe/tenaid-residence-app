@@ -3,10 +3,12 @@ import 'package:injectable/injectable.dart';
 import 'package:tenaid_mobile/app.dart';
 import 'package:tenaid_mobile/feature/core/search_address/search_address_screen.dart';
 import 'package:tenaid_mobile/feature/core/select_country/select_country_screen.dart';
-import 'package:tenaid_mobile/library/account/domain/entity/country_domain.dart';
 import 'package:tenaid_mobile/library/core/domain/entity/place_domain.dart';
+import 'package:tenaid_mobile/utils/country_utils/models/city.dart';
 import 'package:tenaid_mobile/utils/route_utils/route_transition.dart';
 
+import '../../feature/core/select_city/select_city_screen.dart';
+import '../country_utils/models/country.dart';
 import 'app_router.dart';
 
 @injectable
@@ -33,11 +35,20 @@ class BaseNavigator extends AppRouter {
           dynamic args = Object}) =>
       gotoNamed(route, context!, clearStack: clearStack, args: args);
 
-  Future toSelectCountry(Function(CountryDomain) onSelected) => toScreen(
+  Future toSelectCountry(Function(Country) onSelected) => toScreen(
       screen: SelectCountryScreen(onSelected: onSelected),
       animationType: AnimationType.slideUp);
 
   Future toSearchAddress(Function(PlaceDomain) onSelected) => toScreen(
       screen: SearchAddressScreen(onSelected),
       animationType: AnimationType.slideUp);
+
+  Future toSelectCity(
+          {required Function(City) onSelected, required Country country}) =>
+      toScreen(
+          screen: SelectCityScreen(
+            country: country,
+            onSelected: onSelected,
+          ),
+          animationType: AnimationType.slideUp);
 }
