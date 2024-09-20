@@ -29,12 +29,10 @@ class AppTableView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
-                    flex: 1,
-                    child: Text(
-                      item.key,
-                      style: context.text.labelLarge
-                          ?.copyWith(color: context.color.primaryContainer),
-                    )),
+                  flex: 1,
+                  child: Text(item.key,
+                      style: context.text.bodyMedium?.fade(context)),
+                ),
                 Flexible(
                     flex: 2,
                     child: Text(item.value, style: context.text.labelLarge))

@@ -122,6 +122,10 @@ class _State extends State<DashboardScreen> {
               CommunityRequest(
                 accountCommunity: state.pendingJoin!,
               ),
+            if (state.pendingCreate != null)
+              CommunityRequest(
+                accountCommunity: state.pendingCreate!,
+              ),
             if (state.account?.flags?.joinCommunity == true ||
                 state.account?.flags?.createCommunity == true)
               Padding(

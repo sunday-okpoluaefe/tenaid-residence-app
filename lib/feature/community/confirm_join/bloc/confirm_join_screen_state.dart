@@ -8,7 +8,7 @@ class ConfirmJoinScreenState extends Equatable {
   final Resettable<AccountCommunityDomain>? success;
 
   ConfirmJoinScreenState(
-      {this.isPrimary = true, this.loading = false, this.error, this.success});
+      {this.isPrimary = false, this.loading = false, this.error, this.success});
 
   @override
   List<Object?> get props => [error, loading, success, isPrimary];

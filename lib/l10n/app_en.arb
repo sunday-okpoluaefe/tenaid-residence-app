@@ -12,6 +12,8 @@
   "use_primary": "Use as primary",
   "select_city": "Select your city",
   "search_city": "Search city",
+  "create_success": "Community Created",
+  "create_success_body": "Your community has been created successfully and being reviewed. We'll let you know once the status changes.",
   "change_password_success": "Your password has been changed successfully",
   "new_password": "New password",
   "confirm_new_password": "Confirm new password",

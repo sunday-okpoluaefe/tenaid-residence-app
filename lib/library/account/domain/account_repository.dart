@@ -20,7 +20,5 @@ abstract class AccountRepository extends BaseRepository {
 
   Future<void> sendDevicePushToken(String token);
 
-  Future<String> upload(String file);
-
   Future<AccountDomain> updateProfileInfo(UpdateProfileInfoParam param);
 }

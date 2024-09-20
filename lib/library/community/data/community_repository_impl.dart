@@ -5,6 +5,7 @@ import 'package:tenaid_mobile/library/community/data/model/account_community.dar
 import 'package:tenaid_mobile/library/community/data/model/visitor.dart';
 import 'package:tenaid_mobile/library/community/domain/community_repository.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/community_domain.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/create_community_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/invite_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/request_join_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/street_domain.dart';
@@ -260,4 +261,8 @@ class CommunityRepositoryImpl implements CommunityRepository {
         data: List<VisitorDomain>.from(visitors.data
             .map((visitor) => visitorToDomainMapper.map(visitor as Visitor))));
   }
+
+  @override
+  Future<void> createCommunity({required CreateCommunityParam param}) async =>
+      await _remoteDataSource.createCommunity(param);
 }

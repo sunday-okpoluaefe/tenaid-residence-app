@@ -4,7 +4,9 @@ import 'package:tenaid_mobile/library/community/data/model/account_community.dar
 import 'package:tenaid_mobile/library/community/data/model/community.dart';
 import 'package:tenaid_mobile/library/community/data/model/street.dart';
 import 'package:tenaid_mobile/library/community/data/model/visitor.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/create_community_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/request_join_param.dart';
+import 'package:tenaid_mobile/library/core/data/model/address.dart';
 import 'package:tenaid_mobile/library/core/domain/entity/paginated_result.dart';
 
 import '../../../../core/network/api.dart';
@@ -152,5 +154,26 @@ class CommunityRemoteDataSource {
       data: List<Visitor>.from(
           response.data['docs'].map((data) => Visitor.fromJson(data))),
     );
+  }
+
+  // create a community
+  Future<void> createCommunity(CreateCommunityParam param) async {
+    Address address = Address(
+        address: param.address?.address,
+        city: param.address?.city,
+        country: param.address?.country,
+        proofOfAddress: param.images.firstOrNull,
+        latitude: param.address?.latitude,
+        postalCode: '1234',
+        longitude: param.address?.longitude);
+
+    Map<String, dynamic> map = Map();
+    map['name'] = param.name;
+    map['description'] = param.description;
+    map['type'] = param.type;
+    map['images'] = param.images;
+    map['address'] = address.toJson();
+
+    await api(url: 'community', body: map, requestType: RequestType.post);
   }
 }

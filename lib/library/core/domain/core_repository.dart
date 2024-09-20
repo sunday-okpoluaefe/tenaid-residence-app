@@ -7,4 +7,8 @@ abstract class CoreRepository {
   Future<void> saveNotification({required NotificationDomain notification});
 
   Future<List<NotificationDomain>> getNotifications();
+
+  Future<String> uploadSingle(String file);
+
+  Future<List<String>> uploadMultiple(List<String> files);
 }

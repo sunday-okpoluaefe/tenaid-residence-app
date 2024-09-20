@@ -1,7 +1,9 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
+import 'package:mime/mime.dart';
 import 'package:tenaid_mobile/core/network/api.dart';
 import 'package:tenaid_mobile/library/core/data/mapper/place_to_domain_mapper.dart';
 import 'package:tenaid_mobile/library/core/data/model/app_notification.dart';
@@ -11,6 +13,7 @@ import 'package:tenaid_mobile/library/core/domain/entity/notification_domain.dar
 import 'package:tenaid_mobile/library/core/domain/entity/place_domain.dart';
 import 'package:tenaid_mobile/utils/worker.dart';
 
+import '../../../core/network/network_response.dart';
 import 'mapper/notification_to_domain_mapper.dart';
 
 late LazyBox NotificationBox;
@@ -67,5 +70,37 @@ class CoreRepositoryImpl implements CoreRepository {
         type: notification.type);
 
     await NotificationBox.put(uniqueId(), jsonEncode(notify.toJson()));
+  }
+
+  @override
+  Future<List<String>> uploadMultiple(List<String> files) async {
+    List<dynamic> forms = [];
+    for (String path in files) {
+      final String? name = lookupMimeType(path);
+      forms.add(MultipartFile.fromFileSync(path, filename: name));
+    }
+
+    FormData formData = FormData.fromMap({'files': forms});
+
+    NetworkResponse response = await api(
+        url: 'file/upload/multiple',
+        requestType: RequestType.post,
+        body: formData);
+
+    return List<String>.from(response.data.map((url) => url['url']));
+  }
+
+  @override
+  Future<String> uploadSingle(String file) async {
+    final String? name = lookupMimeType(file);
+    FormData formData = FormData.fromMap(
+        {'file': await MultipartFile.fromFile(file, filename: name)});
+
+    NetworkResponse response = await api(
+        url: 'file/upload/single',
+        requestType: RequestType.post,
+        body: formData);
+
+    return response.data['url'];
   }
 }

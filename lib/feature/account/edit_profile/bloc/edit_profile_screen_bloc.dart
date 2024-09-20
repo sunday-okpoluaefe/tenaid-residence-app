@@ -6,7 +6,7 @@ import 'package:tenaid_mobile/library/account/domain/entity/account_domain.dart'
 import 'package:tenaid_mobile/library/account/domain/entity/update_profile_info_param.dart';
 import 'package:tenaid_mobile/library/account/domain/use_cases/get_account_usecase.dart';
 import 'package:tenaid_mobile/library/account/domain/use_cases/update_info_usecase.dart';
-import 'package:tenaid_mobile/library/account/domain/use_cases/upload_file_usecase.dart';
+import 'package:tenaid_mobile/library/core/domain/use_cases/upload_single_file_usecase.dart';
 import 'package:tenaid_mobile/utils/log.dart';
 import 'package:tenaid_mobile/utils/resettable.dart';
 import 'package:tenaid_mobile/utils/xts/datetime_xts.dart';
@@ -23,7 +23,7 @@ part 'edit_profile_screen_state.dart';
 class EditProfileScreenBloc
     extends AppBloc<EditProfileScreenEvent, EditProfileScreenState> {
   final GetAccountUseCase getAccount;
-  final UploadFileUseCase uploadFile;
+  final UploadSingleFileUseCase uploadFile;
   final UpdateInfoUseCase updateInfo;
 
   String fName = '';

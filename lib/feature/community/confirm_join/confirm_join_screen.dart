@@ -111,22 +111,22 @@ class _State extends State<ConfirmJoinScreen> {
                         key: context.locale.apartment, value: widget.apartment)
                   ],
                 ),
-                SizedBox(
-                  height: Spacing.small,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      context.locale.use_primary,
-                      style: context.text.titleMedium,
-                    ),
-                    Switch(
-                        value: state.isPrimary,
-                        onChanged: (x) =>
-                            _bloc.handleUiEvent(OnPrimaryChanged(x)))
-                  ],
-                )
+                // SizedBox(
+                //   height: Spacing.small,
+                // ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //   children: [
+                //     Text(
+                //       context.locale.use_primary,
+                //       style: context.text.titleMedium,
+                //     ),
+                //     Switch(
+                //         value: state.isPrimary,
+                //         onChanged: (x) =>
+                //             _bloc.handleUiEvent(OnPrimaryChanged(x)))
+                //   ],
+                // )
               ],
             ),
           ),

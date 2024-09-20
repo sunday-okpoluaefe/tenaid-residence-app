@@ -4,12 +4,12 @@ import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../../ds/component/spacing.dart';
 
-class InviteDetailsItem extends StatelessWidget {
+class ListDetailItem extends StatelessWidget {
   final String label;
   final String value;
   final Widget? icon;
 
-  const InviteDetailsItem(
+  const ListDetailItem(
       {super.key, required this.label, required this.value, this.icon});
 
   @override
@@ -47,7 +47,6 @@ class InviteDetailsItem extends StatelessWidget {
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.7,
                               child: Text(value,
-                                  maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: context.text.bodyMedium),
                             ),

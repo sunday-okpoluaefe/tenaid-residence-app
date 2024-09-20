@@ -14,8 +14,8 @@ class CommunityRequest extends StatelessWidget {
   Widget build(BuildContext context) => Stack(
         children: [
           Container(
-            margin:
-                EdgeInsets.only(top: Spacing.extraSmall, bottom: Spacing.small),
+            margin: EdgeInsets.only(
+                top: Spacing.extraSmall, bottom: Spacing.extraSmall),
             decoration: BoxDecoration(
               color: context.color.surfaceBright.withOpacity(0.3),
               borderRadius: BorderRadius.circular(10),

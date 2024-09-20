@@ -16,6 +16,7 @@ abstract class _$CreateCommunityParamCWProxy {
   CreateCommunityParam call({
     String? name,
     String? description,
+    String? type,
     AddressDomain? address,
     List<String>? images,
   });
@@ -39,6 +40,7 @@ class _$CreateCommunityParamCWProxyImpl
   CreateCommunityParam call({
     Object? name = const $CopyWithPlaceholder(),
     Object? description = const $CopyWithPlaceholder(),
+    Object? type = const $CopyWithPlaceholder(),
     Object? address = const $CopyWithPlaceholder(),
     Object? images = const $CopyWithPlaceholder(),
   }) {
@@ -51,6 +53,10 @@ class _$CreateCommunityParamCWProxyImpl
           ? _value.description
           // ignore: cast_nullable_to_non_nullable
           : description as String?,
+      type: type == const $CopyWithPlaceholder()
+          ? _value.type
+          // ignore: cast_nullable_to_non_nullable
+          : type as String?,
       address: address == const $CopyWithPlaceholder()
           ? _value.address
           // ignore: cast_nullable_to_non_nullable

@@ -1,8 +1,6 @@
 import 'dart:io';
 
-import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:mime/mime.dart';
 import 'package:tenaid_mobile/core/network/api.dart';
 import 'package:tenaid_mobile/core/network/network_response.dart';
 import 'package:tenaid_mobile/library/account/data/model/account.dart';
@@ -74,19 +72,6 @@ class AccountRemoteDataSource {
 
   Future<void> logout() async {
     await api(url: 'auth/logout', requestType: RequestType.post);
-  }
-
-  Future<String> upload(String file) async {
-    final String? name = lookupMimeType(file);
-    FormData formData = FormData.fromMap(
-        {'file': await MultipartFile.fromFile(file, filename: name)});
-
-    NetworkResponse response = await api(
-        url: 'file/upload/single',
-        requestType: RequestType.post,
-        body: formData);
-
-    return response.data['url'];
   }
 
   Future<Account> updateProfileInfo(UpdateProfileInfoParam param) async {

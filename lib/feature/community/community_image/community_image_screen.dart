@@ -8,6 +8,7 @@ import 'package:tenaid_mobile/ds/component/page_header.dart';
 import 'package:tenaid_mobile/ds/component/primary_button.dart';
 import 'package:tenaid_mobile/ds/component/spacing.dart';
 import 'package:tenaid_mobile/feature/community/community_image/bloc/community_image_bloc.dart';
+import 'package:tenaid_mobile/feature/community/community_navigator.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/create_community_param.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
@@ -25,6 +26,7 @@ class CommunityImageScreen extends StatefulWidget {
 
 class _State extends State<CommunityImageScreen> {
   final CommunityImageBloc bloc = GetIt.instance.get();
+  final CommunityNavigator navigator = GetIt.instance.get();
 
   final ImagePicker _picker = ImagePicker();
 
@@ -61,18 +63,24 @@ class _State extends State<CommunityImageScreen> {
               modifier: EdgeInsets.all(Spacing.small),
               enabled: state.images.isNotEmpty,
               title: context.locale.continue_button,
-              onClick: () {}),
+              onClick: () => navigator.toCommunityConfirmCreate(
+                  param: widget.param.copyWith(images: state.images))),
           body: Padding(
             padding: EdgeInsets.symmetric(horizontal: Spacing.small),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                PageHeader(
-                  title: 'Upload photos',
-                  description:
-                      'Upload at least a photo or logo of your community.',
-                  top: Spacing.extraSmall,
-                  bottom: Spacing.medium,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    PageHeader(
+                      title: 'Upload photos',
+                      description:
+                          'Upload at least a photo or logo of your community.',
+                      top: Spacing.extraSmall,
+                      bottom: Spacing.medium,
+                    )
+                  ],
                 ),
                 CommunityImagesHolder(
                   onEditItem: (x) {

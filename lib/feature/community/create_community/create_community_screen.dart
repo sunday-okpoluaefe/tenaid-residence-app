@@ -67,8 +67,7 @@ class _State extends State<CreateCommunityScreen> {
                 TTextField(
                     label: 'Say something about your community',
                     onChanged: (s) =>
-                        bloc.handleUiEvent(OnDescriptionChanged(s)),
-                    inputType: TextInputType.name)
+                        bloc.handleUiEvent(OnDescriptionChanged(s)))
               ],
             ),
           ));

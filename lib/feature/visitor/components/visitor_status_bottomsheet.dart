@@ -7,10 +7,10 @@ import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 import 'package:tenaid_mobile/utils/xts/string.xts.dart';
 
 import '../../../assets/assets.gen.dart';
+import '../../../ds/component/list_detail_item.dart';
 import '../../../ds/component/mini_button.dart';
 import '../../../utils/pair.dart';
 import '../../../utils/xts/status.dart';
-import '../invite_details/components/invite_details_item.dart';
 import 'invite_code_status.dart';
 
 class VisitorStatusBottomSheet extends StatelessWidget {
@@ -45,19 +45,19 @@ class VisitorStatusBottomSheet extends StatelessWidget {
         SizedBox(
           height: Spacing.small,
         ),
-        InviteDetailsItem(
+        ListDetailItem(
           label: 'Guest name',
           value: visitor.name!,
         ),
-        InviteDetailsItem(
+        ListDetailItem(
           label: 'Valid from',
           value: visitor.startDate.asDateTimeString,
         ),
-        InviteDetailsItem(
+        ListDetailItem(
           label: 'Expires at',
           value: visitor.endDate.asDateTimeString,
         ),
-        InviteDetailsItem(
+        ListDetailItem(
           label: 'Purpose of visit',
           value: visitor.reason!,
         ),

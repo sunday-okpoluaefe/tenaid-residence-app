@@ -80,9 +80,6 @@ class AccountRepositoryImpl implements AccountRepository {
       await remoteDataSource.sendDevicePushToken(token);
 
   @override
-  Future<String> upload(String file) async => remoteDataSource.upload(file);
-
-  @override
   Future<AccountDomain> updateProfileInfo(UpdateProfileInfoParam param) async {
     Account account = await remoteDataSource.updateProfileInfo(param);
     await _accountLocalDataSource.saveAccount(account);

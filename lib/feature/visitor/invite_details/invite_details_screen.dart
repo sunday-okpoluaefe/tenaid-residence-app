@@ -14,10 +14,10 @@ import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 import 'package:tenaid_mobile/utils/xts/string.xts.dart';
 
 import '../../../assets/assets.gen.dart';
+import '../../../ds/component/list_detail_item.dart';
 import '../../../ds/component/mini_button.dart';
 import '../../../library/community/domain/entity/invite_domain.dart';
 import '../components/invite_code_status.dart';
-import 'components/invite_details_item.dart';
 
 class InviteDetailsScreen extends AppStatefulWidget {
   final InviteDomain invite;
@@ -94,19 +94,19 @@ class _State extends AppState<InviteDetailsScreen> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  InviteDetailsItem(
+                  ListDetailItem(
                     label: 'Guest name',
                     value: state.invite!.name,
                   ),
-                  InviteDetailsItem(
+                  ListDetailItem(
                     label: 'Valid from',
                     value: state.invite!.startDate.asDateTimeString,
                   ),
-                  InviteDetailsItem(
+                  ListDetailItem(
                     label: 'Expires at',
                     value: state.invite!.endDate.asDateTimeString,
                   ),
-                  InviteDetailsItem(
+                  ListDetailItem(
                     label: 'Purpose of visit',
                     value: state.invite!.purpose!,
                   ),
