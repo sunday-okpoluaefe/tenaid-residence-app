@@ -60,10 +60,9 @@ class _State extends AppState<HomeScreen> {
     context.read<HomeScreenBloc>().handleUiEvent(OnGetProfilePhoto());
 
     NotificationService.getBackgroundNotification()
-        .then((NotificationResponse? notification) {
-      if (notification != null) {
-        // navigate to specific screen here
-      }
+        .then((NotificationResponse? notificationResponse) {
+      // navigate to a specific screen
+      NotificationService.handleNavigation(notificationResponse?.payload);
     });
   }
 
@@ -78,7 +77,7 @@ class _State extends AppState<HomeScreen> {
             onNotificationsClicked: () =>
                 notificationNavigator.toNotifications()),
         body: Padding(
-          padding: EdgeInsets.only(top: Spacing.extraSmall),
+          padding: EdgeInsets.only(top: Spacing.none),
           child: SafeArea(
               child: IndexedStack(
             children: [

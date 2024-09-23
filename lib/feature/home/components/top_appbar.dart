@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tenaid_mobile/ds/component/icon_size.dart';
 import 'package:tenaid_mobile/feature/home/components/profile_image.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
@@ -23,7 +24,7 @@ class TopSliverAppBar extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: context.text.headlineSmall,
+                style: context.text.titleLarge,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -47,7 +48,7 @@ class TopSliverAppBar extends StatelessWidget {
 String _title(BuildContext context, int index) {
   switch (index) {
     case 0:
-      return context.locale.nav_home;
+      return '';
     case 1:
       return context.locale.nav_message;
     case 2:
@@ -68,29 +69,30 @@ AppBar TopAppBar(BuildContext context,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            _title(context, page),
-            style: context.text.headlineSmall,
-          ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              InkWell(
-                onTap: onNotificationsClicked,
-                child: Badge(
-                  label: Text('2'),
-                  child: Assets.navNotify.svg(),
+              if (page == 0)
+                GestureDetector(
+                  onTap: onProfileClicked,
+                  child: ProfileImage(
+                    path: profilePhoto ?? "",
+                    size: IconSize.extraLarge,
+                  ),
                 ),
+              Text(
+                _title(context, page),
+                style: context.text.headlineSmall,
               ),
-              SizedBox(
-                width: Spacing.medium,
-              ),
-              GestureDetector(
-                onTap: onProfileClicked,
-                child: ProfileImage(path: profilePhoto ?? ""),
-              )
             ],
-          )
+          ),
+          InkWell(
+            onTap: onNotificationsClicked,
+            child: Badge(
+              label: Text('2'),
+              child: Assets.navNotify.svg(),
+            ),
+          ),
         ],
       ),
     );

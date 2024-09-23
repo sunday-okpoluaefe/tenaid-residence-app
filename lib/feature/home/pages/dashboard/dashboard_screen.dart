@@ -15,7 +15,9 @@ import '../../../../assets/assets.gen.dart';
 import '../../../../ds/component/page_loader.dart';
 import '../../../../ds/component/spacing.dart';
 import '../../../../utils/xts/global_notifier.dart';
+import '../../home_screen.dart';
 import 'components/community_request.dart';
+import 'components/count_notify_block.dart';
 import 'components/quick_actions.dart';
 import 'components/quick_actions_loader.dart';
 import 'components/visitor_quick_action.dart';
@@ -51,6 +53,11 @@ class _State extends State<DashboardScreen> {
     context
         .read<DashboardScreenBloc>()
         .handleUiEvent(OnGetTodayVisitors(refresh: refresh, silent: silent));
+
+    // get requests count
+    context
+        .read<DashboardScreenBloc>()
+        .handleUiEvent(OnGetRequestsCount(refresh: refresh, silent: silent));
   }
 
   @override
@@ -77,15 +84,39 @@ class _State extends State<DashboardScreen> {
                 slivers: [
                   SliverList(
                       delegate: SliverChildListDelegate([
-                    if (state.account?.flags?.welcome == true) _cards(),
+                    if (state.account?.flags?.welcome == true)
+                      _cards()
+                    else
+                      _greeting(context, state),
+                    CountNotifyBlock(
+                      text: 'Pending join requests',
+                      count: state.joinRequests,
+                      onTap: () => _communityNavigator.toPendingJoinRequests(),
+                    ),
                     _body(context, state),
                     if (state.loading) PageLoader()
                   ]))
                 ],
               ));
 
+  Widget _greeting(BuildContext context, DashboardScreenState state) => Padding(
+        padding: EdgeInsets.only(left: Spacing.small, top: Spacing.extraSmall),
+        child: Text.rich(
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            TextSpan(children: [
+              TextSpan(
+                  style: context.text.headlineMedium?.fade(context),
+                  text: 'Hi, '),
+              TextSpan(
+                  style: context.text.headlineMedium,
+                  text: state.account?.firstName ?? '')
+            ])),
+      );
+
   Widget _cards() => Padding(
-        padding: EdgeInsets.only(bottom: Spacing.small),
+        padding:
+            EdgeInsets.only(bottom: Spacing.small, top: Spacing.extraSmall),
         child: CarouselSlider(
           items: [
             _banner(Assets.adsInviteCard),
@@ -114,7 +145,7 @@ class _State extends State<DashboardScreen> {
               Padding(
                 padding: EdgeInsets.only(top: Spacing.small),
                 child: Text(
-                  context.locale.requests,
+                  'Under review',
                   style: context.text.titleMedium,
                 ),
               ),
@@ -141,14 +172,16 @@ class _State extends State<DashboardScreen> {
                 icon: Assets.joinCommunity.svg(),
                 title: context.locale.join_community,
                 body: context.locale.join_community_body,
-                onTap: () => _communityNavigator.toJoinCommunity(),
+                onTap: () =>
+                    _communityNavigator.toJoinCommunity(root: HomeScreen()),
               ),
             if (state.account?.flags?.createCommunity == true)
               StartingBanner(
                 icon: Assets.createCommunity.svg(),
                 title: context.locale.create_community,
                 body: context.locale.create_community_body,
-                onTap: () => _communityNavigator.toCreateCommunity(),
+                onTap: () =>
+                    _communityNavigator.toCreateCommunity(root: HomeScreen()),
               ),
             _visitors(
                 label: 'Today visitors',
@@ -165,9 +198,48 @@ class _State extends State<DashboardScreen> {
             if (state.account?.flags?.quickActions == true &&
                 !state.accountLoading)
               QuickActions(),
-            if (state.accountLoading) QuickActionsLoader(size: 64)
+            if (state.accountLoading) QuickActionsLoader(size: 64),
+            if (state.account?.flags?.quickActions == true &&
+                !state.accountLoading)
+              _emptyActivity(
+                  title: 'Recent activities', label: 'No activities found'),
           ],
         ),
+      );
+
+  Widget _emptyActivity({required String title, required String label}) =>
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          SizedBox(
+            height: Spacing.medium,
+          ),
+          Text(
+            title,
+            style: context.text.titleMedium,
+          ),
+          SizedBox(
+            height: Spacing.small,
+          ),
+          Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: [
+                  Assets.emptyActivity.svg(),
+                  SizedBox(
+                    height: Spacing.extraSmall,
+                  ),
+                  Text(
+                    label,
+                    style: context.text.bodyMedium?.fade(context),
+                  ),
+                ],
+              )
+            ],
+          )
+        ],
       );
 
   Widget _visitors(

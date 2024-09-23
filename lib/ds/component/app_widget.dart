@@ -19,13 +19,18 @@ abstract class AppStatefulWidget extends StatefulWidget {
           title: title,
           onDismiss: onDismiss);
 
-  void handleApiError(BuildContext context, ApiException? error) {
+  void handleApiError(BuildContext context, ApiException? error,
+      {Function()? onDismiss}) {
     if (error == null) return;
 
     String? message =
         (error is NetworkError) ? context.locale.network_error : error.message;
 
-    showErrorMessage(error: message ?? "", title: context.locale.error);
+    showMessage(
+        message: message ?? "",
+        title: context.locale.error,
+        type: MessageType.error,
+        onDismiss: onDismiss);
   }
 
   void showMessage(

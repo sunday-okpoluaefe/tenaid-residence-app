@@ -15,6 +15,7 @@ abstract class _$DashboardScreenStateCWProxy {
   /// ````
   DashboardScreenState call({
     bool? loading,
+    int? joinRequests,
     List<VisitorDomain>? todayVisitors,
     List<VisitorDomain>? recentVisitors,
     bool? recentVisitorsLoading,
@@ -45,6 +46,7 @@ class _$DashboardScreenStateCWProxyImpl
   /// ````
   DashboardScreenState call({
     Object? loading = const $CopyWithPlaceholder(),
+    Object? joinRequests = const $CopyWithPlaceholder(),
     Object? todayVisitors = const $CopyWithPlaceholder(),
     Object? recentVisitors = const $CopyWithPlaceholder(),
     Object? recentVisitorsLoading = const $CopyWithPlaceholder(),
@@ -61,6 +63,11 @@ class _$DashboardScreenStateCWProxyImpl
           ? _value.loading
           // ignore: cast_nullable_to_non_nullable
           : loading as bool,
+      joinRequests:
+          joinRequests == const $CopyWithPlaceholder() || joinRequests == null
+              ? _value.joinRequests
+              // ignore: cast_nullable_to_non_nullable
+              : joinRequests as int,
       todayVisitors:
           todayVisitors == const $CopyWithPlaceholder() || todayVisitors == null
               ? _value.todayVisitors

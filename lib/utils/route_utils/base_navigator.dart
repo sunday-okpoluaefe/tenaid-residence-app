@@ -15,25 +15,28 @@ import 'app_router.dart';
 class BaseNavigator extends AppRouter {
   BuildContext? get context => navigatorKey.currentContext;
 
-  void back({bool rootNavigator = false, result}) =>
-      goBack(context!, rootNavigator: false, result: result);
+  void back({bool rootNavigator = false, result, bool toRoot = false}) =>
+      goBack(context!, rootNavigator: false, result: result, toRoot: toRoot);
 
-  Future toScreen({
-    required Widget screen,
-    bool clearStack = false,
-    bool fullScreenDialog = false,
-    AnimationType animationType = AnimationType.slideRight,
-  }) =>
+  Future toScreen(
+          {required Widget screen,
+          bool clearStack = false,
+          bool fullScreenDialog = false,
+          AnimationType animationType = AnimationType.slideRight,
+          Object? root}) =>
       gotoWidget(screen, context!,
           clearStack: clearStack,
+          root: root,
           fullScreenDialog: fullScreenDialog,
           animationType: animationType);
 
   Future toNamed(
           {required String route,
           bool clearStack = false,
+          Type? root,
           dynamic args = Object}) =>
-      gotoNamed(route, context!, clearStack: clearStack, args: args);
+      gotoNamed(route, context!,
+          clearStack: clearStack, args: args, root: root);
 
   Future toSelectCountry(Function(Country) onSelected) => toScreen(
       screen: SelectCountryScreen(onSelected: onSelected),

@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/library/core/data/core_repository_impl.dart';
 import 'package:tenaid_mobile/library/core/data/model/app_notification.dart';
-import 'package:tenaid_mobile/utils/route_utils/base_navigator.dart';
+import 'package:tenaid_mobile/utils/route_utils/navigation_handler.dart';
 import 'package:tenaid_mobile/utils/worker.dart';
 
 import 'notification_payload.dart';
@@ -20,8 +21,19 @@ final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 class NotificationService {
   @pragma('vm:entry-point')
   static Future<void> onNotificationSelected(
-      NotificationResponse payload) async {
+      NotificationResponse notificationResponse) async {
     // navigate to a specific screen
+    handleNavigation(notificationResponse.payload);
+  }
+
+  static void handleNavigation(String? notificationPayload) {
+    // navigate to a specific screen
+    NavigationHandler navigationHandler = GetIt.instance.get();
+    if (notificationPayload == null) return;
+
+    Map<String, dynamic> json = jsonDecode(notificationPayload!);
+    NotificationPayload payload = NotificationPayload.fromJson(json);
+    navigationHandler.parse(route: payload.link, param: payload.extra ?? Map());
   }
 
   static Future<NotificationResponse?> getBackgroundNotification() async {
@@ -31,13 +43,6 @@ class NotificationService {
     return (notification != null && notification.didNotificationLaunchApp)
         ? notification.notificationResponse
         : null;
-  }
-
-  @pragma('vm:entry-point')
-  static Future<void> onNotificationInBackgroundSelected(
-      NotificationResponse payload) async {
-    BaseNavigator navigator = BaseNavigator();
-    navigator.toSelectCountry((x) {});
   }
 
   static AndroidNotificationChannel AppPriorityChannel =
@@ -71,8 +76,6 @@ class NotificationService {
             iOS: DarwinInitializationSettings());
 
     flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onDidReceiveBackgroundNotificationResponse:
-            onNotificationInBackgroundSelected,
         onDidReceiveNotificationResponse: onNotificationSelected);
 
     await flutterLocalNotificationsPlugin

@@ -33,7 +33,7 @@ class VisitorStatusBottomSheet extends StatelessWidget {
         ),
         Text(
           visitor.code!.asCode,
-          style: context.text.bodyMedium,
+          style: context.text.headlineSmall,
         ),
         SizedBox(
           height: Spacing.extraExtraSmall,

@@ -13,7 +13,8 @@ class ProfileImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ImageView(
         url: path,
-        size: size != null ? size! : IconSize.large,
+        shape: Shape.Circle,
+        size: size ?? IconSize.large,
         fallBackImage: Assets.manAvatar.svg(),
       );
 }

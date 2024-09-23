@@ -3,6 +3,7 @@ part of 'dashboard_screen_bloc.dart';
 @CopyWith(skipFields: true)
 class DashboardScreenState extends Equatable {
   final bool loading;
+  final int joinRequests;
   final bool accountLoading;
   final bool todayVisitorsLoading;
   final bool recentVisitorsLoading;
@@ -16,6 +17,7 @@ class DashboardScreenState extends Equatable {
 
   DashboardScreenState(
       {this.loading = false,
+      this.joinRequests = 0,
       this.todayVisitors = const [],
       this.recentVisitors = const [],
       this.recentVisitorsLoading = false,
@@ -34,6 +36,7 @@ class DashboardScreenState extends Equatable {
         communities,
         pendingJoin,
         recentVisitors,
+        joinRequests,
         todayVisitors,
         pendingCreate,
         communitiesLoading,

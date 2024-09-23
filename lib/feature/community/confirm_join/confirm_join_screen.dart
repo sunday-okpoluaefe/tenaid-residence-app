@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/ds/component/app_widget.dart';
 import 'package:tenaid_mobile/ds/component/page_header.dart';
-import 'package:tenaid_mobile/feature/home/home_screen.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/account_community_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/community_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/street_domain.dart';
@@ -14,6 +13,7 @@ import '../../../ds/component/app_table_view.dart';
 import '../../../ds/component/linear_progress_indicator.dart';
 import '../../../ds/component/primary_button.dart';
 import '../../../ds/component/spacing.dart';
+import '../../../utils/xts/global_notifier.dart';
 import '../community_navigator.dart';
 import 'bloc/confirm_join_screen_bloc.dart';
 import 'components/community_join_overview.dart';
@@ -66,8 +66,8 @@ class _State extends State<ConfirmJoinScreen> {
                 widget.showSuccessMessage(
                     title: context.locale.join_success,
                     onDismiss: () {
-                      _communityNavigator.toScreen(
-                          screen: HomeScreen(), clearStack: true);
+                      syncRequiredNotifier.notify();
+                      _communityNavigator.back(toRoot: true);
                     },
                     message: context.locale.join_success_body);
               }

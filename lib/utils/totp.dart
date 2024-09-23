@@ -2,10 +2,17 @@ import 'package:base32/base32.dart';
 import 'package:injectable/injectable.dart';
 import 'package:otp/otp.dart';
 import 'package:tenaid_mobile/library/core/domain/cache.dart';
+import 'package:tenaid_mobile/utils/log.dart';
 
 const String _PREF_VARIABLE_TOKEN = '_PREF_VARIABLE_TOKEN';
 const int MAX_INTERVAL = 9;
-const int MAX_VARIABLE = 9;
+const int MAX_VARIABLE = 99;
+
+const int MEMBER_CODE_LENGTH = 5;
+const int MAX_VARIABLE_LENGTH = 2;
+const int MAX_TOTP_LENGTH = 4;
+const int MAX_CODE_LENGTH = 12;
+const int MAX_HEX_LENGTH = 8;
 
 class Code {
   final String totp;
@@ -20,10 +27,10 @@ class Code {
       required this.interval});
 
   factory Code.parse(String value) => Code(
-      totp: value.substring(0, 4),
-      user: value.substring(4, 8),
-      variable: value.substring(8, 9),
-      interval: value.substring(9, 10));
+      totp: value.substring(0, MAX_TOTP_LENGTH),
+      user: value.substring(4, 4 + MEMBER_CODE_LENGTH),
+      variable: value.substring(4 + MEMBER_CODE_LENGTH, 11),
+      interval: value.substring(11));
 }
 
 @injectable
@@ -43,7 +50,7 @@ class TOTP {
     return variable;
   }
 
-  String shuffle(String code) {
+  String _shuffle(String code) {
     int mean = code.length ~/ 2;
 
     List<String> partEnd = code.substring(mean, code.length).split('');
@@ -66,7 +73,14 @@ class TOTP {
     return merged.join('');
   }
 
-  String reverse(String code) {
+  // convert from base to base 36
+  String _toBase36(String str) => int.parse(str).toRadixString(36);
+
+  // converts from base 36 to base 10
+  String _fromBase36(String str) =>
+      int.parse(str, radix: 36).toString().padLeft(MAX_CODE_LENGTH, '0');
+
+  String _reverse(String code) {
     String partA = '';
     String partB = '';
 
@@ -80,10 +94,17 @@ class TOTP {
     return '$partA$partB';
   }
 
+  Future<String> _variableIdentifier(int? variable) async =>
+      (variable == null ? await _getVariable() : variable)
+          .toString()
+          .padLeft(MAX_VARIABLE_LENGTH, '0');
+
   String _generate(
           {required String secret, required int time, required int steps}) =>
       OTP.generateTOTPCodeString(base32.encodeString(secret), time,
-          interval: steps, algorithm: Algorithm.SHA512, length: 4);
+          interval: steps,
+          algorithm: Algorithm.SHA512,
+          length: MAX_TOTP_LENGTH);
 
   Future<String> generateHourOtp(
       {required String secret,
@@ -93,12 +114,17 @@ class TOTP {
       required int hours}) async {
     // convert to seconds
     int steps = hours * 60 * 60;
-    variable = variable == null ? await _getVariable() : variable;
+    String variableIdentifier = await _variableIdentifier(variable);
+
     String otp = _generate(
-        secret: '$variable$secret',
+        secret: '$variableIdentifier$secret',
         time: start.toUtc().millisecondsSinceEpoch,
         steps: steps);
-    return shuffle('$otp${code.padLeft(4, '0')}$variable${hours - 1}');
+
+    String accessCode = _shuffle(
+        '$otp${code.padLeft(MEMBER_CODE_LENGTH, '0')}$variableIdentifier${hours - 1}');
+    Log.d(accessCode);
+    return _toBase36(accessCode);
   }
 
   Future<String> generateDayOtp(
@@ -110,16 +136,20 @@ class TOTP {
     // convert to seconds
     int days = end.difference(start).inDays;
     int steps = days * 24 * 60 * 60;
-    variable = variable == null ? await _getVariable() : variable;
+    String variableIdentifier = await _variableIdentifier(variable);
+
     String otp = _generate(
-        secret: '$variable$secret',
+        secret: '$variableIdentifier$secret',
         time: start.toUtc().millisecondsSinceEpoch,
         steps: steps);
-    return shuffle('$otp${code.padLeft(4, '0')}$variable${days - 1}');
+
+    return _shuffle(
+        '$otp${code.padLeft(MEMBER_CODE_LENGTH, '0')}$variableIdentifier${days - 1}');
   }
 
   bool isValid(String secret, String otp) {
-    String original = reverse(otp);
+    String base10String = _fromBase36(otp);
+    String original = _reverse(base10String);
     Code code = Code.parse(original);
     int hrSteps = int.parse(code.interval) * 60 * 60;
     int daySteps = int.parse(code.interval) * 60 * 60 * 24;

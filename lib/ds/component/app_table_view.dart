@@ -27,6 +27,7 @@ class AppTableView extends StatelessWidget {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Flexible(
                   flex: 1,
@@ -35,7 +36,11 @@ class AppTableView extends StatelessWidget {
                 ),
                 Flexible(
                     flex: 2,
-                    child: Text(item.value, style: context.text.labelLarge))
+                    child: Text(
+                      item.value,
+                      style: context.text.labelLarge,
+                      textAlign: TextAlign.end,
+                    ))
               ],
             ),
             SizedBox(

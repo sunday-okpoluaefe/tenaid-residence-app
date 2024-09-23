@@ -40,4 +40,9 @@ class AccountNavigator extends BaseNavigator {
   Future toProfile() => toScreen(screen: ProfileScreen());
 
   Future toEditProfile() => toScreen(screen: EditProfileScreen());
+  
+  Future parse({required String route, Map<String, dynamic>? param}) {
+    // TODO: implement parse
+    throw UnimplementedError();
+  }
 }

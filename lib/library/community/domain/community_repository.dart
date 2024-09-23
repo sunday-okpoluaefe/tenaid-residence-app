@@ -1,5 +1,6 @@
 import 'package:tenaid_mobile/library/community/domain/entity/community_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/invite_param.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/join_request_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/request_join_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/street_domain.dart';
 
@@ -37,5 +38,16 @@ abstract class CommunityRepository extends BaseRepository {
   Future<List<AccountCommunityDomain>> getAllCommunities(
       {bool refresh = false});
 
+  Future<int> joinRequestsCount();
+
   Future<void> createCommunity({required CreateCommunityParam param});
+
+  Future<PaginatedResult> getCommunityJoinRequests(
+      {required int page, required int limit});
+
+  Future<JoinRequestDomain> getCommunityJoinRequest({required String request});
+
+  Future<void> setCommunityJoinRequestStatus({required String request,
+    required String status,
+    required String comment});
 }

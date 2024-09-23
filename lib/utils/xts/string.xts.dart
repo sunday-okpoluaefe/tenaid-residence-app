@@ -1,5 +1,3 @@
-
-
 extension EmailValidator on String {
   /// *
   /// Checks if a string is a valid email address
@@ -22,7 +20,7 @@ extension EmailValidator on String {
   }
 
   String get asCode {
-    return '${substring(0, 4)}-${substring(4, 7)}-${substring(7, 10)}';
+    return '${substring(0, 4)}-${substring(4)}';
   }
 
   String get avatar {

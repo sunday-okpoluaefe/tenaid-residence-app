@@ -8,6 +8,7 @@ import 'package:tenaid_mobile/ds/component/page_header.dart';
 import 'package:tenaid_mobile/ds/component/primary_button.dart';
 import 'package:tenaid_mobile/ds/component/spacing.dart';
 import 'package:tenaid_mobile/feature/community/confirm_create/bloc/confirm_create_bloc.dart';
+import 'package:tenaid_mobile/utils/xts/global_notifier.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../ds/component/icon_size.dart';
@@ -50,7 +51,8 @@ class _State extends State<ConfirmCreateScreen> {
           widget.showSuccessMessage(
               title: context.locale.create_success,
               onDismiss: () {
-                navigator.toScreen(screen: HomeScreen(), clearStack: true);
+                syncRequiredNotifier.notify();
+                navigator.back(toRoot: true);
               },
               message: context.locale.create_success_body);
         }

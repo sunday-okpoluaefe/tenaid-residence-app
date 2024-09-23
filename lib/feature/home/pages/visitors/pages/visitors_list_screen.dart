@@ -80,6 +80,7 @@ class _State extends State<VisitorsListScreen> {
           onRefresh: () => _pagingController.refresh(),
           controller: _refreshController,
           child: PagedListView(
+              physics: NeverScrollableScrollPhysics(),
               pagingController: _pagingController,
               shrinkWrap: true,
               builderDelegate: PagedChildBuilderDelegate<VisitorDomain>(
@@ -99,10 +100,10 @@ class _State extends State<VisitorsListScreen> {
                   newPageErrorIndicatorBuilder: (_) => SizedBox(),
                   firstPageErrorIndicatorBuilder: (_) => EmptyScreen(
                         hasError: true,
-                        onTryAgain: () {},
+                        onTryAgain: () => _pagingController.refresh(),
                       ),
                   noItemsFoundIndicatorBuilder: (_) => EmptyScreen(
-                        onTryAgain: () {},
+                        onTryAgain: () => _pagingController.refresh(),
                       ))),
         ),
       );

@@ -10,7 +10,7 @@ import 'package:tenaid_mobile/library/community/domain/entity/invite_param.dart'
 import 'package:tenaid_mobile/utils/resettable.dart';
 import 'package:tenaid_mobile/utils/xts/datetime_xts.dart';
 
-import '../../../../library/community/domain/entity/get_primary_account_community_usecase.dart';
+import '../../../../library/community/domain/use_cases/get_primary_account_community_usecase.dart';
 import '../../../../library/community/domain/use_cases/send_invite_usecase.dart';
 import '../../../../utils/app_bloc.dart';
 import '../../../../utils/totp.dart';
@@ -127,9 +127,7 @@ class InviteVisitorScreenBloc
         }
 
         param = param.copyWith(
-            community: community.community!.id!,
-            member: community.id!,
-            path: community.street!.id!);
+            community: community.community!.id!, member: community.id!);
 
         if (type == InviteType.single) {
           DateTime start = _startDate!.withTime(_startTime!);

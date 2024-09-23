@@ -17,7 +17,7 @@ class MiniButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => InkWell(
-        onTap: () {},
+        onTap: onClick,
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: Spacing.small),
           decoration: BoxDecoration(

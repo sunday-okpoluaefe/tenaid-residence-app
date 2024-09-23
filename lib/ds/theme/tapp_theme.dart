@@ -6,6 +6,7 @@ import 'package:tenaid_mobile/ds/theme/tcheckbox_theme.dart';
 import 'package:tenaid_mobile/ds/theme/tchip_theme.dart';
 import 'package:tenaid_mobile/ds/theme/timepicker_theme.dart';
 import 'package:tenaid_mobile/ds/theme/tnavigation_bar_theme.dart';
+import 'package:tenaid_mobile/ds/theme/toutlined_button_theme.dart';
 import 'package:tenaid_mobile/ds/theme/ttext_theme.dart';
 
 import 'elevated_button_theme.dart';
@@ -37,6 +38,7 @@ class TAppTheme {
           surfaceContainer: ColorLight.colorSurfaceContainer),
       textTheme: TTextTheme.light,
       sliderTheme: TSliderTheme.light,
+      outlinedButtonTheme: TOutlinedButtonTheme.light,
       datePickerTheme: TDatePickerTheme.light,
       timePickerTheme: TTimePickerTheme.light,
       navigationBarTheme: TNavigationBarTheme.light,
@@ -52,6 +54,7 @@ class TAppTheme {
       primaryColor: ColorLight.colorOnBackground,
       scaffoldBackgroundColor: ColorLight.colorBackground,
       textTheme: TTextTheme.dark,
+      outlinedButtonTheme: TOutlinedButtonTheme.dark,
       checkboxTheme: TCheckboxTheme.dark,
       navigationBarTheme: TNavigationBarTheme.dark,
       chipTheme: TChipTheme.dark,

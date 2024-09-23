@@ -23,7 +23,6 @@ abstract class _$InviteParamCWProxy {
     String? code,
     String? community,
     String? member,
-    String? path,
     String? photo,
     String? reason,
     String? type,
@@ -54,7 +53,6 @@ class _$InviteParamCWProxyImpl implements _$InviteParamCWProxy {
     Object? code = const $CopyWithPlaceholder(),
     Object? community = const $CopyWithPlaceholder(),
     Object? member = const $CopyWithPlaceholder(),
-    Object? path = const $CopyWithPlaceholder(),
     Object? photo = const $CopyWithPlaceholder(),
     Object? reason = const $CopyWithPlaceholder(),
     Object? type = const $CopyWithPlaceholder(),
@@ -96,10 +94,6 @@ class _$InviteParamCWProxyImpl implements _$InviteParamCWProxy {
           ? _value.member
           // ignore: cast_nullable_to_non_nullable
           : member as String?,
-      path: path == const $CopyWithPlaceholder()
-          ? _value.path
-          // ignore: cast_nullable_to_non_nullable
-          : path as String?,
       photo: photo == const $CopyWithPlaceholder()
           ? _value.photo
           // ignore: cast_nullable_to_non_nullable

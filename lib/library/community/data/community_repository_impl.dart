@@ -2,11 +2,13 @@ import 'package:injectable/injectable.dart';
 import 'package:tenaid_mobile/core/network/api_error_parser.dart';
 import 'package:tenaid_mobile/library/community/data/mapper/visitor_to_domain_mapper.dart';
 import 'package:tenaid_mobile/library/community/data/model/account_community.dart';
+import 'package:tenaid_mobile/library/community/data/model/join_request.dart';
 import 'package:tenaid_mobile/library/community/data/model/visitor.dart';
 import 'package:tenaid_mobile/library/community/domain/community_repository.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/community_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/create_community_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/invite_param.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/join_request_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/request_join_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/street_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/visitor_domain.dart';
@@ -21,6 +23,7 @@ import 'data_source/community_local_datasource.dart';
 import 'data_source/community_remote_datasource.dart';
 import 'mapper/account_community_to_domain_mapper.dart';
 import 'mapper/community_to_domain_mapper.dart';
+import 'mapper/join_request_to_domain_mapper.dart';
 import 'mapper/street_to_domain_mapper.dart';
 
 @Injectable(as: CommunityRepository)
@@ -31,6 +34,7 @@ class CommunityRepositoryImpl implements CommunityRepository {
   final CommunityLocalDataSource _localDataSource;
   final VisitorToDomainMapper visitorToDomainMapper;
   final AccountCommunityToDomainMapper accountCommunityMapper;
+  final JoinRequestToDomainMapper joinRequestMapper;
 
   CommunityRepositoryImpl(
       this._remoteDataSource,
@@ -38,7 +42,8 @@ class CommunityRepositoryImpl implements CommunityRepository {
       this._streetToDomainMapper,
       this.accountCommunityMapper,
       this._localDataSource,
-      this.visitorToDomainMapper);
+      this.visitorToDomainMapper,
+      this.joinRequestMapper);
 
   @override
   Future<List<CommunityDomain>> searchCommunity(String query) async {
@@ -92,10 +97,10 @@ class CommunityRepositoryImpl implements CommunityRepository {
   Future<AccountCommunityDomain?> getPrimaryAccountCommunity() async {
     AccountCommunity? accountCommunity =
         await _localDataSource.getPrimaryAccountCommunity();
-    if (accountCommunity != null)
-      return accountCommunityMapper.map(accountCommunity);
-    else
-      return null;
+
+    return accountCommunity != null
+        ? accountCommunityMapper.map(accountCommunity)
+        : null;
   }
 
   @override
@@ -108,7 +113,6 @@ class CommunityRepositoryImpl implements CommunityRepository {
     map['code'] = param.code;
     map['community'] = param.community;
     map['member'] = param.member;
-    map['path'] = param.path;
     map['photo'] = param.photo;
     map['reason'] = param.reason;
     map['type'] = param.type;
@@ -265,4 +269,56 @@ class CommunityRepositoryImpl implements CommunityRepository {
   @override
   Future<void> createCommunity({required CreateCommunityParam param}) async =>
       await _remoteDataSource.createCommunity(param);
+
+  @override
+  Future<int> joinRequestsCount() async {
+    AccountCommunity? community =
+        await _localDataSource.getPrimaryAccountCommunity();
+
+    if (community?.isAdmin != true) return 0;
+    return _remoteDataSource.getJoinRequestsCount(
+        community: community!.community!.id!);
+  }
+
+  @override
+  Future<JoinRequestDomain> getCommunityJoinRequest(
+      {required String request}) async {
+    AccountCommunity? community =
+        await _localDataSource.getPrimaryAccountCommunity();
+    JoinRequest data = await _remoteDataSource.getCommunityJoinRequest(
+        community: community!.community!.id!, request: request);
+
+    return joinRequestMapper.map(data);
+  }
+
+  @override
+  Future<PaginatedResult> getCommunityJoinRequests(
+      {required int page, required int limit}) async {
+    AccountCommunity? community =
+        await _localDataSource.getPrimaryAccountCommunity();
+
+    PaginatedResult result = await _remoteDataSource.getCommunityJoinRequests(
+        community!.community!.id!,
+        page: page,
+        limit: limit);
+
+    return result.copyWith(
+        data: List<JoinRequestDomain>.from(result.data
+            .map((request) => joinRequestMapper.map(request as JoinRequest))));
+  }
+
+  @override
+  Future<void> setCommunityJoinRequestStatus(
+      {required String request,
+      required String status,
+      required String comment}) async {
+    AccountCommunity? community =
+        await _localDataSource.getPrimaryAccountCommunity();
+
+    await _remoteDataSource.setCommunityJoinRequestStatus(
+        community!.community!.id!,
+        request: request,
+        status: status,
+        comment: comment);
+  }
 }

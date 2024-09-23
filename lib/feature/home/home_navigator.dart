@@ -20,4 +20,9 @@ class HomeNavigator extends BaseNavigator {
     payments: (BuildContext context) => PaymentScreen(),
     visitors: (BuildContext context) => VisitorsScreen()
   };
+
+  Future parse({required String route, Map<String, dynamic>? param}) {
+    // TODO: implement parse
+    throw UnimplementedError();
+  }
 }

@@ -17,7 +17,7 @@ class DataItem extends StatelessWidget {
           SizedBox(
             height: Spacing.small,
           ),
-          _dataItem(context, Assets.sms.svg(), email),
+          _dataItem(context, Assets.sms.svg(height: 18), email),
         ],
       );
 

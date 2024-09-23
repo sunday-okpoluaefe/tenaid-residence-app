@@ -54,7 +54,6 @@ class CommunityJoinOverview extends StatelessWidget {
         label,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: context.text.labelLarge
-            ?.copyWith(color: context.color.primaryContainer),
+        style: context.text.bodyMedium?.fade(context),
       );
 }

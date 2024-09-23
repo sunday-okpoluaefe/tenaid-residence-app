@@ -15,9 +15,9 @@ import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../assets/assets.gen.dart';
 import '../../../ds/component/page_loader.dart';
+import '../../../ds/component/settings_item.dart';
 import 'components/data_item.dart';
 import 'components/picture_item.dart';
-import 'components/settings_item.dart';
 
 class ProfileScreen extends AppStatefulWidget {
   @override
@@ -136,7 +136,8 @@ class _State extends AppState<ProfileScreen> {
                                 ),
                                 SettingsItem(
                                   label: 'Communities',
-                                  onTap: () => navigator.toChangePassword(),
+                                  onTap: () =>
+                                      communityNavigator.toCommunities(),
                                   icon: Assets.communities.svg(),
                                 ),
                                 SettingsItem(

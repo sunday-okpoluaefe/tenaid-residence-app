@@ -7,10 +7,12 @@ class PageHeader extends StatelessWidget {
   final double top;
   final double bottom;
   final String? description;
+  final Widget? descriptionWidget;
 
   const PageHeader(
       {super.key,
       required this.title,
+      this.descriptionWidget,
       this.description,
       this.top = 0,
       this.bottom = 0});
@@ -24,16 +26,18 @@ class PageHeader extends StatelessWidget {
           ),
           Text(
             title,
-            style: context.text.headlineSmall,
+            style: context.text.titleLarge,
           ),
-          if (description != null)
+          if (description != null && descriptionWidget == null)
             Padding(
               padding: EdgeInsets.only(top: Spacing.extraExtraSmall),
               child: Text(
                 description!,
                 style: context.text.bodyMedium?.fade(context),
               ),
-            ),
+            )
+          else if (descriptionWidget != null)
+            descriptionWidget!,
           SizedBox(
             height: bottom,
           ),

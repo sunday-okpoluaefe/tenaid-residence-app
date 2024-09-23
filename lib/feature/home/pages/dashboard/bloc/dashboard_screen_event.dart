@@ -48,3 +48,11 @@ class OnGetRecentVisitors extends DashboardScreenEvent {
   @override
   List<Object?> get props => [refresh, silent];
 }
+
+class OnGetRequestsCount extends DashboardScreenEvent {
+  OnGetRequestsCount({bool refresh = false, bool silent = true})
+      : super(refresh: refresh, silent: silent);
+
+  @override
+  List<Object?> get props => [];
+}

@@ -20,8 +20,7 @@ class SettingsItem extends StatelessWidget {
       this.isSwitch = false});
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        behavior: HitTestBehavior.opaque,
+  Widget build(BuildContext context) => InkWell(
         onTap: () {
           if (onTap != null) onTap!();
         },

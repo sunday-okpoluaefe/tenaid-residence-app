@@ -12,6 +12,7 @@ import 'package:tenaid_mobile/library/community/domain/use_cases/get_today_visit
 import 'package:tenaid_mobile/utils/xts/list_xt.dart';
 
 import '../../../../../library/community/domain/use_cases/get_all_communities_usecase.dart';
+import '../../../../../library/community/domain/use_cases/get_join_request_count_usecase.dart';
 import '../../../../../library/core/domain/entity/paginated_result.dart';
 import '../../../../../utils/app_bloc.dart';
 
@@ -26,9 +27,10 @@ class DashboardScreenBloc
   final GetAllCommunitiesUseCase getAllCommunities;
   final GetRecentVisitorsUseCase getRecentVisitors;
   final GetTodayVisitorsUseCase getTodayVisitors;
+  final GetJoinRequestCountUseCase getJoinRequestCount;
 
   DashboardScreenBloc(this.getAccount, this.getAllCommunities,
-      this.getRecentVisitors, this.getTodayVisitors)
+      this.getRecentVisitors, this.getTodayVisitors, this.getJoinRequestCount)
       : super(DashboardScreenState()) {
     on<OnGetAccount>((event, emit) async {
       emit(state.copyWith(accountLoading: true && !event.silent));
@@ -69,6 +71,13 @@ class DashboardScreenBloc
       } on ApiException catch (_) {
         emit(state.copyWith(recentVisitorsLoading: false));
       }
+    });
+
+    on<OnGetRequestsCount>((event, emit) async {
+      try {
+        int count = await getJoinRequestCount(true);
+        emit(state.copyWith(joinRequests: count));
+      } on ApiException catch (_) {}
     });
 
     on<OnGetCommunities>((event, emit) async {

@@ -10,4 +10,9 @@ class NotificationNavigator extends BaseNavigator {
       toScreen(screen: NotificationPermissionScreen(onGranted));
 
   Future toNotifications() => toScreen(screen: NotificationScreen());
+  
+  Future parse({required String route, Map<String, dynamic>? param}) {
+    // TODO: implement parse
+    throw UnimplementedError();
+  }
 }

@@ -11,7 +11,6 @@ class InviteParam {
   final String? code;
   final String? community;
   final String? member;
-  final String? path;
   final String? photo;
   final String? reason;
   final String? type;
@@ -28,7 +27,6 @@ class InviteParam {
       this.code,
       this.community,
       this.member,
-      this.path,
       this.photo,
       this.reason,
       this.type});

@@ -32,7 +32,8 @@ Country? getCountryFromCode(String countryCode) {
 }
 
 // get country by name
-Country? getCountryFromName(String name) {
+Country? getCountryFromName(String? name) {
+  if (name == null || name.isEmpty == true) return null;
   List<Country> countries = _countries;
   return countries.firstOrNullWhere((Country c) => c.name == name);
 }

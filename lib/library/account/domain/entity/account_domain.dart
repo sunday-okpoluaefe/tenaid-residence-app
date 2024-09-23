@@ -2,6 +2,7 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:tenaid_mobile/library/account/domain/entity/account_type_domain.dart';
 import 'package:tenaid_mobile/library/account/domain/entity/dashboard_flag_domain.dart';
 import 'package:tenaid_mobile/library/account/domain/entity/kyc.domain.dart';
+import 'package:tenaid_mobile/utils/country_utils/country_utils.dart';
 
 import 'address_domain.dart';
 import 'email_domain.dart';
@@ -25,6 +26,10 @@ class AccountDomain {
   final String? photo;
   final String? dob;
   final String? proofOfId;
+
+  Country? get countryOrigin => getCountryFromName(country);
+
+  String get name => '$firstName $lastName';
 
   AccountDomain(
       {this.id,

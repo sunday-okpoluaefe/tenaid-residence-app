@@ -8,10 +8,16 @@ import 'notification_handler.dart';
 Future sendDevicePushToken() async {
   // only run when there is internet connection
   if (await NetworkUtil.hasConnectivity()) {
-    FirebaseMessaging.instance.getToken().then(onTokenUpdated);
+    try {
+      String? token;
+      if (Platform.isIOS) {
+        token = await FirebaseMessaging.instance.getAPNSToken();
+      } else {
+        token = await FirebaseMessaging.instance.getToken();
+      }
 
-    if (Platform.isIOS)
-      FirebaseMessaging.instance.getAPNSToken().then(onTokenUpdated);
+      onTokenUpdated(token);
+    } catch (_) {}
   }
 }
 

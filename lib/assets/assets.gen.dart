@@ -41,6 +41,9 @@ class $AssetsJsonGen {
 class Assets {
   Assets._();
 
+  static const SvgGenImage addCommunity =
+      SvgGenImage('assets/add_community.svg');
+  static const SvgGenImage adminUser = SvgGenImage('assets/admin_user.svg');
   static const SvgGenImage adsDues = SvgGenImage('assets/ads_dues.svg');
   static const SvgGenImage adsDuesCard =
       SvgGenImage('assets/ads_dues_card.svg');
@@ -51,6 +54,7 @@ class Assets {
   static const SvgGenImage adsUtilityCard =
       SvgGenImage('assets/ads_utility_card.svg');
   static const $AssetsAnimationsGen animations = $AssetsAnimationsGen();
+  static const SvgGenImage bank = SvgGenImage('assets/bank.svg');
   static const SvgGenImage barcode = SvgGenImage('assets/barcode.svg');
   static const SvgGenImage calendar = SvgGenImage('assets/calendar.svg');
   static const SvgGenImage call = SvgGenImage('assets/call.svg');
@@ -67,6 +71,10 @@ class Assets {
   static const SvgGenImage dashTrack = SvgGenImage('assets/dash_track.svg');
   static const SvgGenImage dashUtility = SvgGenImage('assets/dash_utility.svg');
   static const SvgGenImage edit = SvgGenImage('assets/edit.svg');
+  static const SvgGenImage emptyActivity =
+      SvgGenImage('assets/empty_activity.svg');
+  static const SvgGenImage emptyContent =
+      SvgGenImage('assets/empty_content.svg');
   static const SvgGenImage error = SvgGenImage('assets/error.svg');
   static const SvgGenImage gifting = SvgGenImage('assets/gifting.svg');
   static const SvgGenImage icon = SvgGenImage('assets/icon.svg');
@@ -79,6 +87,7 @@ class Assets {
   static const SvgGenImage logout = SvgGenImage('assets/logout.svg');
   static const SvgGenImage manAvatar = SvgGenImage('assets/man_avatar.svg');
   static const SvgGenImage members = SvgGenImage('assets/members.svg');
+  static const SvgGenImage moneys = SvgGenImage('assets/moneys.svg');
   static const SvgGenImage moon = SvgGenImage('assets/moon.svg');
   static const SvgGenImage more = SvgGenImage('assets/more.svg');
   static const SvgGenImage navHome = SvgGenImage('assets/nav_home.svg');
@@ -106,6 +115,10 @@ class Assets {
   static const SvgGenImage routing = SvgGenImage('assets/routing.svg');
   static const SvgGenImage search = SvgGenImage('assets/search.svg');
   static const SvgGenImage searchEmpty = SvgGenImage('assets/search_empty.svg');
+  static const SvgGenImage securitySafe =
+      SvgGenImage('assets/security_safe.svg');
+  static const SvgGenImage securityUser =
+      SvgGenImage('assets/security_user.svg');
   static const SvgGenImage send = SvgGenImage('assets/send.svg');
   static const SvgGenImage signpost = SvgGenImage('assets/signpost.svg');
   static const SvgGenImage sms = SvgGenImage('assets/sms.svg');
@@ -118,6 +131,7 @@ class Assets {
   static const SvgGenImage tenaid = SvgGenImage('assets/tenaid.svg');
   static const SvgGenImage trash = SvgGenImage('assets/trash.svg');
   static const SvgGenImage visitors = SvgGenImage('assets/visitors.svg');
+  static const SvgGenImage wallet = SvgGenImage('assets/wallet.svg');
   static const SvgGenImage warning = SvgGenImage('assets/warning.svg');
   static const SvgGenImage welcomeBannerBg =
       SvgGenImage('assets/welcome_banner_bg.svg');
@@ -126,12 +140,15 @@ class Assets {
 
   /// List of all assets
   static List<SvgGenImage> get values => [
+        addCommunity,
+        adminUser,
         adsDues,
         adsDuesCard,
         adsInvite,
         adsInviteCard,
         adsUtility,
         adsUtilityCard,
+        bank,
         barcode,
         calendar,
         call,
@@ -147,6 +164,8 @@ class Assets {
         dashTrack,
         dashUtility,
         edit,
+        emptyActivity,
+        emptyContent,
         error,
         gifting,
         icon,
@@ -157,6 +176,7 @@ class Assets {
         logout,
         manAvatar,
         members,
+        moneys,
         moon,
         more,
         navHome,
@@ -179,6 +199,8 @@ class Assets {
         routing,
         search,
         searchEmpty,
+        securitySafe,
+        securityUser,
         send,
         signpost,
         sms,
@@ -189,6 +211,7 @@ class Assets {
         tenaid,
         trash,
         visitors,
+        wallet,
         warning,
         welcomeBannerBg,
         welcomeStarter

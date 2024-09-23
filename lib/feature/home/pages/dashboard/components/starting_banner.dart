@@ -50,8 +50,7 @@ class StartingBanner extends StatelessWidget {
                         width: MediaQuery.of(context).size.width * 0.6,
                         child: Text(
                           body,
-                          style: context.text.bodySmall?.copyWith(
-                              color: context.color.surfaceContainerHighest),
+                          style: context.text.bodySmall?.fade(context),
                         ),
                       )
                     ],

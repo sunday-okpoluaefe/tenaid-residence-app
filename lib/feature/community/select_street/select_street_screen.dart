@@ -116,7 +116,7 @@ class _State extends State<SelectStreetScreen> {
                                       horizontal: Spacing.small),
                                   child: ListItem(
                                     itemModel: ListItemModel(
-                                        icon: Assets.signpost.svg(),
+                                        icon: Assets.signpost.svg(height: 24),
                                         title: state.results[index].name ?? ""),
                                     onClick: (item) {
                                       _bloc.handleUiEvent(OnStreetSelected(

@@ -13,4 +13,10 @@ class VisitorNavigator extends BaseNavigator {
   Future toInviteDetails(InviteDomain invite) => toScreen(
       screen: InviteDetailsScreen(invite: invite),
       animationType: AnimationType.slideUp);
+
+  @override
+  Future parse({required String route, Map<String, dynamic>? param}) {
+    // TODO: implement parse
+    throw UnimplementedError();
+  }
 }

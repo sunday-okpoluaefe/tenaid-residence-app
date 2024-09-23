@@ -2,6 +2,7 @@ import 'package:injectable/injectable.dart';
 import 'package:tenaid_mobile/core/network/network_response.dart';
 import 'package:tenaid_mobile/library/community/data/model/account_community.dart';
 import 'package:tenaid_mobile/library/community/data/model/community.dart';
+import 'package:tenaid_mobile/library/community/data/model/join_request.dart';
 import 'package:tenaid_mobile/library/community/data/model/street.dart';
 import 'package:tenaid_mobile/library/community/data/model/visitor.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/create_community_param.dart';
@@ -156,6 +157,14 @@ class CommunityRemoteDataSource {
     );
   }
 
+  Future<int> getJoinRequestsCount({required String community}) async {
+    NetworkResponse response = await api(
+        url: 'community/$community/join-request-count',
+        requestType: RequestType.get);
+
+    return response.data['count'];
+  }
+
   // create a community
   Future<void> createCommunity(CreateCommunityParam param) async {
     Address address = Address(
@@ -175,5 +184,49 @@ class CommunityRemoteDataSource {
     map['address'] = address.toJson();
 
     await api(url: 'community', body: map, requestType: RequestType.post);
+  }
+
+  Future<PaginatedResult> getCommunityJoinRequests(String community,
+      {required int page, required int limit}) async {
+    Map<String, dynamic> map = Map();
+    map['page'] = page;
+    map['limit'] = limit;
+
+    NetworkResponse response = await api(
+        url: 'community/$community/request',
+        params: map,
+        requestType: RequestType.get);
+
+    PaginatedResult pagedResult = _pagedResult(response.data);
+
+    return pagedResult.copyWith(
+      data: List<JoinRequest>.from(
+          response.data['docs'].map((data) => JoinRequest.fromJson(data))),
+    );
+  }
+
+  Future<JoinRequest> getCommunityJoinRequest(
+      {required String community, required String request}) async {
+    NetworkResponse response = await api(
+        url: 'community/$community/request/$request',
+        requestType: RequestType.get);
+
+    return JoinRequest.fromJson(response.data);
+  }
+
+  Future<void> setCommunityJoinRequestStatus(String community,
+      {required String request,
+      required String status,
+      required String comment}) async {
+    Map<String, dynamic> map = Map();
+    map['community'] = community;
+    map['request'] = request;
+    map['status'] = status;
+    map['comment'] = comment;
+
+    await api(
+        url: 'community/request/status',
+        body: map,
+        requestType: RequestType.post);
   }
 }

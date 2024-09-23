@@ -11,6 +11,7 @@ NotificationPayload _$NotificationPayloadFromJson(Map<String, dynamic> json) =>
       type: json['type'] as String,
       description: json['description'] as String,
       link: json['link'] as String,
+      extra: json['extra'] as Map<String, dynamic>?,
     );
 
 Map<String, dynamic> _$NotificationPayloadToJson(
@@ -19,4 +20,5 @@ Map<String, dynamic> _$NotificationPayloadToJson(
       'type': instance.type,
       'description': instance.description,
       'link': instance.link,
+      'extra': instance.extra,
     };

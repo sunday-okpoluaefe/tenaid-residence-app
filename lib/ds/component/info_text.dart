@@ -1,0 +1,34 @@
+import 'package:flutter/material.dart';
+import 'package:tenaid_mobile/ds/component/spacing.dart';
+import 'package:tenaid_mobile/utils/xts/material_xt.dart';
+
+class InfoText extends StatelessWidget {
+  final String title;
+
+  const InfoText({super.key, required this.title});
+
+  @override
+  Widget build(BuildContext context) => Container(
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(8)),
+            color: context.color.primary.withOpacity(0.11)),
+        padding: EdgeInsets.symmetric(
+            horizontal: Spacing.extraSmall, vertical: Spacing.extraSmall),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Icon(
+              Icons.info_outline_rounded,
+              color: context.color.primary,
+            ),
+            SizedBox(
+              width: Spacing.extraSmall,
+            ),
+            Flexible(
+                child: Text(title,
+                    style: context.text.bodyMedium
+                        ?.copyWith(color: context.color.primary)))
+          ],
+        ),
+      );
+}
