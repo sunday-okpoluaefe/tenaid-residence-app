@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:tenaid_mobile/ds/component/app_widget.dart';
 import 'package:tenaid_mobile/ds/component/list_item.dart';
-import 'package:tenaid_mobile/ds/component/listitem_loader.dart';
 import 'package:tenaid_mobile/ds/component/page_header.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/street_domain.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../assets/assets.gen.dart';
-import '../../../ds/component/horizontal_line.dart';
+import '../../../ds/component/dotted_loader.dart';
+import '../../../ds/component/empty_screen.dart';
 import '../../../ds/component/icon_size.dart';
 import '../../../ds/component/spacing.dart';
 import '../../../ds/component/text_field.dart';
+import '../../../library/core/domain/entity/paginated_result.dart';
 import '../../../utils/route_utils/base_navigator.dart';
 import 'bloc/select_street_screen_bloc.dart';
 
@@ -31,10 +33,17 @@ class _State extends State<SelectStreetScreen> {
   final BaseNavigator _navigator = GetIt.instance.get<BaseNavigator>();
   final SelectStreetScreenBloc _bloc = GetIt.instance.get();
 
+  final PagingController<int, StreetDomain> _pagingController =
+      PagingController(firstPageKey: 1);
+
   @override
   void initState() {
     super.initState();
-    _bloc.handleUiEvent(OnGetStreets(widget.community));
+
+    _pagingController.addPageRequestListener((pageKey) {
+      _bloc.handleUiEvent(
+          OnGetStreets(community: widget.community, page: pageKey, limit: 10));
+    });
   }
 
   @override
@@ -60,13 +69,27 @@ class _State extends State<SelectStreetScreen> {
             ),
           ),
       listener: (_, SelectStreetScreenState state) {
-        widget.handleApiError(context, state.errorMessage?.get());
-
         StreetDomain? selected = state.itemSelected?.get();
         if (selected != null) {
           widget.onSelected(selected);
           _navigator.back();
         }
+
+        PaginatedResult? result = state.results?.get();
+
+        if (result != null) {
+          List<StreetDomain> visitors = result.data.isEmpty
+              ? <StreetDomain>[]
+              : result.data as List<StreetDomain>;
+
+          if (result.isLastPage) {
+            _pagingController.appendLastPage(visitors);
+          } else {
+            _pagingController.appendPage(visitors, result.nextPage);
+          }
+        }
+
+        _pagingController.error = state.errorMessage?.get();
       });
 
   _screen(BuildContext context, SelectStreetScreenState state) =>
@@ -99,46 +122,52 @@ class _State extends State<SelectStreetScreen> {
                           },
                         ),
                         SizedBox(
-                          height: Spacing.extraSmall,
+                          height: Spacing.small,
                         ),
                       ],
                     ),
                   ),
-                  if (state.results.isNotEmpty && !state.loading)
-                    ListView.builder(
-                        shrinkWrap: true,
+                  SizedBox(
+                      height: MediaQuery.of(context).size.height,
+                      child: PagedListView.separated(
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: state.results.length,
-                        itemBuilder: (_, index) => Column(
-                              children: [
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: Spacing.small),
-                                  child: ListItem(
-                                    itemModel: ListItemModel(
-                                        icon: Assets.signpost.svg(height: 24),
-                                        title: state.results[index].name ?? ""),
-                                    onClick: (item) {
-                                      _bloc.handleUiEvent(OnStreetSelected(
-                                          state.results[index]));
-                                    },
-                                  ),
+                        pagingController: _pagingController,
+                        shrinkWrap: true,
+                        builderDelegate: PagedChildBuilderDelegate<
+                                StreetDomain>(
+                            itemBuilder: (_, street, index) {
+                              return Padding(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: Spacing.small),
+                                child: ListItem(
+                                  itemModel: ListItemModel(
+                                      icon: Assets.signpost.svg(height: 24),
+                                      title: street.name ?? ""),
+                                  onClick: (item) {
+                                    _bloc.handleUiEvent(
+                                        OnStreetSelected(street));
+                                  },
                                 ),
-                                HorizontalLine()
-                              ],
-                            )),
-                  if (state.results.isEmpty && !state.loading)
-                    Center(
-                      child: Padding(
-                        padding: EdgeInsets.only(top: Spacing.extraExtraLarge),
-                        child: Text(
-                          context.locale.no_results_found,
-                          style: context.text.bodyLarge?.copyWith(
-                              color: context.color.onSurface.withOpacity(0.7)),
+                              );
+                            },
+                            firstPageProgressIndicatorBuilder: (_) =>
+                                topLoader(context),
+                            newPageProgressIndicatorBuilder: (_) =>
+                                loader(context),
+                            newPageErrorIndicatorBuilder: (_) => SizedBox(),
+                            firstPageErrorIndicatorBuilder: (_) => EmptyScreen(
+                                  hasError: true,
+                                  onTryAgain: () => _pagingController.refresh(),
+                                ),
+                            noItemsFoundIndicatorBuilder: (_) => EmptyScreen(
+                                  onTryAgain: () => _pagingController.refresh(),
+                                )),
+                        separatorBuilder: (BuildContext context, int index) =>
+                            Container(
+                          height: Spacing.extraSmall,
+                          color: context.color.surfaceContainer,
                         ),
-                      ),
-                    ),
-                  if (state.loading) ListItemLoader(count: 5)
+                      )),
                 ],
               ),
             )

@@ -28,17 +28,26 @@ class _State extends State<CommunityDetailScreen> {
   final CommunityDetailBloc bloc = GetIt.instance.get();
 
   @override
+  void initState() {
+    super.initState();
+
+    bloc.handleUiEvent(OnInit(widget.community));
+  }
+
+  @override
   Widget build(BuildContext context) => BlocConsumer(
       bloc: bloc,
       builder: (_, CommunityDetailState state) => Scaffold(
             appBar: AppBar(),
             body: SafeArea(
                 child: AppScrollView(
-                    bottom: widget.community.isPrimary != true &&
-                            widget.community.status == 'approved'
+                    bottom: state.community?.isPrimary != true &&
+                            state.community?.status == 'approved'
                         ? PrimaryButton(
                             title: 'Set as primary',
-                            onClick: () {},
+                            loading: state.loading,
+                            onClick: () =>
+                                bloc.handleUiEvent(OnSetPrimaryClicked()),
                             modifier: EdgeInsets.all(Spacing.small),
                           )
                         : SizedBox.shrink(),
@@ -51,9 +60,9 @@ class _State extends State<CommunityDetailScreen> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               PageHeader(
-                                title: widget.community.community!.name ?? '',
+                                title: state.community?.community?.name ?? '',
                                 description:
-                                    widget.community.community!.description ??
+                                    state.community?.community?.description ??
                                         '',
                               ),
                               SizedBox(
@@ -61,7 +70,7 @@ class _State extends State<CommunityDetailScreen> {
                               ),
                               DetailText(
                                   label: context.locale.address,
-                                  detail: widget.community.community?.address
+                                  detail: state.community?.community?.address
                                           ?.address ??
                                       ''),
                               SizedBox(
@@ -71,17 +80,19 @@ class _State extends State<CommunityDetailScreen> {
                                   label:
                                       '${context.locale.city} & ${context.locale.country}',
                                   detail:
-                                      '${widget.community.community?.address?.city}, ${widget.community.community?.address?.country}'),
+                                      '${state.community?.community?.address?.city}, ${state.community?.community?.address?.country}'),
                             ],
                           ),
                         ),
-                        if (widget.community.isAdmin == true &&
-                            widget.community.status == 'approved')
-                          AdminDetailsScreen()
-                        else if (widget.community.isAdmin != true &&
-                            widget.community.status == 'approved')
+                        if (state.community?.isAdmin == true &&
+                            state.community?.status == 'approved')
+                          AdminDetailsScreen(
+                            community: state.community?.community,
+                          )
+                        else if (state.community?.isAdmin != true &&
+                            state.community?.status == 'approved')
                           MemberDetailScreen(
-                            community: widget.community,
+                            community: state.community,
                           ),
                         Padding(
                           padding:
@@ -91,14 +102,14 @@ class _State extends State<CommunityDetailScreen> {
                               SizedBox(
                                 height: Spacing.medium,
                               ),
-                              if (widget.community.isPrimary == true)
+                              if (state.community?.isPrimary == true)
                                 Padding(
                                   padding:
                                       EdgeInsets.only(bottom: Spacing.small),
                                   child: InfoText(
                                       title: 'This is your primary community'),
                                 ),
-                              if (widget.community.status == 'pending')
+                              if (state.community?.status == 'pending')
                                 InfoText(
                                   title:
                                       'Your membership is being reviewed. We will let you know once the status changes',

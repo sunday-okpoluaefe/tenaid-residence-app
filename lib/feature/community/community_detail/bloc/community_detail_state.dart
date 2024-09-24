@@ -1,10 +1,13 @@
 part of 'community_detail_bloc.dart';
 
-sealed class CommunityDetailState extends Equatable {
-  const CommunityDetailState();
-}
+@CopyWith(skipFields: true)
+class CommunityDetailState extends Equatable {
+  final bool loading;
+  final Resettable<ApiException>? error;
+  final AccountCommunityDomain? community;
 
-final class CommunityDetailInitial extends CommunityDetailState {
+  CommunityDetailState({this.loading = false, this.error, this.community});
+
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [loading, error, community];
 }

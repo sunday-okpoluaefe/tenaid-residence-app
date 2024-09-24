@@ -113,8 +113,8 @@ class _State extends State<PendingJoinRequestScreen> {
                         request: request, root: widget),
                   );
                 },
-                firstPageProgressIndicatorBuilder: (_) => _topLoader(context),
-                newPageProgressIndicatorBuilder: (_) => _loader(context),
+                firstPageProgressIndicatorBuilder: (_) => topLoader(context),
+                newPageProgressIndicatorBuilder: (_) => loader(context),
                 newPageErrorIndicatorBuilder: (_) => SizedBox(),
                 firstPageErrorIndicatorBuilder: (_) => EmptyScreen(
                       hasError: true,
@@ -128,12 +128,4 @@ class _State extends State<PendingJoinRequestScreen> {
               color: context.color.surfaceContainer,
             ),
           ));
-
-  Widget _topLoader(BuildContext context) => Padding(
-      padding: EdgeInsets.all(Spacing.extraLarge), child: _loader(context));
-
-  Widget _loader(BuildContext context) => DottedLoader(
-        color: context.color.surfaceBright,
-        size: 38,
-      );
 }

@@ -16,6 +16,7 @@ import 'package:tenaid_mobile/utils/xts/datetime_xts.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../assets/assets.gen.dart';
+import '../../../ds/component/chip_group.dart';
 import '../../../ds/component/icon_size.dart';
 import '../../../ds/component/image_view.dart';
 import '../../../ds/component/phone_field.dart';
@@ -199,6 +200,24 @@ class _State extends State<EditProfileScreen> {
                   onCountrySelected: (country) =>
                       bloc.handleUiEvent(OnCountryChanged(country)),
                 ),
+                SizedBox(
+                  height: Spacing.small,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Gender',
+                      style: context.text.titleMedium,
+                    ),
+                    ChipGroup(
+                      choices: ['Male', 'Female'],
+                      defaultSelected: state.gender,
+                      onSelectedChanged: (String choice) =>
+                          bloc.handleUiEvent(OnGenderChanged(choice)),
+                    )
+                  ],
+                )
               ],
             ),
           ));

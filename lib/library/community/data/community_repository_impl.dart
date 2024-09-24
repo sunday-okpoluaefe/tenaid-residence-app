@@ -1,11 +1,15 @@
 import 'package:injectable/injectable.dart';
 import 'package:tenaid_mobile/core/network/api_error_parser.dart';
 import 'package:tenaid_mobile/library/community/data/mapper/visitor_to_domain_mapper.dart';
+import 'package:tenaid_mobile/library/community/data/model/access_point.dart';
 import 'package:tenaid_mobile/library/community/data/model/account_community.dart';
 import 'package:tenaid_mobile/library/community/data/model/join_request.dart';
+import 'package:tenaid_mobile/library/community/data/model/street.dart';
 import 'package:tenaid_mobile/library/community/data/model/visitor.dart';
 import 'package:tenaid_mobile/library/community/domain/community_repository.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/access_point_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/community_domain.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/create_access_point_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/create_community_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/invite_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/join_request_domain.dart';
@@ -21,6 +25,7 @@ import '../../core/domain/entity/paginated_result.dart';
 import '../domain/entity/account_community_domain.dart';
 import 'data_source/community_local_datasource.dart';
 import 'data_source/community_remote_datasource.dart';
+import 'mapper/access_point_to_domain_mapper.dart';
 import 'mapper/account_community_to_domain_mapper.dart';
 import 'mapper/community_to_domain_mapper.dart';
 import 'mapper/join_request_to_domain_mapper.dart';
@@ -35,6 +40,7 @@ class CommunityRepositoryImpl implements CommunityRepository {
   final VisitorToDomainMapper visitorToDomainMapper;
   final AccountCommunityToDomainMapper accountCommunityMapper;
   final JoinRequestToDomainMapper joinRequestMapper;
+  final AccessPointToDomainMapper accessPointMapper;
 
   CommunityRepositoryImpl(
       this._remoteDataSource,
@@ -43,7 +49,8 @@ class CommunityRepositoryImpl implements CommunityRepository {
       this.accountCommunityMapper,
       this._localDataSource,
       this.visitorToDomainMapper,
-      this.joinRequestMapper);
+      this.joinRequestMapper,
+      this.accessPointMapper);
 
   @override
   Future<List<CommunityDomain>> searchCommunity(String query) async {
@@ -53,10 +60,13 @@ class CommunityRepositoryImpl implements CommunityRepository {
   }
 
   @override
-  Future<List<StreetDomain>> getAllCommunityStreets(String community) async {
-    return (await _remoteDataSource.streets(community))
-        .map((street) => _streetToDomainMapper.map(street)!)
-        .toList();
+  Future<PaginatedResult> getAllCommunityStreets(
+      {required String community, int page = 1, int limit = 10}) async {
+    PaginatedResult streets = await await _remoteDataSource.streets(
+        community: community, page: page, limit: limit);
+    return streets.copyWith(
+        data: List<StreetDomain>.from(streets.data
+            .map((street) => _streetToDomainMapper.map(street as Street))));
   }
 
   @override
@@ -320,5 +330,38 @@ class CommunityRepositoryImpl implements CommunityRepository {
         request: request,
         status: status,
         comment: comment);
+  }
+
+  @override
+  Future<List<AccessPointDomain>> getCommunityAccessPoints() async {
+    AccountCommunity? community =
+        await _localDataSource.getPrimaryAccountCommunity();
+
+    List<AccessPoint> result = await _remoteDataSource.getCommunityAccessPoints(
+        community: community?.community?.id ?? '');
+
+    return List<AccessPointDomain>.from(
+        result.map((data) => accessPointMapper.map(data)));
+  }
+
+  @override
+  Future<AccessPointDomain> createCommunityAccessPoints(
+      {required CreateAccessPointParam param}) async {
+    AccountCommunity? community =
+        await _localDataSource.getPrimaryAccountCommunity();
+    AccessPoint result = await _remoteDataSource.createCommunityAccessPoint(
+        param: param, community: community?.community?.id ?? '');
+
+    return accessPointMapper.map(result);
+  }
+
+  @override
+  Future<AccountCommunityDomain> setPrimaryCommunity(String community) async {
+    AccountCommunity result =
+        await _remoteDataSource.setPrimaryCommunity(community);
+
+    await _localDataSource.savePrimaryAccountCommunity(result);
+
+    return accountCommunityMapper.map(result);
   }
 }

@@ -78,6 +78,7 @@ class AccountRemoteDataSource {
     final body = <String, dynamic>{};
     body['dob'] = param.dob;
     body['phone'] = param.phone;
+    body['gender'] = param.gender;
     body['photo'] = param.photo;
     body['firstName'] = param.firstName;
     body['lastName'] = param.lastName;

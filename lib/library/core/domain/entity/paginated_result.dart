@@ -19,5 +19,12 @@ class PaginatedResult {
       this.totalItems = 0,
       this.itemsPerPage = 0});
 
+  factory PaginatedResult.parse(dynamic json) => PaginatedResult(
+      totalItems: json['totalItems'],
+      currentPage: json['currentPage'],
+      totalPages: json['totalPages'],
+      nextPage: json['currentPage'] + 1,
+      itemsPerPage: json['itemsPerPage']);
+
   bool get isLastPage => currentPage >= totalPages;
 }

@@ -3,15 +3,15 @@ import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:tenaid_mobile/core/network/api_error_parser.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/paginate_param.dart';
 import 'package:tenaid_mobile/library/community/domain/use_cases/get_streets_usecase.dart';
+import 'package:tenaid_mobile/library/core/domain/entity/paginated_result.dart';
 import 'package:tenaid_mobile/utils/resettable.dart';
 
 import '../../../../library/community/domain/entity/street_domain.dart';
 
 part 'select_street_screen_bloc.g.dart';
-
 part 'select_street_screen_event.dart';
-
 part 'select_street_screen_state.dart';
 
 @injectable
@@ -26,8 +26,9 @@ class SelectStreetScreenBloc
       emit(state.copyWith(loading: true));
 
       try {
-        List<StreetDomain> streets = await _getStreets(event.community);
-        emit(state.copyWith(loading: false, results: streets));
+        PaginatedResult result = await _getStreets(PaginateParam(
+            page: event.page, limit: event.limit, query: event.community));
+        emit(state.copyWith(loading: false, results: Resettable(result)));
       } on ApiException catch (error) {
         emit(state.copyWith(loading: false, errorMessage: Resettable(error)));
       }

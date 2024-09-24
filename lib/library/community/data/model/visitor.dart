@@ -1,9 +1,6 @@
-import 'package:tenaid_mobile/library/community/data/model/street.dart';
-
 class Visitor {
   Visitor({
     String? id,
-    Street? street,
     String? name,
     String? photo,
     String? code,
@@ -14,7 +11,6 @@ class Visitor {
     String? status,
   }) {
     _id = id;
-    _street = street;
     _name = name;
     _photo = photo;
     _code = code;
@@ -27,7 +23,7 @@ class Visitor {
 
   Visitor.fromJson(dynamic json) {
     _id = json['_id'];
-    _street = json['path'] != null ? Street.fromJson(json['path']) : null;
+    // _street = json['path'] != null ? Street.fromJson(json['path']) : null;
     _name = json['name'];
     _photo = json['photo'];
     _date = json['date'];
@@ -39,7 +35,6 @@ class Visitor {
   }
 
   String? _id;
-  Street? _street;
   String? _name;
   String? _photo;
   String? _code;
@@ -50,8 +45,6 @@ class Visitor {
   String? _status;
 
   String? get id => _id;
-
-  Street? get street => _street;
 
   String? get name => _name;
 
@@ -76,9 +69,6 @@ class Visitor {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['_id'] = _id;
-    if (_street != null) {
-      map['path'] = _street?.toJson();
-    }
     map['name'] = _name;
     map['photo'] = _photo;
     map['code'] = _code;

@@ -1,10 +1,12 @@
 import 'package:injectable/injectable.dart';
 import 'package:tenaid_mobile/core/network/network_response.dart';
+import 'package:tenaid_mobile/library/community/data/model/access_point.dart';
 import 'package:tenaid_mobile/library/community/data/model/account_community.dart';
 import 'package:tenaid_mobile/library/community/data/model/community.dart';
 import 'package:tenaid_mobile/library/community/data/model/join_request.dart';
 import 'package:tenaid_mobile/library/community/data/model/street.dart';
 import 'package:tenaid_mobile/library/community/data/model/visitor.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/create_access_point_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/create_community_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/request_join_param.dart';
 import 'package:tenaid_mobile/library/core/data/model/address.dart';
@@ -18,13 +20,6 @@ class CommunityRemoteDataSource {
 
   CommunityRemoteDataSource({required this.api});
 
-  PaginatedResult _pagedResult(dynamic json) => PaginatedResult(
-      totalItems: json['totalItems'],
-      currentPage: json['currentPage'],
-      totalPages: json['totalPages'],
-      nextPage: json['currentPage'] + 1,
-      itemsPerPage: json['itemsPerPage']);
-
   Future<List<Community>> searchCommunity(String query) async {
     final body = <String, dynamic>{};
     body['query'] = query;
@@ -36,12 +31,22 @@ class CommunityRemoteDataSource {
         response.data['docs'].map((data) => Community.fromJson(data)));
   }
 
-  Future<List<Street>> streets(String community) async {
-    NetworkResponse response = await api(
-        url: 'community/$community/path', requestType: RequestType.get);
+  Future<PaginatedResult> streets(
+      {required String community, int page = 1, int limit = 10}) async {
+    Map<String, dynamic> map = Map();
+    map['page'] = page;
+    map['limit'] = limit;
 
-    return List<Street>.from(
-        response.data.map((data) => Street.fromJson(data)));
+    NetworkResponse response = await api(
+        url: 'community/$community/path',
+        requestType: RequestType.get,
+        params: map);
+
+    PaginatedResult result = PaginatedResult.parse(response.data);
+
+    return result.copyWith(
+        data: List<Street>.from(
+            response.data['docs'].map((data) => Street.fromJson(data))));
   }
 
   Future<AccountCommunity> requestJoin(RequestJoinParam param) async {
@@ -82,7 +87,7 @@ class CommunityRemoteDataSource {
         params: map,
         requestType: RequestType.get);
 
-    PaginatedResult pagedResult = _pagedResult(response.data);
+    PaginatedResult pagedResult = PaginatedResult.parse(response.data);
 
     return pagedResult.copyWith(
       data: List<Visitor>.from(
@@ -105,7 +110,7 @@ class CommunityRemoteDataSource {
         params: map,
         requestType: RequestType.get);
 
-    PaginatedResult pagedResult = _pagedResult(response.data);
+    PaginatedResult pagedResult = PaginatedResult.parse(response.data);
 
     return pagedResult.copyWith(
       data: List<Visitor>.from(
@@ -130,7 +135,7 @@ class CommunityRemoteDataSource {
         params: map,
         requestType: RequestType.get);
 
-    PaginatedResult pagedResult = _pagedResult(response.data);
+    PaginatedResult pagedResult = PaginatedResult.parse(response.data);
 
     return pagedResult.copyWith(
       data: List<Visitor>.from(
@@ -149,7 +154,7 @@ class CommunityRemoteDataSource {
         params: map,
         requestType: RequestType.get);
 
-    PaginatedResult pagedResult = _pagedResult(response.data);
+    PaginatedResult pagedResult = PaginatedResult.parse(response.data);
 
     return pagedResult.copyWith(
       data: List<Visitor>.from(
@@ -197,7 +202,7 @@ class CommunityRemoteDataSource {
         params: map,
         requestType: RequestType.get);
 
-    PaginatedResult pagedResult = _pagedResult(response.data);
+    PaginatedResult pagedResult = PaginatedResult.parse(response.data);
 
     return pagedResult.copyWith(
       data: List<JoinRequest>.from(
@@ -214,6 +219,31 @@ class CommunityRemoteDataSource {
     return JoinRequest.fromJson(response.data);
   }
 
+  Future<List<AccessPoint>> getCommunityAccessPoints(
+      {required String community}) async {
+    NetworkResponse response = await api(
+        url: 'community/$community/access-point', requestType: RequestType.get);
+
+    return List<AccessPoint>.from(
+        response.data.map((json) => AccessPoint.fromJson(json)));
+  }
+
+  Future<AccessPoint> createCommunityAccessPoint(
+      {required CreateAccessPointParam param,
+      required String community}) async {
+    Map<String, dynamic> map = Map();
+    map['name'] = param.name;
+    map['description'] = param.description;
+    map['password'] = param.password;
+
+    NetworkResponse response = await api(
+        url: 'community/$community/access-point',
+        requestType: RequestType.post,
+        body: map);
+
+    return AccessPoint.fromJson(response.data);
+  }
+
   Future<void> setCommunityJoinRequestStatus(String community,
       {required String request,
       required String status,
@@ -228,5 +258,13 @@ class CommunityRemoteDataSource {
         url: 'community/request/status',
         body: map,
         requestType: RequestType.post);
+  }
+
+  Future<AccountCommunity> setPrimaryCommunity(String community) async {
+    NetworkResponse response = await api(
+        url: 'community/$community/primary-access-point',
+        requestType: RequestType.post);
+
+    return AccountCommunity.fromJson(response.data);
   }
 }

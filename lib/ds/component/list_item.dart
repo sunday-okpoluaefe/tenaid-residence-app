@@ -22,8 +22,7 @@ class ListItem extends StatelessWidget {
       this.showTrailingIcon = true});
 
   @override
-  Widget build(BuildContext context) => GestureDetector(
-        behavior: HitTestBehavior.opaque,
+  Widget build(BuildContext context) => InkWell(
         onTap: () {
           if (onClick != null) onClick!(itemModel);
         },

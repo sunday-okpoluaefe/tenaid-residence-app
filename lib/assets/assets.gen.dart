@@ -106,6 +106,7 @@ class Assets {
   static const SvgGenImage passwordChange =
       SvgGenImage('assets/password_change.svg');
   static const SvgGenImage pattern = SvgGenImage('assets/pattern.svg');
+  static const SvgGenImage penAdd = SvgGenImage('assets/pen_add.svg');
   static const SvgGenImage phone = SvgGenImage('assets/phone.svg');
   static const SvgGenImage pricing = SvgGenImage('assets/pricing.svg');
   static const SvgGenImage profile = SvgGenImage('assets/profile.svg');
@@ -120,6 +121,7 @@ class Assets {
   static const SvgGenImage securityUser =
       SvgGenImage('assets/security_user.svg');
   static const SvgGenImage send = SvgGenImage('assets/send.svg');
+  static const SvgGenImage shield = SvgGenImage('assets/shield.svg');
   static const SvgGenImage signpost = SvgGenImage('assets/signpost.svg');
   static const SvgGenImage sms = SvgGenImage('assets/sms.svg');
   static const SvgGenImage somethingWong =
@@ -190,6 +192,7 @@ class Assets {
         notificationsEmpty,
         passwordChange,
         pattern,
+        penAdd,
         phone,
         pricing,
         profile,
@@ -202,6 +205,7 @@ class Assets {
         securitySafe,
         securityUser,
         send,
+        shield,
         signpost,
         sms,
         somethingWong,

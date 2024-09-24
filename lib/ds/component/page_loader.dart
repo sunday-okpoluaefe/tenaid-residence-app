@@ -6,6 +6,10 @@ import 'place_holders.dart';
 import 'spacing.dart';
 
 class PageLoader extends StatelessWidget {
+  final double padding;
+
+  const PageLoader({super.key, this.padding = 16});
+
   @override
   Widget build(BuildContext context) => Shimmer.fromColors(
         baseColor: Colors.grey.shade300,
@@ -23,8 +27,8 @@ class PageLoader extends StatelessWidget {
 
   Widget _large(BuildContext context) => Container(
         margin: EdgeInsets.only(
-            bottom: Spacing.small, right: Spacing.small, left: Spacing.small),
-        height: 92,
+            bottom: Spacing.small, right: padding, left: padding),
+        height: 56,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
           color: context.color.surface,
@@ -33,7 +37,7 @@ class PageLoader extends StatelessWidget {
 
   Widget _list(BuildContext context) => Padding(
         padding: EdgeInsets.only(
-            bottom: Spacing.small, left: Spacing.small, right: Spacing.small),
+            bottom: Spacing.small, left: padding, right: padding),
         child: Row(
           children: [
             Container(
@@ -47,7 +51,7 @@ class PageLoader extends StatelessWidget {
             SizedBox(
               width: Spacing.small,
             ),
-            TitlePlaceholder(width: MediaQuery.of(context).size.width * 0.65)
+            TitlePlaceholder(width: MediaQuery.of(context).size.width * 0.60)
           ],
         ),
       );

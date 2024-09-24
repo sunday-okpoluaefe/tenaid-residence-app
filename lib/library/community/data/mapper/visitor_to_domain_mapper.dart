@@ -13,7 +13,6 @@ class VisitorToDomainMapper extends Mapper<Visitor, VisitorDomain> {
   @override
   VisitorDomain map(Visitor from) => VisitorDomain(
       id: from.id,
-      street: streetMapper.map(from.street),
       name: from.name,
       date: from.date,
       photo: from.photo,

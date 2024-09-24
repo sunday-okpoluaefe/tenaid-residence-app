@@ -81,7 +81,7 @@ class _State extends State<ListCommunityScreen> {
             Padding(
               padding: EdgeInsets.only(left: Spacing.small),
               child: PageHeader(
-                title: 'My Communities',
+                title: 'Communities',
                 bottom: Spacing.small,
               ),
             ),

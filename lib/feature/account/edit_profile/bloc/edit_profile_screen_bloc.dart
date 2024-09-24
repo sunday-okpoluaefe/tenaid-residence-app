@@ -35,7 +35,11 @@ class EditProfileScreenBloc
   late Country selectedCountry;
 
   bool get validated =>
-      fName.isNotEmpty && lName.isNotEmpty && dob != null && phone.isNotEmpty;
+      fName.isNotEmpty &&
+      lName.isNotEmpty &&
+      dob != null &&
+      phone.isNotEmpty &&
+      imageUrl.isNotEmpty;
 
   EditProfileScreenBloc(this.getAccount, this.uploadFile, this.updateInfo)
       : super(EditProfileScreenState()) {
@@ -47,6 +51,10 @@ class EditProfileScreenBloc
     on<OnLastNameChanged>((event, emit) async {
       lName = event.name;
       emit(state.copyWith(validated: validated));
+    });
+
+    on<OnGenderChanged>((event, emit) async {
+      emit(state.copyWith(gender: event.gender));
     });
 
     on<OnPhotoAdded>((event, emit) async {
@@ -79,6 +87,7 @@ class EditProfileScreenBloc
             firstName: fName,
             lastName: lName,
             photo: imageUrl,
+            gender: state.gender,
             phone: phone,
             country: selectedCountry.name,
             dob: dob!.toFormat(DATETIME_FORMAT)));

@@ -47,7 +47,6 @@ dependencies:
   carousel_slider: ^5.0.0
   workmanager:
   uuid: ^4.5.0
-  lottie: ^3.1.2
   qr_flutter: ^4.1.0
   json_annotation: ^4.9.0
   pretty_dio_logger: ^1.4.0

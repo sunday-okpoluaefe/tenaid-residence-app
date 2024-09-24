@@ -15,6 +15,7 @@ class AccountToDomainMapper implements Mapper<Account, AccountDomain> {
   AccountDomain map(Account from) => AccountDomain(
       id: from.id,
       country: from.country,
+      gender: from.gender,
       lastName: from.lastName,
       firstName: from.firstName,
       kycCompleted: from.kycCompleted,

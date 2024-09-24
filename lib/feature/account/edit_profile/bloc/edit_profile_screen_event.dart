@@ -45,6 +45,15 @@ class OnCountryChanged extends EditProfileScreenEvent {
   List<Object?> get props => [country];
 }
 
+class OnGenderChanged extends EditProfileScreenEvent {
+  final String gender;
+
+  OnGenderChanged(this.gender);
+
+  @override
+  List<Object?> get props => [gender];
+}
+
 class OnPhotoAdded extends EditProfileScreenEvent {
   final String path;
 

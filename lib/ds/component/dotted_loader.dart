@@ -1,6 +1,8 @@
 import 'dart:math' as math show sin, pi;
 
 import 'package:flutter/widgets.dart';
+import 'package:tenaid_mobile/ds/component/spacing.dart';
+import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 class DottedLoader extends StatefulWidget {
   const DottedLoader({
@@ -99,3 +101,11 @@ class DelayTween extends Tween<double> {
   @override
   double evaluate(Animation<double> animation) => lerp(animation.value);
 }
+
+Widget topLoader(BuildContext context) => Padding(
+    padding: EdgeInsets.all(Spacing.extraLarge), child: loader(context));
+
+Widget loader(BuildContext context) => DottedLoader(
+      color: context.color.surfaceBright,
+      size: 38,
+    );

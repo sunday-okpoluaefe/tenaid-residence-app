@@ -16,6 +16,7 @@ abstract class _$EditProfileScreenStateCWProxy {
   EditProfileScreenState call({
     bool? loading,
     Resettable<ApiException>? error,
+    String? gender,
     Country? selectedCountry,
     bool? initializing,
     Resettable<bool>? showProfile,
@@ -42,6 +43,7 @@ class _$EditProfileScreenStateCWProxyImpl
   EditProfileScreenState call({
     Object? loading = const $CopyWithPlaceholder(),
     Object? error = const $CopyWithPlaceholder(),
+    Object? gender = const $CopyWithPlaceholder(),
     Object? selectedCountry = const $CopyWithPlaceholder(),
     Object? initializing = const $CopyWithPlaceholder(),
     Object? showProfile = const $CopyWithPlaceholder(),
@@ -57,6 +59,10 @@ class _$EditProfileScreenStateCWProxyImpl
           ? _value.error
           // ignore: cast_nullable_to_non_nullable
           : error as Resettable<ApiException>?,
+      gender: gender == const $CopyWithPlaceholder() || gender == null
+          ? _value.gender
+          // ignore: cast_nullable_to_non_nullable
+          : gender as String,
       selectedCountry: selectedCountry == const $CopyWithPlaceholder()
           ? _value.selectedCountry
           // ignore: cast_nullable_to_non_nullable

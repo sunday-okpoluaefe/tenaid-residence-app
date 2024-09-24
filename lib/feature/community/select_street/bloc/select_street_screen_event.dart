@@ -6,11 +6,14 @@ sealed class SelectStreetScreenEvent extends Equatable {
 
 class OnGetStreets extends SelectStreetScreenEvent {
   final String community;
+  final int page;
+  final int limit;
 
-  OnGetStreets(this.community);
+  OnGetStreets(
+      {required this.community, required this.page, required this.limit});
 
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [community, page, limit];
 }
 
 class OnStreetSelected extends SelectStreetScreenEvent {

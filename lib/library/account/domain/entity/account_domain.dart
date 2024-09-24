@@ -14,6 +14,7 @@ class AccountDomain {
   final String? id;
   final String? lastName;
   final String? firstName;
+  final String? gender;
   final String? country;
   final EmailDomain? email;
   final AddressDomain? address;
@@ -37,6 +38,7 @@ class AccountDomain {
       this.flags,
       this.firstName,
       this.country,
+      this.gender,
       this.email,
       this.address,
       this.kyc,

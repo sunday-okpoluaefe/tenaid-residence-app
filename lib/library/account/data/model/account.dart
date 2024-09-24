@@ -20,6 +20,7 @@ class Account {
     String? phone,
     String? photo,
     String? dob,
+    String? gender,
     String? proofOfId,
   }) {
     _id = id;
@@ -29,6 +30,7 @@ class Account {
     _email = email;
     _address = address;
     _kyc = kyc;
+    _gender = gender;
     _flags = flags;
     _primaryAccountType = primaryAccountType;
     _accountTypes = accountTypes;
@@ -60,6 +62,7 @@ class Account {
     }
     _kycCompleted = json['kycCompleted'];
     _phone = json['phone'];
+    _gender = json['gender'];
     _photo = json['photo'];
     _dob = json['dob'];
     _proofOfId = json['proofOfId'];
@@ -69,6 +72,7 @@ class Account {
   String? _country;
   String? _lastName;
   String? _firstName;
+  String? _gender;
   Email? _email;
   Address? _address;
   Kyc? _kyc;
@@ -82,6 +86,8 @@ class Account {
   String? _proofOfId;
 
   String? get id => _id;
+
+  String? get gender => _gender;
 
   String? get lastName => _lastName;
 

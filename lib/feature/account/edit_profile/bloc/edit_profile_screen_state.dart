@@ -5,6 +5,7 @@ class EditProfileScreenState extends Equatable {
   final bool loading;
   final bool initializing;
   final bool validated;
+  final String gender;
   final Country? selectedCountry;
   final AccountDomain? account;
   final Resettable<ApiException>? error;
@@ -13,6 +14,7 @@ class EditProfileScreenState extends Equatable {
   EditProfileScreenState(
       {this.loading = false,
       this.error,
+      this.gender = 'Male',
       this.selectedCountry,
       this.initializing = true,
       this.showProfile,
@@ -24,6 +26,7 @@ class EditProfileScreenState extends Equatable {
         initializing,
         selectedCountry,
         loading,
+        gender,
         showProfile,
         error,
         account,

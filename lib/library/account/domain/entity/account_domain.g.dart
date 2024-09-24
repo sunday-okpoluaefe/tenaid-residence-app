@@ -19,6 +19,7 @@ abstract class _$AccountDomainCWProxy {
     DashboardFlagDomain? flags,
     String? firstName,
     String? country,
+    String? gender,
     EmailDomain? email,
     AddressDomain? address,
     KycDomain? kyc,
@@ -52,6 +53,7 @@ class _$AccountDomainCWProxyImpl implements _$AccountDomainCWProxy {
     Object? flags = const $CopyWithPlaceholder(),
     Object? firstName = const $CopyWithPlaceholder(),
     Object? country = const $CopyWithPlaceholder(),
+    Object? gender = const $CopyWithPlaceholder(),
     Object? email = const $CopyWithPlaceholder(),
     Object? address = const $CopyWithPlaceholder(),
     Object? kyc = const $CopyWithPlaceholder(),
@@ -84,6 +86,10 @@ class _$AccountDomainCWProxyImpl implements _$AccountDomainCWProxy {
           ? _value.country
           // ignore: cast_nullable_to_non_nullable
           : country as String?,
+      gender: gender == const $CopyWithPlaceholder()
+          ? _value.gender
+          // ignore: cast_nullable_to_non_nullable
+          : gender as String?,
       email: email == const $CopyWithPlaceholder()
           ? _value.email
           // ignore: cast_nullable_to_non_nullable

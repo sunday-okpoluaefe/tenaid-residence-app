@@ -14,7 +14,7 @@ abstract class _$SelectStreetScreenStateCWProxy {
   /// SelectStreetScreenState(...).copyWith(id: 12, name: "My name")
   /// ````
   SelectStreetScreenState call({
-    List<StreetDomain>? results,
+    Resettable<PaginatedResult>? results,
     bool? loading,
     Resettable<ApiException>? errorMessage,
     Resettable<StreetDomain>? itemSelected,
@@ -43,10 +43,10 @@ class _$SelectStreetScreenStateCWProxyImpl
     Object? itemSelected = const $CopyWithPlaceholder(),
   }) {
     return SelectStreetScreenState(
-      results: results == const $CopyWithPlaceholder() || results == null
+      results: results == const $CopyWithPlaceholder()
           ? _value.results
           // ignore: cast_nullable_to_non_nullable
-          : results as List<StreetDomain>,
+          : results as Resettable<PaginatedResult>?,
       loading: loading == const $CopyWithPlaceholder() || loading == null
           ? _value.loading
           // ignore: cast_nullable_to_non_nullable
