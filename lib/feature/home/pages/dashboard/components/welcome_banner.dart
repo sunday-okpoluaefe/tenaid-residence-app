@@ -7,7 +7,7 @@ import '../../../../../ds/component/spacing.dart';
 class WelcomeBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
-        padding: EdgeInsets.only(left: Spacing.small, right: Spacing.small),
+        padding: EdgeInsets.only(left: Spacing.small_w, right: Spacing.small_w),
         child: Stack(
           children: [
             Assets.welcomeBannerBg
@@ -18,7 +18,8 @@ class WelcomeBanner extends StatelessWidget {
                 left: 0,
                 right: 0,
                 child: Padding(
-                  padding: EdgeInsets.all(Spacing.small),
+                  padding: EdgeInsets.symmetric(
+                      horizontal: Spacing.small_w, vertical: Spacing.small_h),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -32,7 +33,7 @@ class WelcomeBanner extends StatelessWidget {
                             style: context.text.titleMedium,
                           ),
                           SizedBox(
-                            height: Spacing.extraSmall,
+                            height: Spacing.extraSmall_h,
                           ),
                           Text(
                             context.locale.welcome_tenaid_body,

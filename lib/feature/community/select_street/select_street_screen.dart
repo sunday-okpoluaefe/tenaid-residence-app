@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:tenaid_mobile/ds/component/app_widget.dart';
+import 'package:tenaid_mobile/ds/component/horizontal_line.dart';
 import 'package:tenaid_mobile/ds/component/list_item.dart';
 import 'package:tenaid_mobile/ds/component/page_header.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/street_domain.dart';
@@ -98,17 +99,17 @@ class _State extends State<SelectStreetScreen> {
           SliverList(
               delegate: SliverChildListDelegate([
             Padding(
-              padding: EdgeInsets.only(top: Spacing.extraSmall),
+              padding: EdgeInsets.only(top: Spacing.extraSmall_h),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+                    padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PageHeader(title: context.locale.select_your_street),
                         SizedBox(
-                          height: Spacing.medium,
+                          height: Spacing.medium_h,
                         ),
                         TTextField(
                           label: context.locale.search_street,
@@ -122,7 +123,7 @@ class _State extends State<SelectStreetScreen> {
                           },
                         ),
                         SizedBox(
-                          height: Spacing.small,
+                          height: Spacing.small_h,
                         ),
                       ],
                     ),
@@ -138,7 +139,7 @@ class _State extends State<SelectStreetScreen> {
                             itemBuilder: (_, street, index) {
                               return Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: Spacing.small),
+                                    horizontal: Spacing.small_w),
                                 child: ListItem(
                                   itemModel: ListItemModel(
                                       icon: Assets.signpost.svg(height: 24),
@@ -163,10 +164,7 @@ class _State extends State<SelectStreetScreen> {
                                   onTryAgain: () => _pagingController.refresh(),
                                 )),
                         separatorBuilder: (BuildContext context, int index) =>
-                            Container(
-                          height: Spacing.extraSmall,
-                          color: context.color.surfaceContainer,
-                        ),
+                            HorizontalLine(),
                       )),
                 ],
               ),

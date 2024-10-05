@@ -10,6 +10,7 @@ class VisitorDomain {
     this.street,
     this.name,
     this.photo,
+    this.exitOnly,
     this.code,
     this.date,
     this.start,
@@ -27,6 +28,7 @@ class VisitorDomain {
   final StreetDomain? street;
   final String? name;
   final String? photo;
+  final bool? exitOnly;
   final String? code;
   final String? start;
   final String? end;

@@ -20,27 +20,28 @@ class JoinRequestItem extends StatelessWidget {
   Widget build(BuildContext context) => InkWell(
         onTap: () => onTap(request),
         child: Padding(
-          padding: EdgeInsets.all(Spacing.small),
+          padding: EdgeInsets.symmetric(
+              horizontal: Spacing.small_w, vertical: Spacing.small_h),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _profile(context, request.account),
               SizedBox(
-                height: Spacing.small,
+                height: Spacing.small_h,
               ),
               HorizontalLine(),
               SizedBox(
-                height: Spacing.extraSmall,
+                height: Spacing.extraSmall_h,
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(top: Spacing.extraExtraSmall),
+                    padding: EdgeInsets.only(top: Spacing.extraExtraSmall_h),
                     child: Assets.routeSquare.svg(height: 18),
                   ),
                   SizedBox(
-                    width: Spacing.extraSmall,
+                    width: Spacing.extraSmall_w,
                   ),
                   Flexible(
                       child: Text(
@@ -64,7 +65,7 @@ class JoinRequestItem extends StatelessWidget {
               ProfileImage(
                   path: account?.photo ?? '', size: IconSize.extraLarge),
               SizedBox(
-                width: Spacing.small,
+                width: Spacing.small_w,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

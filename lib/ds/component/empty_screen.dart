@@ -20,7 +20,8 @@ class EmptyScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.all(Spacing.extraLarge),
+        padding: EdgeInsets.symmetric(
+            vertical: Spacing.extraLarge_h, horizontal: Spacing.extraLarge_w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -29,7 +30,7 @@ class EmptyScreen extends StatelessWidget {
                 ? Assets.somethingWong.svg(width: 180, fit: BoxFit.scaleDown)
                 : emptyWidget!.svg(width: 180, fit: BoxFit.scaleDown),
             SizedBox(
-              height: Spacing.extraLarge,
+              height: Spacing.extraLarge_h,
             ),
             Text(
               hasError ? 'Something went wrong' : 'Result not found',
@@ -37,17 +38,17 @@ class EmptyScreen extends StatelessWidget {
               style: context.text.titleLarge,
             ),
             SizedBox(
-              height: Spacing.extraSmall,
+              height: Spacing.extraSmall_h,
             ),
             Text(
               hasError
-                  ? 'Whoops... we encountered an issue. kindly try again'
+                  ? 'Whoops! we encountered an issue. kindly try again'
                   : 'We\'ve looked everywhere, could not find anything.',
               textAlign: TextAlign.center,
               style: context.text.titleMedium?.fade(context),
             ),
             SizedBox(
-              height: Spacing.medium,
+              height: Spacing.medium_h,
             ),
             if (onTryAgain != null)
               SizedBox(

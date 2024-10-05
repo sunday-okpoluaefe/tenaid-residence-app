@@ -9,7 +9,7 @@ import 'package:tenaid_mobile/ds/component/tlinear_process_indicator.dart';
 import 'package:tenaid_mobile/feature/account/account_navigator.dart';
 import 'package:tenaid_mobile/feature/account/profile/bloc/profile_screen_bloc.dart';
 import 'package:tenaid_mobile/feature/community/community_navigator.dart';
-import 'package:tenaid_mobile/feature/home/pages/dashboard/components/community_request.dart';
+import 'package:tenaid_mobile/utils/xts/global_notifier.dart';
 import 'package:tenaid_mobile/utils/xts/list_xt.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
@@ -33,6 +33,11 @@ class _State extends AppState<ProfileScreen> {
   void initState() {
     super.initState();
     bloc.handleUiEvent(OnFetchProfile());
+
+    syncRequiredNotifier.addListener(() {
+      if (syncRequiredNotifier.syncRequired)
+        bloc.handleUiEvent(OnFetchProfile());
+    });
   }
 
   @override
@@ -46,7 +51,7 @@ class _State extends AppState<ProfileScreen> {
                     bloc.handleUiEvent(OnFetchProfile());
                   }),
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+                    padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
                     child: Assets.edit.svg(),
                   ),
                 )
@@ -69,12 +74,13 @@ class _State extends AppState<ProfileScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: Spacing.small_w),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: Spacing.small,
+                            height: Spacing.small_h,
                           ),
                           PictureItem(
                             onQrClicked: () {},
@@ -87,30 +93,30 @@ class _State extends AppState<ProfileScreen> {
                                 state.communities?.primary?.community?.name,
                           ),
                           SizedBox(
-                            height: Spacing.medium,
+                            height: Spacing.medium_h,
                           ),
                           DataItem(
                             phone: '${state.account?.phone}',
                             email: '${state.account?.email?.value}',
                           ),
                           SizedBox(
-                            height: Spacing.medium,
+                            height: Spacing.medium_h,
                           ),
-                          if (state.communities?.primary != null)
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  context.locale.section_community,
-                                  style: context.text.titleMedium,
-                                ),
-                                CommunityRequest(
-                                    accountCommunity:
-                                        state.communities!.primary!)
-                              ],
-                            ),
+                          // if (state.communities?.primary != null)
+                          //   Column(
+                          //     crossAxisAlignment: CrossAxisAlignment.start,
+                          //     children: [
+                          //       Text(
+                          //         context.locale.section_community,
+                          //         style: context.text.titleMedium,
+                          //       ),
+                          //       CommunityRequest(
+                          //           accountCommunity:
+                          //               state.communities!.primary!)
+                          //     ],
+                          //   ),
                           SizedBox(
-                            height: Spacing.small,
+                            height: Spacing.small_h,
                           ),
                           Text(
                             context.locale.settings,
@@ -121,12 +127,12 @@ class _State extends AppState<ProfileScreen> {
                     ),
                     Container(
                       decoration: BoxDecoration(),
-                      margin: EdgeInsets.only(top: Spacing.extraSmall),
+                      margin: EdgeInsets.only(top: Spacing.extraSmall_h),
                       child: Column(
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: Spacing.small),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Spacing.small_w),
                             child: Column(
                               children: [
                                 SettingsItem(
@@ -150,12 +156,12 @@ class _State extends AppState<ProfileScreen> {
                           ),
                           Padding(
                             padding:
-                                EdgeInsets.symmetric(vertical: Spacing.small),
+                                EdgeInsets.symmetric(vertical: Spacing.small_h),
                             child: HorizontalLine(),
                           ),
                           Padding(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: Spacing.small),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Spacing.small_w),
                             child: Column(
                               children: [
                                 SettingsItem(

@@ -7,11 +7,13 @@ class Visitor {
     String? date,
     String? start,
     String? end,
+    bool? exitOnly,
     String? reason,
     String? status,
   }) {
     _id = id;
     _name = name;
+    _exitOnly = exitOnly;
     _photo = photo;
     _code = code;
     _date = date;
@@ -25,6 +27,7 @@ class Visitor {
     _id = json['_id'];
     // _street = json['path'] != null ? Street.fromJson(json['path']) : null;
     _name = json['name'];
+    _exitOnly = json['exitOnly'];
     _photo = json['photo'];
     _date = json['date'];
     _code = json['code'];
@@ -38,6 +41,7 @@ class Visitor {
   String? _name;
   String? _photo;
   String? _code;
+  bool? _exitOnly;
   String? _start;
   String? _date;
   String? _end;
@@ -45,6 +49,8 @@ class Visitor {
   String? _status;
 
   String? get id => _id;
+
+  bool? get exitOnly => _exitOnly;
 
   String? get name => _name;
 

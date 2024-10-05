@@ -12,7 +12,7 @@ class AssetIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: size.width,
+        width: size.height,
         height: size.height,
         child: SvgPicture.asset(asset, fit: BoxFit.scaleDown));
   }

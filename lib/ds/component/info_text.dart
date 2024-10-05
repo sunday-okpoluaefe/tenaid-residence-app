@@ -13,7 +13,7 @@ class InfoText extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(8)),
             color: context.color.primary.withOpacity(0.11)),
         padding: EdgeInsets.symmetric(
-            horizontal: Spacing.extraSmall, vertical: Spacing.extraSmall),
+            horizontal: Spacing.extraSmall_w, vertical: Spacing.extraSmall_h),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -22,7 +22,7 @@ class InfoText extends StatelessWidget {
               color: context.color.primary,
             ),
             SizedBox(
-              width: Spacing.extraSmall,
+              width: Spacing.extraSmall_w,
             ),
             Flexible(
                 child: Text(title,

@@ -6,14 +6,16 @@ part 'notification_payload.g.dart';
 class NotificationPayload {
   final String type;
   final String description;
+  final String community;
   final String link;
-  final Map<String, dynamic>? extra;
+  final String? contentId;
 
   NotificationPayload(
       {required this.type,
+      required this.community,
       required this.description,
       required this.link,
-      this.extra});
+      this.contentId});
 
   factory NotificationPayload.fromJson(dynamic json) =>
       _$NotificationPayloadFromJson(json);

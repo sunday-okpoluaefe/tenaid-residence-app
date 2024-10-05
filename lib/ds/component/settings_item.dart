@@ -28,12 +28,12 @@ class SettingsItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(vertical: Spacing.small),
+              padding: EdgeInsets.symmetric(vertical: Spacing.small_h),
               child: Row(
                 children: [
                   icon,
                   SizedBox(
-                    width: Spacing.small,
+                    width: Spacing.small_w,
                   ),
                   Text(
                     label,

@@ -27,10 +27,10 @@ class InviteVisitorScreenBloc
   final GetPrimaryAccountCommunityUseCase getPrimaryAccountCommunity;
   final SendInviteUseCase sendInvite;
 
-  DateTime? _startDate;
+  DateTime? _startDate = DateTime.now();
   DateTime? _endDate;
   TimeOfDay? _startTime;
-  String? _name;
+  String _name = '';
 
   bool get isTimeFuture {
     if (_startDate == null)
@@ -38,7 +38,7 @@ class InviteVisitorScreenBloc
     else if (_startTime == null) return true;
 
     DateTime dt = _startDate!.withTime(_startTime!);
-    return dt.isAfter(DateTime.now());
+    return dt.isAfter(DateTime.now().subtract(Duration(minutes: 1)));
   }
 
   bool get isDateFuture {
@@ -49,13 +49,13 @@ class InviteVisitorScreenBloc
   bool get validated {
     switch (type) {
       case InviteType.single:
-        return (_name?.isNotEmpty == true) &&
+        return (_name.isNotEmpty == true) &&
             _startTime != null &&
             _startDate != null &&
             isTimeFuture;
 
       case InviteType.extended:
-        return (_name?.isNotEmpty == true) &&
+        return (_name.isNotEmpty == true) &&
             _endDate != null &&
             _startDate != null &&
             isDateFuture;
@@ -65,11 +65,24 @@ class InviteVisitorScreenBloc
   InviteVisitorScreenBloc(this.getPrimaryAccountCommunity, this.sendInvite)
       : super(InviteVisitorScreenState()) {
     on<OnStartDateChanged>((event, emit) {
-      _startDate = event.dateTime;
+      _startDate = event.dateTime.withTime(_startTime!);
       emit(state.copyWith(
           startDate: event.dateTime,
           validated: validated,
+          dateString: _startDate!.periodDateString,
+          dateTimeString: _startDate!.periodDateTimeString,
           startTimeError: !isTimeFuture));
+    });
+
+    on<OnInit>((event, emit) {
+      _startDate = DateTime.now();
+      _startTime = TimeOfDay.now();
+
+      emit(state.copyWith(
+          dateTimeString: _startDate!.periodDateTimeString,
+          startDate: _startDate,
+          dateString: _startDate!.periodDateString,
+          startTime: _startTime));
     });
 
     on<OnEndDateChanged>((event, emit) {
@@ -83,10 +96,12 @@ class InviteVisitorScreenBloc
 
     on<OnTimeChanged>((event, emit) {
       _startTime = event.timeOfDay;
+      _startDate = _startDate!.withTime(_startTime!);
 
       emit(state.copyWith(
           startTime: event.timeOfDay,
           validated: validated,
+          dateTimeString: _startDate!.periodDateTimeString,
           startTimeError: !isTimeFuture));
     });
 
@@ -112,7 +127,7 @@ class InviteVisitorScreenBloc
       emit(state.copyWith(loading: true));
       InviteParam param = InviteParam(
           date: DateTime.now().toUtc().toIso8601String(),
-          name: _name!,
+          name: _name.trim(),
           photo: "",
           reason: state.purpose ?? "Personal",
           type: type.name);
@@ -167,6 +182,7 @@ class InviteVisitorScreenBloc
         await sendInvite(param);
         InviteDomain invite = InviteDomain(
             community: community,
+            exitOnly: param.exitOnly,
             code: param.code!,
             type: type,
             name: param.name!.trim(),

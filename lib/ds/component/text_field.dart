@@ -178,8 +178,8 @@ class _State extends State<TTextField> {
                     borderRadius: BorderRadius.circular(5)),
                 label: Text(
                   widget.label,
-                  style: context.text.bodyMedium
-                      ?.copyWith(color: context.color.onSecondary),
+                  style: context.text.bodyMedium?.copyWith(
+                      color: context.color.onSurface.withOpacity(0.5)),
                 ),
                 border: OutlineInputBorder(
                     borderSide: BorderSide(
@@ -222,7 +222,7 @@ class _State extends State<TTextField> {
           if (_getSupportText()?.isNotEmpty == true)
             Column(
               children: [
-                SizedBox(height: Spacing.extraExtraSmall),
+                SizedBox(height: Spacing.extraExtraSmall_h),
                 Text(
                   _getSupportText()!,
                   style: Theme.of(context)

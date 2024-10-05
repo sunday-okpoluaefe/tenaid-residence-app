@@ -25,6 +25,12 @@ class _State extends AppState<InviteVisitorScreen> {
   final VisitorNavigator navigator = GetIt.instance.get();
 
   @override
+  void initState() {
+    super.initState();
+    bloc.handleUiEvent(OnInit());
+  }
+
+  @override
   Widget build(BuildContext context) => BlocConsumer(
       bloc: bloc,
       builder: (_, InviteVisitorScreenState state) => Scaffold(
@@ -47,21 +53,22 @@ class _State extends AppState<InviteVisitorScreen> {
             enabled: state.validated,
             loading: state.loading,
             onClick: () => bloc.handleUiEvent(OnContinueClicked()),
-            modifier: EdgeInsets.all(Spacing.small),
+            modifier: EdgeInsets.symmetric(
+                horizontal: Spacing.small_w, vertical: Spacing.small_h),
           ),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+            padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(bottom: Spacing.small),
+                  padding: EdgeInsets.only(bottom: Spacing.small_h),
                   child: PageHeader(
                     title: 'Invite a guest',
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: Spacing.small),
+                  padding: EdgeInsets.only(bottom: Spacing.small_h),
                   child: AnimatedAppTab(
                       onChanged: (x) {
                         bloc.handleUiEvent(OnInviteTypeChanged(InviteType.values

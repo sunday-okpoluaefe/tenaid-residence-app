@@ -16,7 +16,9 @@ class AddCommunityBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.only(
-            left: Spacing.small, right: Spacing.small, bottom: Spacing.small),
+            left: Spacing.small_w,
+            right: Spacing.small_w,
+            bottom: Spacing.small_h),
         child: Column(
           children: [
             ListItem(

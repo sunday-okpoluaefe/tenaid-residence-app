@@ -12,6 +12,10 @@ import 'package:tenaid_mobile/feature/community/community_navigator.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 class AddAccessPointScreen extends AppStatefulWidget {
+  final String community;
+
+  AddAccessPointScreen(this.community);
+
   @override
   State<StatefulWidget> createState() => _State();
 }
@@ -41,25 +45,27 @@ class _State extends State<AddAccessPointScreen> {
             enabled: state.password.isNotEmpty &&
                 state.description.isNotEmpty &&
                 state.name.isNotEmpty,
-            onClick: () => bloc.handleUiEvent(OnContinueClicked()),
-            modifier: EdgeInsets.all(Spacing.small),
+            onClick: () => bloc
+                .handleUiEvent(OnContinueClicked(community: widget.community)),
+            modifier: EdgeInsets.symmetric(
+                horizontal: Spacing.small_w, vertical: Spacing.small_h),
           ),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+            padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PageHeader(
                   title: 'Create access point',
                   description: 'Create an entry or exit to your community',
-                  bottom: Spacing.medium,
+                  bottom: Spacing.medium_h,
                 ),
                 TTextField(
                   label: 'Access name - e.g Main Gate',
                   onChanged: (x) => bloc.handleUiEvent(OnNamedChanged(name: x)),
                 ),
                 SizedBox(
-                  height: Spacing.small,
+                  height: Spacing.small_h,
                 ),
                 TTextField(
                   label: 'Description',
@@ -68,7 +74,7 @@ class _State extends State<AddAccessPointScreen> {
                       bloc.handleUiEvent(OnDescriptionChanged(description: x)),
                 ),
                 SizedBox(
-                  height: Spacing.small,
+                  height: Spacing.small_h,
                 ),
                 TTextField(
                   label: 'Password',

@@ -76,19 +76,19 @@ class _State extends State<EditProfileScreen> {
               title: 'Continue',
               enabled: state.validated,
               loading: state.loading,
-              modifier: EdgeInsets.all(Spacing.small),
+              modifier: EdgeInsets.symmetric(
+                  horizontal: Spacing.small_w, vertical: Spacing.small_h),
               onClick: () => bloc.handleUiEvent(OnContinueClicked())),
           body: Padding(
-            padding: EdgeInsets.only(left: Spacing.small, right: Spacing.small),
+            padding:
+                EdgeInsets.only(left: Spacing.small_w, right: Spacing.small_w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PageHeader(
                   title: 'Edit profile',
                   description: 'Update your profile information',
-                ),
-                SizedBox(
-                  height: Spacing.medium,
+                  bottom: Spacing.medium_h,
                 ),
                 Stack(
                   children: [
@@ -128,7 +128,9 @@ class _State extends State<EditProfileScreen> {
                             }
                           },
                           child: Container(
-                            padding: EdgeInsets.all(Spacing.extraExtraSmall),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: Spacing.extraExtraSmall_w,
+                                vertical: Spacing.extraExtraSmall_h),
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 color: context.color.surfaceContainer),
@@ -139,7 +141,7 @@ class _State extends State<EditProfileScreen> {
                   ],
                 ),
                 SizedBox(
-                  height: Spacing.extraLarge,
+                  height: Spacing.extraLarge_h,
                 ),
                 TTextField(
                   label: 'Email address',
@@ -149,21 +151,21 @@ class _State extends State<EditProfileScreen> {
                   prefixIcon: Assets.sms.svg(fit: BoxFit.scaleDown),
                   readOnly: true,
                 ),
-                SizedBox(height: Spacing.small),
+                SizedBox(height: Spacing.small_h),
                 TTextField(
                   label: 'First name',
                   onChanged: (s) => bloc.handleUiEvent(OnFirstNameChanged(s)),
                   initialValue: state.account?.firstName ?? "",
                   prefixIcon: Assets.profile.svg(fit: BoxFit.scaleDown),
                 ),
-                SizedBox(height: Spacing.small),
+                SizedBox(height: Spacing.small_h),
                 TTextField(
                   label: 'Last name',
                   onChanged: (s) => bloc.handleUiEvent(OnLastNameChanged(s)),
                   initialValue: state.account?.lastName ?? "",
                   prefixIcon: Assets.profile.svg(fit: BoxFit.scaleDown),
                 ),
-                SizedBox(height: Spacing.small),
+                SizedBox(height: Spacing.small_h),
                 TTextField(
                   label: 'Date of birth',
                   initialValue: state.account?.dob != null
@@ -191,7 +193,7 @@ class _State extends State<EditProfileScreen> {
                   },
                   suffixIcon: Assets.chevronDown.svg(fit: BoxFit.scaleDown),
                 ),
-                SizedBox(height: Spacing.small),
+                SizedBox(height: Spacing.small_h),
                 PhoneField(
                   label: context.locale.phone_number,
                   initialValue: state.account?.phone ?? "",
@@ -201,7 +203,7 @@ class _State extends State<EditProfileScreen> {
                       bloc.handleUiEvent(OnCountryChanged(country)),
                 ),
                 SizedBox(
-                  height: Spacing.small,
+                  height: Spacing.small_h,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

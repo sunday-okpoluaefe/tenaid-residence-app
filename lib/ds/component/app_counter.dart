@@ -131,7 +131,7 @@ class _CustomizableCounterState extends State<AppCounter> {
             children: [
               IconButton(onPressed: decrement, icon: _button(_decIcon())),
               SizedBox(
-                width: Spacing.small,
+                width: Spacing.small_w,
               ),
               Text(
                 _formatDouble(mCount),
@@ -142,7 +142,7 @@ class _CustomizableCounterState extends State<AppCounter> {
                 ),
               ),
               SizedBox(
-                width: Spacing.small,
+                width: Spacing.small_w,
               ),
               IconButton(onPressed: increment, icon: _button(_incIcon())),
             ],

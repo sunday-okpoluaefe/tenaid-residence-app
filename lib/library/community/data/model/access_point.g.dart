@@ -7,6 +7,7 @@ part of 'access_point.dart';
 // **************************************************************************
 
 AccessPoint _$AccessPointFromJson(Map<String, dynamic> json) => AccessPoint(
+      id: json['_id'] as String?,
       name: json['name'] as String?,
       description: json['description'] as String?,
     );
@@ -14,5 +15,6 @@ AccessPoint _$AccessPointFromJson(Map<String, dynamic> json) => AccessPoint(
 Map<String, dynamic> _$AccessPointToJson(AccessPoint instance) =>
     <String, dynamic>{
       'name': instance.name,
+      '_id': instance.id,
       'description': instance.description,
     };

@@ -1,8 +1,13 @@
 import 'package:tenaid_mobile/library/community/domain/entity/access_point_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/community_domain.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/create_street_param.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/exit_code_param.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/invite_activity_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/invite_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/join_request_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/request_join_param.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/street_domain.dart';
+import 'package:tenaid_mobile/utils/pair.dart';
 
 import '../../base/domain/base_repository.dart';
 import '../../core/domain/entity/paginated_result.dart';
@@ -49,15 +54,23 @@ abstract class CommunityRepository extends BaseRepository {
 
   Future<JoinRequestDomain> getCommunityJoinRequest({required String request});
 
-  Future<List<AccessPointDomain>> getCommunityAccessPoints();
+  Future<List<AccessPointDomain>> getCommunityAccessPoints(
+      {required String community});
 
   Future<AccessPointDomain> createCommunityAccessPoints(
       {required CreateAccessPointParam param});
 
   Future<AccountCommunityDomain> setPrimaryCommunity(String community);
 
+  Future<StreetDomain> createCommunityStreet(CreateStreetParam param);
+
   Future<void> setCommunityJoinRequestStatus(
       {required String request,
       required String status,
       required String comment});
+
+  Future<void> updateVisitorExitCode(ExitCodeParam param);
+
+  Future<Pair<InviteDomain, PaginatedResult>> getInviteActivities(
+      {required String invite, required int page, required int limit});
 }

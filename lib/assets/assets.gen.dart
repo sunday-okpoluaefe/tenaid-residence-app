@@ -54,11 +54,14 @@ class Assets {
   static const SvgGenImage adsUtilityCard =
       SvgGenImage('assets/ads_utility_card.svg');
   static const $AssetsAnimationsGen animations = $AssetsAnimationsGen();
+  static const SvgGenImage announce = SvgGenImage('assets/announce.svg');
   static const SvgGenImage bank = SvgGenImage('assets/bank.svg');
   static const SvgGenImage barcode = SvgGenImage('assets/barcode.svg');
   static const SvgGenImage calendar = SvgGenImage('assets/calendar.svg');
   static const SvgGenImage call = SvgGenImage('assets/call.svg');
   static const SvgGenImage cancel = SvgGenImage('assets/cancel.svg');
+  static const SvgGenImage checkIn = SvgGenImage('assets/check_in.svg');
+  static const SvgGenImage checkOut = SvgGenImage('assets/check_out.svg');
   static const SvgGenImage chevronDown = SvgGenImage('assets/chevron_down.svg');
   static const SvgGenImage clock = SvgGenImage('assets/clock.svg');
   static const SvgGenImage communities = SvgGenImage('assets/communities.svg');
@@ -78,6 +81,8 @@ class Assets {
   static const SvgGenImage error = SvgGenImage('assets/error.svg');
   static const SvgGenImage gifting = SvgGenImage('assets/gifting.svg');
   static const SvgGenImage icon = SvgGenImage('assets/icon.svg');
+  static const SvgGenImage inviteFriends =
+      SvgGenImage('assets/invite_friends.svg');
   static const SvgGenImage joinCommunity =
       SvgGenImage('assets/join_community.svg');
   static const $AssetsJsonGen json = $AssetsJsonGen();
@@ -87,6 +92,7 @@ class Assets {
   static const SvgGenImage logout = SvgGenImage('assets/logout.svg');
   static const SvgGenImage manAvatar = SvgGenImage('assets/man_avatar.svg');
   static const SvgGenImage members = SvgGenImage('assets/members.svg');
+  static const SvgGenImage messages = SvgGenImage('assets/messages.svg');
   static const SvgGenImage moneys = SvgGenImage('assets/moneys.svg');
   static const SvgGenImage moon = SvgGenImage('assets/moon.svg');
   static const SvgGenImage more = SvgGenImage('assets/more.svg');
@@ -103,14 +109,21 @@ class Assets {
       SvgGenImage('assets/notification.svg');
   static const SvgGenImage notificationsEmpty =
       SvgGenImage('assets/notifications_empty.svg');
+  static const SvgGenImage offlineService =
+      SvgGenImage('assets/offline_service.svg');
   static const SvgGenImage passwordChange =
       SvgGenImage('assets/password_change.svg');
   static const SvgGenImage pattern = SvgGenImage('assets/pattern.svg');
+  static const SvgGenImage payments = SvgGenImage('assets/payments.svg');
   static const SvgGenImage penAdd = SvgGenImage('assets/pen_add.svg');
+  static const SvgGenImage personalcard =
+      SvgGenImage('assets/personalcard.svg');
   static const SvgGenImage phone = SvgGenImage('assets/phone.svg');
   static const SvgGenImage pricing = SvgGenImage('assets/pricing.svg');
   static const SvgGenImage profile = SvgGenImage('assets/profile.svg');
   static const SvgGenImage qrCode = SvgGenImage('assets/qr_code.svg');
+  static const SvgGenImage removeVisitor =
+      SvgGenImage('assets/remove_visitor.svg');
   static const SvgGenImage repeat = SvgGenImage('assets/repeat.svg');
   static const SvgGenImage routeSquare = SvgGenImage('assets/route_square.svg');
   static const SvgGenImage routing = SvgGenImage('assets/routing.svg');
@@ -129,6 +142,7 @@ class Assets {
   static const SvgGenImage streetDirection =
       SvgGenImage('assets/street_direction.svg');
   static const SvgGenImage success = SvgGenImage('assets/success.svg');
+  static const SvgGenImage task = SvgGenImage('assets/task.svg');
   static const SvgGenImage team = SvgGenImage('assets/team.svg');
   static const SvgGenImage tenaid = SvgGenImage('assets/tenaid.svg');
   static const SvgGenImage trash = SvgGenImage('assets/trash.svg');
@@ -150,11 +164,14 @@ class Assets {
         adsInviteCard,
         adsUtility,
         adsUtilityCard,
+        announce,
         bank,
         barcode,
         calendar,
         call,
         cancel,
+        checkIn,
+        checkOut,
         chevronDown,
         clock,
         communities,
@@ -171,6 +188,7 @@ class Assets {
         error,
         gifting,
         icon,
+        inviteFriends,
         joinCommunity,
         location,
         lock,
@@ -178,6 +196,7 @@ class Assets {
         logout,
         manAvatar,
         members,
+        messages,
         moneys,
         moon,
         more,
@@ -190,13 +209,17 @@ class Assets {
         nothingFoundDark,
         notification,
         notificationsEmpty,
+        offlineService,
         passwordChange,
         pattern,
+        payments,
         penAdd,
+        personalcard,
         phone,
         pricing,
         profile,
         qrCode,
+        removeVisitor,
         repeat,
         routeSquare,
         routing,
@@ -211,6 +234,7 @@ class Assets {
         somethingWong,
         streetDirection,
         success,
+        task,
         team,
         tenaid,
         trash,

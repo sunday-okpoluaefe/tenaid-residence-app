@@ -51,18 +51,18 @@ class _State extends State<JoinCommunityScreen> {
           top: const TLinearProgressIndicator(steps: 4, current: 1),
           body: Padding(
             padding: EdgeInsets.only(
-                left: Spacing.small,
-                right: Spacing.small,
-                top: Spacing.extraSmall),
+                left: Spacing.small_w,
+                right: Spacing.small_w,
+                top: Spacing.extraSmall_h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PageHeader(
                   title: context.locale.join_community,
                   description: context.locale.search_community_body,
-                  top: Spacing.extraSmall,
+                  top: Spacing.extraSmall_h,
                 ),
-                SizedBox(height: Spacing.medium),
+                SizedBox(height: Spacing.medium_h),
                 TTextField(
                   label: context.locale.search_community,
                   readOnly: true,
@@ -74,7 +74,7 @@ class _State extends State<JoinCommunityScreen> {
                   Column(
                     children: [
                       SizedBox(
-                        height: Spacing.medium,
+                        height: Spacing.medium_h,
                       ),
                       CommunityOverview(community: state.selected!)
                     ],
@@ -88,6 +88,7 @@ class _State extends State<JoinCommunityScreen> {
             onClick: () {
               _bloc.handleUiEvent(OnContinue());
             },
-            modifier: EdgeInsets.all(Spacing.small),
+            modifier: EdgeInsets.symmetric(
+                horizontal: Spacing.small_w, vertical: Spacing.small_h),
           ));
 }

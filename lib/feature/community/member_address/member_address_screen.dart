@@ -59,9 +59,9 @@ class _State extends State<MemberAddressScreen> {
           top: const TLinearProgressIndicator(steps: 3, current: 2),
           body: Padding(
             padding: EdgeInsets.only(
-                left: Spacing.small,
-                right: Spacing.small,
-                top: Spacing.extraSmall),
+                left: Spacing.small_w,
+                right: Spacing.small_w,
+                top: Spacing.extraSmall_h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -69,7 +69,7 @@ class _State extends State<MemberAddressScreen> {
                   title: context.locale.where_you_live,
                   description: context.locale.where_you_live_body,
                 ),
-                SizedBox(height: Spacing.medium),
+                SizedBox(height: Spacing.medium_h),
                 TTextField(
                   controller: _streetController,
                   label: context.locale.select_street,
@@ -81,7 +81,7 @@ class _State extends State<MemberAddressScreen> {
                   suffixIcon: Assets.chevronDown
                       .svg(width: IconSize.medium.width, fit: BoxFit.scaleDown),
                 ),
-                SizedBox(height: Spacing.medium),
+                SizedBox(height: Spacing.medium_h),
                 TTextField(
                   label: context.locale.house_number,
                   inputType: TextInputType.name,
@@ -89,7 +89,7 @@ class _State extends State<MemberAddressScreen> {
                     _bloc.handleUiEvent(OnHouseNumberChanged(s));
                   },
                 ),
-                SizedBox(height: Spacing.medium),
+                SizedBox(height: Spacing.medium_h),
                 TTextField(
                   label: context.locale.apartment_number,
                   inputType: TextInputType.name,
@@ -104,6 +104,7 @@ class _State extends State<MemberAddressScreen> {
             title: context.locale.continue_button,
             enabled: state.validated,
             onClick: () => _bloc.handleUiEvent(OnContinueClicked()),
-            modifier: EdgeInsets.all(Spacing.small),
+            modifier: EdgeInsets.symmetric(
+                horizontal: Spacing.small_w, vertical: Spacing.small_h),
           ));
 }

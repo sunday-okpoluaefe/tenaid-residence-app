@@ -19,13 +19,13 @@ class TitlePlaceholder extends StatelessWidget {
         children: [
           Container(
             width: width,
-            height: Spacing.medium,
+            height: Spacing.medium_h,
             color: Colors.white,
           ),
-          SizedBox(height: Spacing.extraSmall),
+          SizedBox(height: Spacing.extraSmall_h),
           Container(
             width: width * 0.7,
-            height: Spacing.small,
+            height: Spacing.small_h,
             color: Colors.white,
           ),
         ],

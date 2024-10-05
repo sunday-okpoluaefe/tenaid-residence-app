@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -12,7 +13,7 @@ import '../../../../../ds/component/dotted_loader.dart';
 import '../../../../../ds/component/empty_screen.dart';
 import '../../../../../ds/component/spacing.dart';
 import '../../../../../utils/xts/global_notifier.dart';
-import '../../../../visitor/components/visitor_status_bottomsheet.dart';
+import '../../../../visitor/invite_status/invite_status_screen.dart';
 import '../components/visitor_list_item.dart';
 import 'bloc/visitors_list_screen_bloc.dart';
 
@@ -89,7 +90,7 @@ class _State extends State<VisitorsListScreen> {
                       visitor: item,
                       showStatus: widget.type != ListType.upcoming,
                       onTap: () {
-                        AppBottomSheet(VisitorStatusBottomSheet(
+                        AppBottomSheet(InviteStatusScreen(
                           visitor: item,
                         )).show(context);
                       },
@@ -109,10 +110,12 @@ class _State extends State<VisitorsListScreen> {
       );
 
   Widget _topLoader(BuildContext context) => Padding(
-      padding: EdgeInsets.all(Spacing.extraLarge), child: _loader(context));
+      padding: EdgeInsets.symmetric(
+          horizontal: Spacing.extraLarge_h, vertical: Spacing.extraLarge_h),
+      child: _loader(context));
 
   Widget _loader(BuildContext context) => DottedLoader(
         color: context.color.surfaceBright,
-        size: 38,
+        size: 38.h,
       );
 }

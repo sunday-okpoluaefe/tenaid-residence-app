@@ -32,14 +32,16 @@ class NotificationItem extends StatelessWidget {
       ),
       child: Container(
         padding: EdgeInsets.only(
-            left: Spacing.small, right: Spacing.small, bottom: Spacing.small),
+            left: Spacing.small_w,
+            right: Spacing.small_w,
+            bottom: Spacing.small_h),
         child: Column(
           children: [
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  margin: EdgeInsets.only(right: Spacing.small),
+                  margin: EdgeInsets.only(right: Spacing.small_w),
                   child: Assets.navNotify.svg(),
                 ),
                 Expanded(
@@ -53,7 +55,7 @@ class NotificationItem extends StatelessWidget {
                         style: context.text.titleMedium,
                       ),
                       SizedBox(
-                        height: Spacing.extraExtraSmall,
+                        height: Spacing.extraExtraSmall_h,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,

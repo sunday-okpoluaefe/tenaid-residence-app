@@ -63,14 +63,14 @@ class _State extends State<SignUpScreen> {
         body: Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+              padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   PageHeader(
                       title: context.locale.let_get_started,
                       description: context.locale.create_account),
-                  SizedBox(height: Spacing.large),
+                  SizedBox(height: Spacing.large_h),
                   TTextField(
                     label: context.locale.first_name,
                     inputType: TextInputType.name,
@@ -79,7 +79,7 @@ class _State extends State<SignUpScreen> {
                     },
                     prefixIcon: Assets.profile.svg(fit: BoxFit.scaleDown),
                   ),
-                  SizedBox(height: Spacing.small),
+                  SizedBox(height: Spacing.small_h),
                   TTextField(
                     label: context.locale.last_name,
                     inputType: TextInputType.name,
@@ -88,7 +88,7 @@ class _State extends State<SignUpScreen> {
                       _screenBloc.handleUiEvent(OnLNameChanged(s));
                     },
                   ),
-                  SizedBox(height: Spacing.small),
+                  SizedBox(height: Spacing.small_h),
                   TTextField(
                     label: context.locale.email_address,
                     errorText: state.emailValidationError
@@ -103,7 +103,7 @@ class _State extends State<SignUpScreen> {
                       _screenBloc.handleUiEvent(OnEmailNameChanged(s));
                     },
                   ),
-                  SizedBox(height: Spacing.small),
+                  SizedBox(height: Spacing.small_h),
                   PhoneField(
                     label: context.locale.phone_number,
                     error: state.phoneValidationError
@@ -115,7 +115,7 @@ class _State extends State<SignUpScreen> {
                       _screenBloc.handleUiEvent(OnCountryChanged(country));
                     },
                   ),
-                  SizedBox(height: Spacing.small),
+                  SizedBox(height: Spacing.small_h),
                   TTextField(
                     label: context.locale.password,
                     isSecret: true,
@@ -124,21 +124,21 @@ class _State extends State<SignUpScreen> {
                       _screenBloc.handleUiEvent(OnPasswordNameChanged(s));
                     },
                   ),
-                  SizedBox(height: Spacing.extraSmall),
+                  SizedBox(height: Spacing.extraSmall_h),
                 ],
               ),
             ),
           ],
         ),
         bottom: Padding(
-          padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+          padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
           child: Column(
             children: [
-              SizedBox(height: Spacing.medium),
+              SizedBox(height: Spacing.medium_h),
               const TermsConditions(),
               PrimaryButton(
                   title: context.locale.sign_up,
-                  modifier: EdgeInsets.symmetric(vertical: Spacing.small),
+                  modifier: EdgeInsets.symmetric(vertical: Spacing.small_h),
                   loading: state.loading,
                   enabled: state.validated,
                   onClick: () {
@@ -150,7 +150,7 @@ class _State extends State<SignUpScreen> {
                   Text(context.locale.have_account,
                       style: context.text.bodyMedium?.copyWith(
                           color: context.color.onSurface.withOpacity(0.70))),
-                  SizedBox(width: Spacing.extraExtraSmall),
+                  SizedBox(width: Spacing.extraExtraSmall_w),
                   GestureDetector(
                     child: Text(context.locale.sign_in,
                         style: Theme.of(context).textTheme.bodyMedium),
@@ -160,7 +160,7 @@ class _State extends State<SignUpScreen> {
                   )
                 ],
               ),
-              SizedBox(height: Spacing.small),
+              SizedBox(height: Spacing.small_h),
             ],
           ),
         ),

@@ -5,6 +5,10 @@ sealed class CommunityAccessPointEvent extends Equatable {
 }
 
 class OnLoadAccessPoints extends CommunityAccessPointEvent {
+  final String community;
+
+  OnLoadAccessPoints(this.community);
+
   @override
   List<Object?> get props => [];
 }

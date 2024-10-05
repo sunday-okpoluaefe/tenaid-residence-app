@@ -10,7 +10,7 @@ class HomeHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) => SafeArea(
         child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+            padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
             child: Column(
               children: [
                 Row(

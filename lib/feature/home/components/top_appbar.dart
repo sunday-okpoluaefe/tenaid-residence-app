@@ -16,7 +16,7 @@ class TopSliverAppBar extends StatelessWidget {
         backgroundColor: context.color.surface,
         pinned: false,
         floating: false,
-        toolbarHeight: Spacing.extraExtraLarge,
+        toolbarHeight: Spacing.extraExtraLarge_h,
         flexibleSpace: AppBar(
           title: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,7 +34,7 @@ class TopSliverAppBar extends StatelessWidget {
                     child: Assets.navNotify.svg(),
                   ),
                   SizedBox(
-                    width: Spacing.medium,
+                    width: Spacing.medium_w,
                   ),
                   ProfileImage(path: '')
                 ],

@@ -16,6 +16,7 @@ abstract class _$InviteParamCWProxy {
   InviteParam call({
     String? start,
     String? end,
+    bool? exitOnly,
     DateTime? startDate,
     DateTime? endDate,
     String? date,
@@ -46,6 +47,7 @@ class _$InviteParamCWProxyImpl implements _$InviteParamCWProxy {
   InviteParam call({
     Object? start = const $CopyWithPlaceholder(),
     Object? end = const $CopyWithPlaceholder(),
+    Object? exitOnly = const $CopyWithPlaceholder(),
     Object? startDate = const $CopyWithPlaceholder(),
     Object? endDate = const $CopyWithPlaceholder(),
     Object? date = const $CopyWithPlaceholder(),
@@ -66,6 +68,10 @@ class _$InviteParamCWProxyImpl implements _$InviteParamCWProxy {
           ? _value.end
           // ignore: cast_nullable_to_non_nullable
           : end as String?,
+      exitOnly: exitOnly == const $CopyWithPlaceholder() || exitOnly == null
+          ? _value.exitOnly
+          // ignore: cast_nullable_to_non_nullable
+          : exitOnly as bool,
       startDate: startDate == const $CopyWithPlaceholder()
           ? _value.startDate
           // ignore: cast_nullable_to_non_nullable

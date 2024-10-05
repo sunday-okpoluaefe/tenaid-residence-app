@@ -22,7 +22,7 @@ class AppTableView extends StatelessWidget {
       );
 
   Widget _tableItem(BuildContext context, TableItemModel item) => Padding(
-        padding: EdgeInsets.only(top: Spacing.small),
+        padding: EdgeInsets.only(top: Spacing.small_h),
         child: Column(
           children: [
             Row(
@@ -44,7 +44,7 @@ class AppTableView extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: Spacing.small,
+              height: Spacing.small_h,
             ),
             HorizontalLine()
           ],

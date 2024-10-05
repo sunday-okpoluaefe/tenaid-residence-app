@@ -9,6 +9,7 @@ class InviteDomain {
   final AccountCommunityDomain community;
   final String code;
   final String name;
+  final bool exitOnly;
   final String? purpose;
   final DateTime startDate;
   final DateTime endDate;
@@ -18,6 +19,7 @@ class InviteDomain {
   InviteDomain(
       {required this.community,
       required this.code,
+      required this.exitOnly,
       required this.type,
       required this.name,
       required this.purpose,

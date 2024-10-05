@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/ds/component/app_scrollview.dart';
+import 'package:tenaid_mobile/ds/component/page_header.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../ds/component/app_widget.dart';
@@ -30,48 +31,33 @@ class _State extends State<LoginScreen> {
       GetIt.instance.get<AccountNavigator>();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-      ),
-      backgroundColor: Theme.of(context).colorScheme.surface,
-      body: BlocConsumer(
-          bloc: _loginScreenBloc,
-          builder: (_, LoginScreenState state) =>
-              SafeArea(child: _screen(context, state)),
-          listener: (_, LoginScreenState state) {
-            bool? isSignInComplete = state.signInComplete.get();
+  Widget build(BuildContext context) => BlocConsumer(
+      bloc: _loginScreenBloc,
+      builder: (_, LoginScreenState state) => Scaffold(
+            body: SafeArea(child: _screen(context, state)),
+            appBar: AppBar(),
+          ),
+      listener: (_, LoginScreenState state) {
+        bool? isSignInComplete = state.signInComplete.get();
 
-            widget.handleApiError(context, state.errorMessage.get());
+        widget.handleApiError(context, state.errorMessage.get());
 
-            if (isSignInComplete == true) {
-              _accountNavigator.toHome();
-            }
-          }),
-    );
-  }
+        if (isSignInComplete == true) {
+          _accountNavigator.toHome();
+        }
+      });
 
   _screen(BuildContext context, LoginScreenState state) => AppScrollView(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+        padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: Spacing.small),
-              child: Text(
-                context.locale.welcome_back,
-                style: context.text.headlineMedium,
-              ),
+            PageHeader(
+              title: context.locale.welcome_back,
+              description: context.locale.sign_in_body_text,
+              bottom: Spacing.medium_h,
             ),
-            Text(
-              context.locale.sign_in_body_text,
-              textAlign: TextAlign.center,
-              style: context.text.titleMedium
-                  ?.copyWith(color: context.color.onSurface.withOpacity(0.50)),
-            ),
-            SizedBox(height: Spacing.large),
             TTextField(
                 label: context.locale.email_address,
                 inputType: TextInputType.emailAddress,
@@ -87,7 +73,7 @@ class _State extends State<LoginScreen> {
                 },
                 prefixIcon:
                     AssetIcon(size: IconSize.large, asset: 'assets/sms.svg')),
-            SizedBox(height: Spacing.small),
+            SizedBox(height: Spacing.small_h),
             TTextField(
                 label: context.locale.password,
                 inputType: TextInputType.text,
@@ -97,7 +83,7 @@ class _State extends State<LoginScreen> {
                 isSecret: true,
                 prefixIcon:
                     AssetIcon(size: IconSize.large, asset: 'assets/lock.svg')),
-            SizedBox(height: Spacing.extraSmall),
+            SizedBox(height: Spacing.small_h),
             Row(mainAxisAlignment: MainAxisAlignment.end, children: [
               GestureDetector(
                 child: Text(context.locale.forgot_password,
@@ -111,13 +97,13 @@ class _State extends State<LoginScreen> {
         ),
       ),
       bottom: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+        padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
         child: Column(
           children: [
-            SizedBox(height: Spacing.medium),
+            SizedBox(height: Spacing.medium_h),
             PrimaryButton(
                 title: AppLocalizations.of(context)!.sign_in,
-                modifier: EdgeInsets.symmetric(vertical: Spacing.small),
+                modifier: EdgeInsets.symmetric(vertical: Spacing.small_h),
                 loading: state.loading,
                 enabled: state.canContinue,
                 onClick: () {
@@ -129,7 +115,7 @@ class _State extends State<LoginScreen> {
                 Text(context.locale.no_account,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: context.color.onSurface.withOpacity(0.50))),
-                SizedBox(width: Spacing.extraExtraSmall),
+                SizedBox(width: Spacing.extraExtraSmall_w),
                 GestureDetector(
                   child: Text(context.locale.sign_up,
                       style: context.text.bodyMedium),
@@ -139,7 +125,7 @@ class _State extends State<LoginScreen> {
                 )
               ],
             ),
-            SizedBox(height: Spacing.small),
+            SizedBox(height: Spacing.small_h),
           ],
         ),
       ));

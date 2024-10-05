@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 class SecondaryButton extends StatelessWidget {
   final String title;
@@ -17,8 +19,15 @@ class SecondaryButton extends StatelessWidget {
         child: OutlinedButton(
             onPressed: onClick,
             child: SizedBox(
-              height: 64,
-              child: Center(child: Text(title)),
+              height: 64.h,
+              child: Center(
+                  child: Text(
+                title,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0.sp,
+                    color: context.color.secondary),
+              )),
             )),
       );
 }

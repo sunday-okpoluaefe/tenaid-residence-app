@@ -13,11 +13,13 @@ class DashboardScreenState extends Equatable {
   final List<VisitorDomain> recentVisitors;
   final List<AccountCommunityDomain>? communities;
   final AccountCommunityDomain? pendingJoin;
+  final AccountCommunityDomain? primaryCommunity;
   final AccountCommunityDomain? pendingCreate;
 
   DashboardScreenState(
       {this.loading = false,
       this.joinRequests = 0,
+      this.primaryCommunity,
       this.todayVisitors = const [],
       this.recentVisitors = const [],
       this.recentVisitorsLoading = false,
@@ -34,6 +36,7 @@ class DashboardScreenState extends Equatable {
         loading,
         account,
         communities,
+        primaryCommunity,
         pendingJoin,
         recentVisitors,
         joinRequests,

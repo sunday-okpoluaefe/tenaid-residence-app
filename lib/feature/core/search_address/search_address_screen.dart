@@ -73,20 +73,20 @@ class _State extends State<SearchAddressScreen> {
           SliverList(
               delegate: SliverChildListDelegate([
             Padding(
-              padding: EdgeInsets.only(top: Spacing.extraSmall),
+              padding: EdgeInsets.only(top: Spacing.extraSmall_h),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+                    padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PageHeader(
                           title: context.locale.search_address,
-                          top: Spacing.extraSmall,
+                          top: Spacing.extraSmall_h,
                         ),
                         SizedBox(
-                          height: Spacing.medium,
+                          height: Spacing.medium_h,
                         ),
                         TTextField(
                           label: context.locale.enter_address,
@@ -101,7 +101,7 @@ class _State extends State<SearchAddressScreen> {
                           },
                         ),
                         SizedBox(
-                          height: Spacing.extraSmall,
+                          height: Spacing.extraSmall_h,
                         ),
                       ],
                     ),
@@ -117,7 +117,7 @@ class _State extends State<SearchAddressScreen> {
                             children: [
                               Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: Spacing.small),
+                                    horizontal: Spacing.small_w),
                                 child: ListItem(
                                     onClick: (_) {
                                       widget.onSelected(place);
@@ -136,7 +136,8 @@ class _State extends State<SearchAddressScreen> {
                   else
                     Center(
                       child: Padding(
-                        padding: EdgeInsets.only(top: Spacing.extraExtraLarge),
+                        padding:
+                            EdgeInsets.only(top: Spacing.extraExtraLarge_h),
                         child: Text(
                           context.locale.no_results_found,
                           style: context.text.bodyLarge?.copyWith(

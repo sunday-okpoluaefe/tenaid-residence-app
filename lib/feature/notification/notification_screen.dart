@@ -49,11 +49,11 @@ class _State extends State<NotificationScreen> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+              padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
               child: PageHeader(title: 'Notifications'),
             ),
             SizedBox(
-              height: Spacing.medium,
+              height: Spacing.medium_h,
             ),
             if (state.notifications.isEmpty)
               Column(

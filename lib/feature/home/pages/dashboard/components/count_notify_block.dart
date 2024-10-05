@@ -19,8 +19,11 @@ class CountNotifyBlock extends StatelessWidget {
           onTap: onTap,
           child: Container(
             margin: EdgeInsets.only(
-                left: Spacing.small, right: Spacing.small, top: Spacing.small),
-            padding: EdgeInsets.only(left: Spacing.small, right: Spacing.small),
+                left: Spacing.small_w,
+                right: Spacing.small_w,
+                top: Spacing.small_h),
+            padding:
+                EdgeInsets.only(left: Spacing.small_w, right: Spacing.small_w),
             decoration: BoxDecoration(
                 color: context.color.primary.withOpacity(0.11),
                 borderRadius: BorderRadius.circular(8)),
@@ -31,9 +34,9 @@ class CountNotifyBlock extends StatelessWidget {
                   children: [
                     Container(
                       margin:
-                          EdgeInsets.symmetric(vertical: Spacing.extraSmall),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: Spacing.extraSmall),
+                          EdgeInsets.symmetric(vertical: Spacing.extraSmall_h),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Spacing.extraSmall_w),
                       decoration: BoxDecoration(
                           color: context.color.primary,
                           borderRadius: BorderRadius.circular(5)),
@@ -45,7 +48,7 @@ class CountNotifyBlock extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      width: Spacing.extraSmall,
+                      width: Spacing.extraSmall_w,
                     ),
                     Text(
                       text,

@@ -74,15 +74,15 @@ class _State extends State<ListCommunityScreen> {
   Widget _screen(BuildContext context, ListCommunityState state) =>
       AppScrollView(
           body: Padding(
-        padding: EdgeInsets.only(right: Spacing.small),
+        padding: EdgeInsets.only(right: Spacing.small_w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.only(left: Spacing.small),
+              padding: EdgeInsets.only(left: Spacing.small_w),
               child: PageHeader(
                 title: 'Communities',
-                bottom: Spacing.small,
+                bottom: Spacing.small_h,
               ),
             ),
             if (state.error || state.communities.isEmpty)

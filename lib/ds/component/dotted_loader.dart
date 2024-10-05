@@ -103,7 +103,9 @@ class DelayTween extends Tween<double> {
 }
 
 Widget topLoader(BuildContext context) => Padding(
-    padding: EdgeInsets.all(Spacing.extraLarge), child: loader(context));
+    padding: EdgeInsets.symmetric(
+        horizontal: Spacing.extraLarge_w, vertical: Spacing.extraLarge_h),
+    child: loader(context));
 
 Widget loader(BuildContext context) => DottedLoader(
       color: context.color.surfaceBright,

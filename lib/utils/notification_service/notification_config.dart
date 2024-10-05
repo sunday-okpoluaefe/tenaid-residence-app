@@ -21,6 +21,12 @@ Future sendDevicePushToken() async {
   }
 }
 
+Future<void> subscribeToTopic({required String topic}) async =>
+    await FirebaseMessaging.instance.subscribeToTopic(topic);
+
+Future<void> unSubscribeFromTopic({required String topic}) async =>
+    await FirebaseMessaging.instance.unsubscribeFromTopic(topic);
+
 Future<void> setupFirebaseNotification() async {
   FirebaseMessaging.onMessage.listen(foregroundHandler);
 

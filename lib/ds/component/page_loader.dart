@@ -27,7 +27,7 @@ class PageLoader extends StatelessWidget {
 
   Widget _large(BuildContext context) => Container(
         margin: EdgeInsets.only(
-            bottom: Spacing.small, right: padding, left: padding),
+            bottom: Spacing.small_h, right: padding, left: padding),
         height: 56,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),
@@ -37,19 +37,19 @@ class PageLoader extends StatelessWidget {
 
   Widget _list(BuildContext context) => Padding(
         padding: EdgeInsets.only(
-            bottom: Spacing.small, left: padding, right: padding),
+            bottom: Spacing.small_h, left: padding, right: padding),
         child: Row(
           children: [
             Container(
-              width: Spacing.extraLarge,
-              height: Spacing.extraLarge,
+              width: Spacing.extraLarge_w,
+              height: Spacing.extraLarge_h,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12.0),
                 color: context.color.surface,
               ),
             ),
             SizedBox(
-              width: Spacing.small,
+              width: Spacing.small_w,
             ),
             TitlePlaceholder(width: MediaQuery.of(context).size.width * 0.60)
           ],

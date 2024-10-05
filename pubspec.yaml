@@ -39,6 +39,7 @@ dependencies:
   flutter_svg:
   hive: ^2.2.3
   hive_flutter:
+  another_stepper: ^1.2.2
   shimmer: ^3.0.0
   dotted_border: ^2.1.0
   connectivity_plus: ^6.0.5
@@ -46,7 +47,8 @@ dependencies:
   injectable: ^2.4.4
   carousel_slider: ^5.0.0
   workmanager:
-  uuid: ^4.5.0
+  flutter_screenutil: ^5.9.3
+  uuid: ^4.5.1
   qr_flutter: ^4.1.0
   json_annotation: ^4.9.0
   pretty_dio_logger: ^1.4.0
@@ -56,21 +58,20 @@ dependencies:
   copy_with_extension: ^5.0.4
   linear_progress_bar: ^1.1.2
   expandable_page_view: ^1.0.17
-  smooth_page_indicator: ^1.2.0+3
   dio_cache_interceptor: ^3.5.0
   flutter_autostart: ^0.0.2
   path_provider:
   timeago: ^3.7.0
+  socket_io_client: ^2.0.3+1
   flutter_slidable: ^3.1.1
   image_picker: ^1.1.2
   mime: ^1.0.6
-  otp: ^3.1.4
   base32: any
   permission_handler: ^11.3.1
-  flutter_local_notifications: ^17.2.2
+  flutter_local_notifications: ^17.2.3
 
-  firebase_core: ^3.5.0
-  firebase_messaging: ^15.1.2
+  firebase_core: ^3.6.0
+  firebase_messaging: ^15.1.3
 
   flutter_localizations:
     sdk: flutter

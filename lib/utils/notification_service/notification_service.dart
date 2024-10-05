@@ -31,9 +31,10 @@ class NotificationService {
     NavigationHandler navigationHandler = GetIt.instance.get();
     if (notificationPayload == null) return;
 
-    Map<String, dynamic> json = jsonDecode(notificationPayload!);
+    Map<String, dynamic> json = jsonDecode(notificationPayload);
     NotificationPayload payload = NotificationPayload.fromJson(json);
-    navigationHandler.parse(route: payload.link, param: payload.extra ?? Map());
+    navigationHandler.parse(
+        route: payload.link, param: payload.contentId ?? '');
   }
 
   static Future<NotificationResponse?> getBackgroundNotification() async {
@@ -98,8 +99,7 @@ class NotificationService {
   static void showNotification(RemoteMessage message) {
     RemoteNotification? notification = message.notification;
     if (notification != null && notification.body?.isNotEmpty == true) {
-      Map<String, dynamic> json = jsonDecode(notification.body!);
-      NotificationPayload payload = NotificationPayload.fromJson(json);
+      NotificationPayload payload = NotificationPayload.fromJson(message.data);
 
       saveNotification(notification.title ?? "", payload);
 
@@ -107,7 +107,7 @@ class NotificationService {
           _notificationId(),
           notification.title ?? "",
           payload.description,
-          payload: notification.body,
+          payload: jsonEncode(message.data),
           NotificationDetails(
               android: androidNotificationDetails,
               iOS: darwinNotificationDetails));

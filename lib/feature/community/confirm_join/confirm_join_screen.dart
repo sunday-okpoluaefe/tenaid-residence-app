@@ -79,9 +79,9 @@ class _State extends State<ConfirmJoinScreen> {
           top: const TLinearProgressIndicator(steps: 3, current: 3),
           body: Padding(
             padding: EdgeInsets.only(
-                left: Spacing.small,
-                right: Spacing.small,
-                top: Spacing.extraSmall),
+                left: Spacing.small_w,
+                right: Spacing.small_w,
+                top: Spacing.extraSmall_h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -89,14 +89,14 @@ class _State extends State<ConfirmJoinScreen> {
                   title: context.locale.confirm_details,
                   description: context.locale.confirm_details_body,
                 ),
-                SizedBox(height: Spacing.medium),
+                SizedBox(height: Spacing.medium_h),
                 Text(context.locale.section_community,
                     style: context.text.titleMedium),
-                SizedBox(height: Spacing.extraSmall),
+                SizedBox(height: Spacing.extraSmall_h),
                 CommunityJoinOverview(
                   community: widget.community,
                 ),
-                SizedBox(height: Spacing.medium),
+                SizedBox(height: Spacing.medium_h),
                 Text(context.locale.section_member_address,
                     style: context.text.titleMedium),
                 AppTableView(
@@ -134,6 +134,7 @@ class _State extends State<ConfirmJoinScreen> {
             title: context.locale.continue_button,
             loading: state.loading,
             onClick: () => _bloc.handleUiEvent(OnContinueClicked()),
-            modifier: EdgeInsets.all(Spacing.small),
+            modifier: EdgeInsets.symmetric(
+                horizontal: Spacing.small_w, vertical: Spacing.small_h),
           ));
 }

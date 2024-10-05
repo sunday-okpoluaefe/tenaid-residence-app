@@ -7,5 +7,7 @@ import 'package:tenaid_mobile/utils/mapper.dart';
 class AccessPointToDomainMapper extends Mapper<AccessPoint, AccessPointDomain> {
   @override
   AccessPointDomain map(AccessPoint from) => AccessPointDomain(
-      name: from.name ?? '', description: from.description ?? '');
+      name: from.name ?? '',
+      description: from.description ?? '',
+      id: from.id ?? '');
 }

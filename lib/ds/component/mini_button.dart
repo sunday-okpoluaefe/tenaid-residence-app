@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tenaid_mobile/ds/component/spacing.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
@@ -19,7 +20,7 @@ class MiniButton extends StatelessWidget {
   Widget build(BuildContext context) => InkWell(
         onTap: onClick,
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+          padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
           decoration: BoxDecoration(
               color: fill ? context.color.secondary : context.color.surface,
               border: Border.all(
@@ -33,11 +34,11 @@ class MiniButton extends StatelessWidget {
             children: [
               if (icon != null)
                 Padding(
-                  padding: EdgeInsets.only(right: Spacing.extraSmall),
+                  padding: EdgeInsets.only(right: Spacing.extraSmall_w),
                   child: icon!,
                 ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 12),
+                padding: EdgeInsets.symmetric(vertical: 12.h),
                 child: Text(
                   title,
                   style: context.text.titleMedium?.copyWith(

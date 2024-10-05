@@ -20,7 +20,8 @@ class VisitorListItem extends StatelessWidget {
           if (onTap != null) onTap!();
         },
         child: Padding(
-          padding: EdgeInsets.all(Spacing.small),
+          padding: EdgeInsets.symmetric(
+              horizontal: Spacing.small_w, vertical: Spacing.small_h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -28,10 +29,11 @@ class VisitorListItem extends StatelessWidget {
                 children: [
                   Avatar(
                       title: visitor.name ?? "",
+                      opacity: 0.5,
                       status: showStatus ? visitor.status : null,
                       size: IconSize.extraLarge.height),
                   SizedBox(
-                    width: Spacing.small,
+                    width: Spacing.small_w,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +50,8 @@ class VisitorListItem extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: Spacing.extraExtraSmall),
+                        padding:
+                            EdgeInsets.only(top: Spacing.extraExtraSmall_h),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width * 0.7,
                           child: Text(visitor.dateTime,

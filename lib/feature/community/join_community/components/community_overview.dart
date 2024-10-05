@@ -14,7 +14,8 @@ class CommunityOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.all(Spacing.small),
+        padding: EdgeInsets.symmetric(
+            horizontal: Spacing.small_w, vertical: Spacing.small_h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
@@ -34,21 +35,21 @@ class CommunityOverview extends StatelessWidget {
                         children: [
                           ImageView(url: image, size: IconSize.extraExtraLarge),
                           SizedBox(
-                            width: Spacing.extraSmall,
+                            width: Spacing.extraSmall_w,
                           )
                         ],
                       ))
                   .toList(),
             ),
             SizedBox(
-              height: Spacing.small,
+              height: Spacing.small_h,
             ),
             Text(
               community.name ?? "",
               style: context.text.bodyLarge,
             ),
             SizedBox(
-              height: Spacing.extraSmall,
+              height: Spacing.extraSmall_h,
             ),
             Text(
               community.address?.address ?? "",
@@ -58,7 +59,7 @@ class CommunityOverview extends StatelessWidget {
                   ?.copyWith(color: context.color.onSurface.withOpacity(0.7)),
             ),
             SizedBox(
-              height: Spacing.medium,
+              height: Spacing.medium_h,
             ),
             Text(
               community.description ?? "",
@@ -67,7 +68,7 @@ class CommunityOverview extends StatelessWidget {
               maxLines: 3,
             ),
             SizedBox(
-              height: Spacing.small,
+              height: Spacing.small_h,
             ),
             communityStats(context,
                 members: community.members?.toString() ?? "0",

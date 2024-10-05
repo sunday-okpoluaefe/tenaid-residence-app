@@ -14,12 +14,14 @@ class InviteParam {
   final String? photo;
   final String? reason;
   final String? type;
+  final bool exitOnly;
   final DateTime? startDate;
   final DateTime? endDate;
 
   InviteParam(
       {this.start,
       this.end,
+      this.exitOnly = false,
       this.startDate,
       this.endDate,
       this.date,

@@ -9,9 +9,10 @@ part of 'notification_payload.dart';
 NotificationPayload _$NotificationPayloadFromJson(Map<String, dynamic> json) =>
     NotificationPayload(
       type: json['type'] as String,
+      community: json['community'] as String,
       description: json['description'] as String,
       link: json['link'] as String,
-      extra: json['extra'] as Map<String, dynamic>?,
+      contentId: json['contentId'] as String?,
     );
 
 Map<String, dynamic> _$NotificationPayloadToJson(
@@ -19,6 +20,7 @@ Map<String, dynamic> _$NotificationPayloadToJson(
     <String, dynamic>{
       'type': instance.type,
       'description': instance.description,
+      'community': instance.community,
       'link': instance.link,
-      'extra': instance.extra,
+      'contentId': instance.contentId,
     };

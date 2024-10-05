@@ -18,13 +18,15 @@ class AdminDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.only(
-            left: Spacing.small, right: Spacing.small, top: Spacing.large),
+            left: Spacing.small_w,
+            right: Spacing.small_w,
+            top: Spacing.large_h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text('Settings', style: context.text.titleMedium?.fade(context)),
             SizedBox(
-              height: Spacing.extraSmall,
+              height: Spacing.extraSmall_h,
             ),
             SettingsItem(
               label: 'Members',
@@ -34,7 +36,8 @@ class AdminDetailsScreen extends StatelessWidget {
             SettingsItem(
               label: 'Access points',
               icon: Assets.securitySafe.svg(),
-              onTap: () => navigator.toCommunityAccessPointScreen(),
+              onTap: () => navigator.toCommunityAccessPointScreen(
+                  community: community?.id ?? ''),
             ),
             HorizontalLine(),
             SettingsItem(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 class AnimatedAppTab extends StatefulWidget {
@@ -37,7 +38,7 @@ class _AnimatedAppTabState extends State<AnimatedAppTab> {
             borderRadius: BorderRadius.circular(30),
           ),
         ),
-        height: 56,
+        height: 56.h,
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -51,7 +52,7 @@ class _AnimatedAppTabState extends State<AnimatedAppTab> {
                   0),
               duration: const Duration(milliseconds: 200),
               child: Container(
-                height: 48,
+                height: 48.h,
                 width: (width / widget.items.length),
                 decoration: BoxDecoration(
                   color: context.color.secondary,

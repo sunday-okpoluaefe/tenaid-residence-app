@@ -30,17 +30,18 @@ class PageHeader extends StatelessWidget {
           ),
           if (description != null && descriptionWidget == null)
             Padding(
-              padding: EdgeInsets.only(top: Spacing.extraExtraSmall),
+              padding: EdgeInsets.only(top: Spacing.extraExtraSmall_h),
               child: Text(
                 description!,
                 style: context.text.bodyMedium?.fade(context),
               ),
             )
           else if (descriptionWidget != null)
-            descriptionWidget!,
-          SizedBox(
-            height: bottom,
-          ),
+            Padding(
+              padding: EdgeInsets.only(top: Spacing.extraExtraSmall_h),
+              child: descriptionWidget!,
+            ),
+          SizedBox(height: bottom),
         ],
       );
 }

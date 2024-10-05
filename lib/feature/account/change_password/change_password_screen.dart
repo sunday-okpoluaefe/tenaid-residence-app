@@ -43,11 +43,12 @@ class _State extends AppState<ChangePasswordScreen> {
           bottom: PrimaryButton(
               loading: state.loading,
               enabled: state.validated,
-              modifier: EdgeInsets.all(Spacing.small),
+              modifier: EdgeInsets.symmetric(
+                  horizontal: Spacing.small_w, vertical: Spacing.small_h),
               title: context.locale.continue_button,
               onClick: () => bloc.handleUiEvent(OnContinueClicked())),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+            padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -56,7 +57,7 @@ class _State extends AppState<ChangePasswordScreen> {
                   description: context.locale.change_password_body,
                 ),
                 SizedBox(
-                  height: Spacing.medium,
+                  height: Spacing.medium_h,
                 ),
                 TTextField(
                   label: context.locale.new_password,
@@ -64,7 +65,7 @@ class _State extends AppState<ChangePasswordScreen> {
                   isSecret: true,
                 ),
                 SizedBox(
-                  height: Spacing.small,
+                  height: Spacing.small_h,
                 ),
                 TTextField(
                   label: context.locale.confirm_new_password,

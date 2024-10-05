@@ -67,17 +67,17 @@ class _State extends State<SearchCommunityScreen> {
           SliverList(
               delegate: SliverChildListDelegate([
             Padding(
-              padding: EdgeInsets.only(top: Spacing.extraSmall),
+              padding: EdgeInsets.only(top: Spacing.extraSmall_h),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+                    padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         PageHeader(title: context.locale.search_your_community),
                         SizedBox(
-                          height: Spacing.medium,
+                          height: Spacing.medium_h,
                         ),
                         TTextField(
                           label: context.locale.search_community,
@@ -92,7 +92,7 @@ class _State extends State<SearchCommunityScreen> {
                           },
                         ),
                         SizedBox(
-                          height: Spacing.extraSmall,
+                          height: Spacing.extraSmall_h,
                         ),
                       ],
                     ),
@@ -117,7 +117,8 @@ class _State extends State<SearchCommunityScreen> {
                   else
                     Center(
                       child: Padding(
-                        padding: EdgeInsets.only(top: Spacing.extraExtraLarge),
+                        padding:
+                            EdgeInsets.only(top: Spacing.extraExtraLarge_h),
                         child: Text(
                           'No results found',
                           style: context.text.bodyLarge?.copyWith(

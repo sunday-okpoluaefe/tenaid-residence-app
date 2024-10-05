@@ -21,8 +21,8 @@ class ListCommunityItem extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              top: Spacing.extraSmall,
-              bottom: Spacing.extraSmall,
+              top: Spacing.extraSmall_h,
+              bottom: Spacing.extraSmall_h,
               child: Container(
                 width: 5,
                 color: community.status == 'approved'
@@ -32,9 +32,9 @@ class ListCommunityItem extends StatelessWidget {
             ),
             Padding(
               padding: EdgeInsets.only(
-                  left: Spacing.small,
-                  top: Spacing.small,
-                  bottom: Spacing.small),
+                  left: Spacing.small_w,
+                  top: Spacing.small_h,
+                  bottom: Spacing.small_h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -42,13 +42,14 @@ class ListCommunityItem extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: Spacing.extraExtraSmall),
+                        padding:
+                            EdgeInsets.only(top: Spacing.extraExtraSmall_h),
                         child: ImageView(
                             url: community.community?.images.firstOrNull ?? "",
                             size: IconSize.extraLarge),
                       ),
                       SizedBox(
-                        width: Spacing.small,
+                        width: Spacing.small_w,
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.70,
@@ -68,13 +69,13 @@ class ListCommunityItem extends StatelessWidget {
                                 if (community.isAdmin == true)
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        left: Spacing.extraSmall),
+                                        left: Spacing.extraSmall_w),
                                     child: Assets.adminUser.svg(),
                                   ),
                                 if (community.isPrimary == true)
                                   Padding(
                                     padding: EdgeInsets.only(
-                                        left: Spacing.extraExtraSmall),
+                                        left: Spacing.extraExtraSmall_w),
                                     child: Assets.securityUser.svg(height: 27),
                                   )
                               ],
@@ -107,7 +108,7 @@ Widget communityStats(BuildContext context,
       children: [
         Assets.members.svg(),
         SizedBox(
-          width: Spacing.extraExtraSmall,
+          width: Spacing.extraExtraSmall_w,
         ),
         Text(
           members,
@@ -116,11 +117,11 @@ Widget communityStats(BuildContext context,
           style: context.text.bodySmall,
         ),
         SizedBox(
-          width: Spacing.small,
+          width: Spacing.small_w,
         ),
         Assets.location.svg(),
         SizedBox(
-          width: Spacing.extraExtraSmall,
+          width: Spacing.extraExtraSmall_w,
         ),
         Flexible(
           child: Text(

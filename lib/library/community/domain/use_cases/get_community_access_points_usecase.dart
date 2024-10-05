@@ -5,12 +5,12 @@ import 'package:tenaid_mobile/utils/use_case.dart';
 
 @injectable
 class GetCommunityAccessPointsUseCase
-    extends UseCase<void, List<AccessPointDomain>> {
+    extends UseCase<String, List<AccessPointDomain>> {
   final CommunityRepository repository;
 
   GetCommunityAccessPointsUseCase(this.repository);
 
   @override
-  Future<List<AccessPointDomain>> call(void args) async =>
-      await repository.getCommunityAccessPoints();
+  Future<List<AccessPointDomain>> call(String args) async =>
+      await repository.getCommunityAccessPoints(community: args);
 }

@@ -4,6 +4,11 @@ sealed class InviteVisitorScreenEvent extends Equatable {
   const InviteVisitorScreenEvent();
 }
 
+class OnInit extends InviteVisitorScreenEvent {
+  @override
+  List<Object?> get props => [];
+}
+
 class OnStartDateChanged extends InviteVisitorScreenEvent {
   final DateTime dateTime;
 

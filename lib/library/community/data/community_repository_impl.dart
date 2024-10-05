@@ -3,6 +3,7 @@ import 'package:tenaid_mobile/core/network/api_error_parser.dart';
 import 'package:tenaid_mobile/library/community/data/mapper/visitor_to_domain_mapper.dart';
 import 'package:tenaid_mobile/library/community/data/model/access_point.dart';
 import 'package:tenaid_mobile/library/community/data/model/account_community.dart';
+import 'package:tenaid_mobile/library/community/data/model/invite_activity.dart';
 import 'package:tenaid_mobile/library/community/data/model/join_request.dart';
 import 'package:tenaid_mobile/library/community/data/model/street.dart';
 import 'package:tenaid_mobile/library/community/data/model/visitor.dart';
@@ -11,6 +12,8 @@ import 'package:tenaid_mobile/library/community/domain/entity/access_point_domai
 import 'package:tenaid_mobile/library/community/domain/entity/community_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/create_access_point_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/create_community_param.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/create_street_param.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/exit_code_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/invite_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/join_request_domain.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/request_join_param.dart';
@@ -23,11 +26,13 @@ import '../../../utils/network.dart';
 import '../../../utils/worker.dart';
 import '../../core/domain/entity/paginated_result.dart';
 import '../domain/entity/account_community_domain.dart';
+import '../domain/entity/invite_activity_domain.dart';
 import 'data_source/community_local_datasource.dart';
 import 'data_source/community_remote_datasource.dart';
 import 'mapper/access_point_to_domain_mapper.dart';
 import 'mapper/account_community_to_domain_mapper.dart';
 import 'mapper/community_to_domain_mapper.dart';
+import 'mapper/invite_activity_to_domain_mapper.dart';
 import 'mapper/join_request_to_domain_mapper.dart';
 import 'mapper/street_to_domain_mapper.dart';
 
@@ -41,6 +46,8 @@ class CommunityRepositoryImpl implements CommunityRepository {
   final AccountCommunityToDomainMapper accountCommunityMapper;
   final JoinRequestToDomainMapper joinRequestMapper;
   final AccessPointToDomainMapper accessPointMapper;
+  final InviteActivityToDomainMapper inviteActivityMapper;
+  final InviteToDomainMapper inviteMapper;
 
   CommunityRepositoryImpl(
       this._remoteDataSource,
@@ -50,7 +57,9 @@ class CommunityRepositoryImpl implements CommunityRepository {
       this._localDataSource,
       this.visitorToDomainMapper,
       this.joinRequestMapper,
-      this.accessPointMapper);
+      this.accessPointMapper,
+      this.inviteActivityMapper,
+      this.inviteMapper);
 
   @override
   Future<List<CommunityDomain>> searchCommunity(String query) async {
@@ -121,37 +130,28 @@ class CommunityRepositoryImpl implements CommunityRepository {
     map['date'] = param.date;
     map['name'] = param.name;
     map['code'] = param.code;
+    map['exitOnly'] = param.exitOnly;
     map['community'] = param.community;
     map['member'] = param.member;
     map['photo'] = param.photo;
     map['reason'] = param.reason;
     map['type'] = param.type;
+    map['path'] = 'community/invite';
 
-    if (!(await NetworkUtil.hasConnectivity())) {
-      // save for offline
-      Visitor visitor = Visitor(
-          id: uniqueId(),
-          name: param.name,
-          photo: param.photo,
-          code: param.code,
-          date: param.date,
-          start: param.start,
-          end: param.end,
-          reason: param.reason,
-          status: 'pending');
-      await _localDataSource.saveVisitor(visitor: visitor);
+    Visitor visitor = Visitor(
+        id: uniqueId(),
+        name: param.name,
+        photo: param.photo,
+        code: param.code,
+        date: param.date,
+        start: param.start,
+        end: param.end,
+        reason: param.reason,
+        status: 'pending');
 
-      registerInviteWorker(data: map);
-      return;
-    }
-    try {
-      return await _remoteDataSource.sendInvite(map);
-    } on ApiException catch (error) {
-      if (error is NetworkError) {
-        registerInviteWorker(data: map);
-      } else
-        throw error;
-    }
+    await _localDataSource.saveVisitor(visitor: visitor);
+
+    registerInviteWorker(data: map);
   }
 
   @override
@@ -333,12 +333,10 @@ class CommunityRepositoryImpl implements CommunityRepository {
   }
 
   @override
-  Future<List<AccessPointDomain>> getCommunityAccessPoints() async {
-    AccountCommunity? community =
-        await _localDataSource.getPrimaryAccountCommunity();
-
-    List<AccessPoint> result = await _remoteDataSource.getCommunityAccessPoints(
-        community: community?.community?.id ?? '');
+  Future<List<AccessPointDomain>> getCommunityAccessPoints(
+      {required String community}) async {
+    List<AccessPoint> result =
+        await _remoteDataSource.getCommunityAccessPoints(community: community);
 
     return List<AccessPointDomain>.from(
         result.map((data) => accessPointMapper.map(data)));
@@ -347,10 +345,8 @@ class CommunityRepositoryImpl implements CommunityRepository {
   @override
   Future<AccessPointDomain> createCommunityAccessPoints(
       {required CreateAccessPointParam param}) async {
-    AccountCommunity? community =
-        await _localDataSource.getPrimaryAccountCommunity();
     AccessPoint result = await _remoteDataSource.createCommunityAccessPoint(
-        param: param, community: community?.community?.id ?? '');
+        param: param, community: param.community);
 
     return accessPointMapper.map(result);
   }
@@ -363,5 +359,46 @@ class CommunityRepositoryImpl implements CommunityRepository {
     await _localDataSource.savePrimaryAccountCommunity(result);
 
     return accountCommunityMapper.map(result);
+  }
+
+  @override
+  Future<StreetDomain> createCommunityStreet(CreateStreetParam param) async {
+    Street street = await _remoteDataSource.createCommunityStreet(param);
+    return _streetToDomainMapper.map(street)!;
+  }
+
+  @override
+  Future<Pair<InviteDomain, PaginatedResult>> getInviteActivities(
+      {required String invite, required int page, required int limit}) async {
+    AccountCommunity? community =
+        await _localDataSource.getPrimaryAccountCommunity();
+
+    Pair<Invite, PaginatedResult> response =
+        await _remoteDataSource.getInviteActivities(
+            community: community?.community?.id ?? '',
+            request: invite,
+            page: page,
+            limit: limit);
+
+    PaginatedResult activities = response.second.copyWith(
+        data: List<InviteActivityDomain>.from(response.second.data
+            .map((data) => inviteActivityMapper.map(data as InviteActivity))));
+
+    return Pair(first: inviteMapper.map(response.first), second: activities);
+  }
+
+  @override
+  Future<void> updateVisitorExitCode(ExitCodeParam param) async {
+    AccountCommunity? community =
+        await _localDataSource.getPrimaryAccountCommunity();
+
+    Map<String, dynamic> map = Map();
+    map['invite'] = param.invite;
+    map['member'] = community?.id;
+    map['code'] = param.code;
+    map['date'] = param.date;
+    map['path'] = 'community/${community?.community?.id}/visitor/exit-code';
+
+    registerInviteWorker(data: map);
   }
 }

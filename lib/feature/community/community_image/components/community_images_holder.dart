@@ -25,14 +25,15 @@ class CommunityImagesHolder extends StatelessWidget {
         height: MediaQuery.of(context).size.height *
             0.6, // Define the height of the GridView
         child: Padding(
-          padding: EdgeInsets.all(Spacing.extraSmall),
+          padding: EdgeInsets.symmetric(
+              horizontal: Spacing.extraSmall_w, vertical: Spacing.extraSmall_h),
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               // 2 squares per row
-              crossAxisSpacing: Spacing.small,
+              crossAxisSpacing: Spacing.small_w,
               // space between squares horizontally
-              mainAxisSpacing: Spacing.small,
+              mainAxisSpacing: Spacing.small_h,
               // space between squares vertically
               childAspectRatio: 1.0, // To maintain the square aspect ratio
             ),
@@ -66,7 +67,7 @@ class CommunityImagesHolder extends StatelessWidget {
           children: [
             _button(context),
             SizedBox(
-              height: Spacing.extraSmall,
+              height: Spacing.extraSmall_h,
             ),
             Text(
               'Tap to add',
@@ -89,7 +90,7 @@ class CommunityImagesHolder extends StatelessWidget {
             width: double.infinity,
           ),
           Positioned(
-              bottom: Spacing.small,
+              bottom: Spacing.small_h,
               right: 0,
               left: 0,
               child: Row(
@@ -110,7 +111,8 @@ class CommunityImagesHolder extends StatelessWidget {
         onTap: onTap,
         child: Container(
           child: button,
-          padding: EdgeInsets.all(Spacing.extraSmall),
+          padding: EdgeInsets.symmetric(
+              horizontal: Spacing.extraSmall_w, vertical: Spacing.extraSmall_h),
           decoration: BoxDecoration(
               color: context.color.surfaceContainer.withOpacity(0.6),
               shape: BoxShape.circle),
@@ -139,7 +141,8 @@ class CommunityImagesHolder extends StatelessWidget {
           Icons.add,
           color: context.color.surface,
         ),
-        padding: EdgeInsets.all(Spacing.extraSmall),
+        padding: EdgeInsets.symmetric(
+            horizontal: Spacing.extraSmall_w, vertical: Spacing.extraSmall_h),
         decoration:
             BoxDecoration(color: context.color.primary, shape: BoxShape.circle),
       );

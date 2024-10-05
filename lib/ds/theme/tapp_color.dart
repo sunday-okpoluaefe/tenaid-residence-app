@@ -8,7 +8,7 @@ class ColorLight {
   static Color colorSecondaryContainer = const Color(0xFFFEBEC7);
   static Color colorBackground = const Color(0xFFFFFFFF);
   static Color colorOnBackground = const Color(0xFF333333);
-  static Color colorOnSecondary = const Color(0xFFBDC5C6);
+  static Color colorOnSecondary = const Color(0xFFF2F4F9);
   static Color colorOnPrimaryContainer = const Color(0xFFA9AAAA);
 
   static Color colorSurface = const Color(0xFFFFFFFF);

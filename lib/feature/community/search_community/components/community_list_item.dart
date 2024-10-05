@@ -19,7 +19,8 @@ class CommunityListItem extends StatelessWidget {
         behavior: HitTestBehavior.opaque,
         onTap: () => onTap(community),
         child: Padding(
-          padding: EdgeInsets.all(Spacing.small),
+          padding: EdgeInsets.symmetric(
+              horizontal: Spacing.small_w, vertical: Spacing.small_h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -30,7 +31,7 @@ class CommunityListItem extends StatelessWidget {
                       url: community.images.firstOrNull ?? "",
                       size: IconSize.extraLarge),
                   SizedBox(
-                    width: Spacing.small,
+                    width: Spacing.small_w,
                   ),
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.65,
@@ -52,7 +53,7 @@ class CommunityListItem extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                         ),
                         SizedBox(
-                          height: Spacing.extraSmall,
+                          height: Spacing.extraSmall_h,
                         ),
                         communityStats(context,
                             members: community.members?.toString() ?? "0",
@@ -77,7 +78,7 @@ Widget communityStats(BuildContext context,
       children: [
         Assets.members.svg(),
         SizedBox(
-          width: Spacing.extraExtraSmall,
+          width: Spacing.extraExtraSmall_w,
         ),
         Text(
           members,
@@ -86,11 +87,11 @@ Widget communityStats(BuildContext context,
           style: context.text.bodySmall,
         ),
         SizedBox(
-          width: Spacing.small,
+          width: Spacing.small_w,
         ),
         Assets.location.svg(),
         SizedBox(
-          width: Spacing.extraExtraSmall,
+          width: Spacing.extraExtraSmall_w,
         ),
         Flexible(
           child: Text(

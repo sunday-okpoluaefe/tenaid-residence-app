@@ -15,7 +15,7 @@ class DataItem extends StatelessWidget {
         children: [
           _dataItem(context, Assets.phone.svg(), phone),
           SizedBox(
-            height: Spacing.small,
+            height: Spacing.small_h,
           ),
           _dataItem(context, Assets.sms.svg(height: 18), email),
         ],
@@ -25,7 +25,7 @@ class DataItem extends StatelessWidget {
         children: [
           icon,
           SizedBox(
-            width: Spacing.small,
+            width: Spacing.small_w,
           ),
           Text(
             label,

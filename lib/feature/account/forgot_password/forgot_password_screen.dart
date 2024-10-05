@@ -37,7 +37,7 @@ class _State extends State<ForgotPasswordScreen> {
       );
 
   _screen(BuildContext context) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+        padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -57,7 +57,7 @@ class _State extends State<ForgotPasswordScreen> {
                           .withOpacity(0.50)),
                 ),
                 SizedBox(
-                  height: Spacing.medium,
+                  height: Spacing.medium_h,
                 ),
                 TTextField(
                   label: context.locale.email_address,
@@ -68,7 +68,7 @@ class _State extends State<ForgotPasswordScreen> {
             ),
             PrimaryButton(
                 title: context.locale.continue_button,
-                modifier: EdgeInsets.symmetric(vertical: Spacing.small),
+                modifier: EdgeInsets.symmetric(vertical: Spacing.small_h),
                 onClick: () {})
           ],
         ),

@@ -4,9 +4,9 @@ import 'package:tenaid_mobile/ds/theme/tapp_color.dart';
 
 class TSliderTheme {
   static SliderThemeData light = SliderThemeData(
-      trackHeight: Spacing.extraSmall,
+      trackHeight: Spacing.extraSmall_h,
       inactiveTrackColor: ColorLight.colorSurfaceContainer);
 
   static SliderThemeData dark =
-      SliderThemeData(trackHeight: Spacing.extraSmall);
+      SliderThemeData(trackHeight: Spacing.extraSmall_h);
 }

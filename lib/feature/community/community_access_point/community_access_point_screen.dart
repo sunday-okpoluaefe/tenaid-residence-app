@@ -14,6 +14,10 @@ import 'package:tenaid_mobile/library/community/domain/entity/access_point_domai
 import 'package:tenaid_mobile/utils/xts/global_notifier.dart';
 
 class CommunityAccessPointScreen extends StatefulWidget {
+  final String community;
+
+  const CommunityAccessPointScreen({super.key, required this.community});
+
   @override
   State<StatefulWidget> createState() => _State();
 }
@@ -25,11 +29,11 @@ class _State extends State<CommunityAccessPointScreen> {
   @override
   void initState() {
     super.initState();
-    bloc.handleUiEvent(OnLoadAccessPoints());
+    bloc.handleUiEvent(OnLoadAccessPoints(widget.community));
 
     syncRequiredNotifier.addListener(() {
       if (syncRequiredNotifier.syncRequired)
-        bloc.handleUiEvent(OnLoadAccessPoints());
+        bloc.handleUiEvent(OnLoadAccessPoints(widget.community));
     });
   }
 
@@ -42,7 +46,8 @@ class _State extends State<CommunityAccessPointScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   InkWell(
-                    onTap: () => navigator.toAddAccessPoint(),
+                    onTap: () =>
+                        navigator.toAddAccessPoint(community: widget.community),
                     child: Assets.penAdd.svg(),
                   )
                 ],
@@ -55,13 +60,13 @@ class _State extends State<CommunityAccessPointScreen> {
   Widget _screen(BuildContext context, CommunityAccessPointState state) =>
       AppScrollView(
           body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+        padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PageHeader(
               title: 'Access Points',
-              bottom: Spacing.small,
+              bottom: Spacing.small_h,
             ),
             if (state.loading)
               PageLoader(
@@ -72,9 +77,9 @@ class _State extends State<CommunityAccessPointScreen> {
                 hasError: state.error,
                 onTryAgain: () {
                   if (state.error)
-                    bloc.handleUiEvent(OnLoadAccessPoints());
+                    bloc.handleUiEvent(OnLoadAccessPoints(widget.community));
                   else
-                    navigator.toAddAccessPoint();
+                    navigator.toAddAccessPoint(community: widget.community);
                 },
                 retryTitle: state.error ? 'Try again' : 'Add access point',
               )

@@ -1,5 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get_it/get_it.dart';
+import 'package:tenaid_mobile/utils/log.dart';
 
 import '../../core/local/database.dart';
 import '../../library/account/domain/account_repository.dart';

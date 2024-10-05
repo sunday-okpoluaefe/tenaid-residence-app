@@ -12,7 +12,8 @@ class CommunityJoinOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Container(
-        padding: EdgeInsets.all(Spacing.small),
+        padding: EdgeInsets.symmetric(
+            horizontal: Spacing.small_w, vertical: Spacing.small_h),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(
@@ -22,7 +23,7 @@ class CommunityJoinOverview extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(community.name ?? "", style: context.text.titleLarge),
-            SizedBox(height: Spacing.small),
+            SizedBox(height: Spacing.small_h),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: community.images
@@ -30,14 +31,14 @@ class CommunityJoinOverview extends StatelessWidget {
                         children: [
                           ImageView(url: image, size: IconSize.extraExtraLarge),
                           SizedBox(
-                            width: Spacing.extraSmall,
+                            width: Spacing.extraSmall_w,
                           )
                         ],
                       ))
                   .toList(),
             ),
             SizedBox(
-              height: Spacing.small,
+              height: Spacing.small_h,
             ),
             _label(context, context.locale.address),
             Text(

@@ -20,7 +20,7 @@ extension EmailValidator on String {
   }
 
   String get asCode {
-    return '${substring(0, 4)}-${substring(4)}';
+    return '${substring(0, 3)}-${substring(3)}';
   }
 
   String get avatar {
@@ -30,4 +30,8 @@ extension EmailValidator on String {
           .toUpperCase();
     return parts[0].substring(0, 2).toUpperCase();
   }
+}
+
+extension NullXts on String? {
+  String get value => this?.isNotEmpty == true ? this! : 'N/A';
 }

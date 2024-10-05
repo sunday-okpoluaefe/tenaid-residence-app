@@ -32,6 +32,10 @@ class OnDescriptionChanged extends AddAccessPointEvent {
 }
 
 class OnContinueClicked extends AddAccessPointEvent {
+  final String community;
+
+  OnContinueClicked({required this.community});
+
   @override
-  List<Object?> get props => [];
+  List<Object?> get props => [community];
 }

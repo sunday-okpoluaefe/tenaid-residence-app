@@ -48,14 +48,17 @@ class _State extends State<CommunityDetailScreen> {
                             loading: state.loading,
                             onClick: () =>
                                 bloc.handleUiEvent(OnSetPrimaryClicked()),
-                            modifier: EdgeInsets.all(Spacing.small),
+                            modifier: EdgeInsets.symmetric(
+                                horizontal: Spacing.small_w,
+                                vertical: Spacing.small_h),
                           )
                         : SizedBox.shrink(),
                     body: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
                           padding:
-                              EdgeInsets.symmetric(horizontal: Spacing.small),
+                              EdgeInsets.symmetric(horizontal: Spacing.small_w),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -66,7 +69,7 @@ class _State extends State<CommunityDetailScreen> {
                                         '',
                               ),
                               SizedBox(
-                                height: Spacing.medium,
+                                height: Spacing.medium_h,
                               ),
                               DetailText(
                                   label: context.locale.address,
@@ -74,7 +77,7 @@ class _State extends State<CommunityDetailScreen> {
                                           ?.address ??
                                       ''),
                               SizedBox(
-                                height: Spacing.small,
+                                height: Spacing.small_h,
                               ),
                               DetailText(
                                   label:
@@ -96,16 +99,16 @@ class _State extends State<CommunityDetailScreen> {
                           ),
                         Padding(
                           padding:
-                              EdgeInsets.symmetric(horizontal: Spacing.small),
+                              EdgeInsets.symmetric(horizontal: Spacing.small_w),
                           child: Column(
                             children: [
                               SizedBox(
-                                height: Spacing.medium,
+                                height: Spacing.medium_h,
                               ),
                               if (state.community?.isPrimary == true)
                                 Padding(
                                   padding:
-                                      EdgeInsets.only(bottom: Spacing.small),
+                                      EdgeInsets.only(bottom: Spacing.small_h),
                                   child: InfoText(
                                       title: 'This is your primary community'),
                                 ),

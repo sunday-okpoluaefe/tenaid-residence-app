@@ -36,6 +36,7 @@ class AddAccessPointBloc
       try {
         await createAccessPoint(CreateAccessPointParam(
             name: state.name,
+            community: event.community,
             description: state.description,
             password: state.password));
 

@@ -60,13 +60,14 @@ class _State extends State<CommunityImageScreen> {
       AppScrollView(
           top: TLinearProgressIndicator(steps: 4, current: 3),
           bottom: PrimaryButton(
-              modifier: EdgeInsets.all(Spacing.small),
+              modifier: EdgeInsets.symmetric(
+                  horizontal: Spacing.small_w, vertical: Spacing.small_h),
               enabled: state.images.isNotEmpty,
               title: context.locale.continue_button,
               onClick: () => navigator.toCommunityConfirmCreate(
                   param: widget.param.copyWith(images: state.images))),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+            padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -77,8 +78,8 @@ class _State extends State<CommunityImageScreen> {
                       title: 'Upload photos',
                       description:
                           'Upload at least a photo or logo of your community.',
-                      top: Spacing.extraSmall,
-                      bottom: Spacing.medium,
+                      top: Spacing.extraSmall_h,
+                      bottom: Spacing.medium_h,
                     )
                   ],
                 ),

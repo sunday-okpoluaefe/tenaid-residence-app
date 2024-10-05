@@ -15,6 +15,7 @@ class VisitorToDomainMapper extends Mapper<Visitor, VisitorDomain> {
       id: from.id,
       name: from.name,
       date: from.date,
+      exitOnly: from.exitOnly,
       photo: from.photo,
       code: from.code,
       start: from.start,

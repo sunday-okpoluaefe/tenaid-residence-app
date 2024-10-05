@@ -55,17 +55,18 @@ class _State extends State<ConfirmDeclineJoinRequestScreen> {
             enabled: state.reason.isNotEmpty,
             onClick: () =>
                 bloc.handleUiEvent(OnDeclineRequest(widget.request.id ?? '')),
-            modifier: EdgeInsets.all(Spacing.small),
+            modifier: EdgeInsets.symmetric(
+                horizontal: Spacing.small_w, vertical: Spacing.small_h),
           ),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+            padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PageHeader(
                   title: 'Confirm decline',
                   description: 'Kindly click continue to confirm your decision',
-                  bottom: Spacing.medium,
+                  bottom: Spacing.medium_h,
                 ),
                 TTextField(
                   label: 'Enter decline reason',

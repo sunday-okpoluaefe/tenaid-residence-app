@@ -16,6 +16,8 @@ abstract class _$InviteVisitorScreenStateCWProxy {
   InviteVisitorScreenState call({
     bool? validated,
     bool? loading,
+    String? dateTimeString,
+    String? dateString,
     Resettable<ApiException>? error,
     Resettable<InviteDomain>? showDetailsScreen,
     bool? startTimeError,
@@ -48,6 +50,8 @@ class _$InviteVisitorScreenStateCWProxyImpl
   InviteVisitorScreenState call({
     Object? validated = const $CopyWithPlaceholder(),
     Object? loading = const $CopyWithPlaceholder(),
+    Object? dateTimeString = const $CopyWithPlaceholder(),
+    Object? dateString = const $CopyWithPlaceholder(),
     Object? error = const $CopyWithPlaceholder(),
     Object? showDetailsScreen = const $CopyWithPlaceholder(),
     Object? startTimeError = const $CopyWithPlaceholder(),
@@ -69,6 +73,14 @@ class _$InviteVisitorScreenStateCWProxyImpl
           ? _value.loading
           // ignore: cast_nullable_to_non_nullable
           : loading as bool,
+      dateTimeString: dateTimeString == const $CopyWithPlaceholder()
+          ? _value.dateTimeString
+          // ignore: cast_nullable_to_non_nullable
+          : dateTimeString as String?,
+      dateString: dateString == const $CopyWithPlaceholder()
+          ? _value.dateString
+          // ignore: cast_nullable_to_non_nullable
+          : dateString as String?,
       error: error == const $CopyWithPlaceholder()
           ? _value.error
           // ignore: cast_nullable_to_non_nullable

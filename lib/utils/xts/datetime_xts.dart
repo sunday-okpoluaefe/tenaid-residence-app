@@ -15,6 +15,22 @@ extension DatetimeXts on DateTime {
     return DateFormat(format).format(this.toLocal());
   }
 
+  bool isSameDay(DateTime other) {
+    return year == other.year && month == other.month && day == other.day;
+  }
+
+  String get periodDateTimeString {
+    DateTime now = DateTime.now();
+    return !isSameDay(now)
+        ? asDateTimeString
+        : 'Today - ${timeOfDay.timeString}';
+  }
+
+  String get periodDateString {
+    DateTime now = DateTime.now();
+    return !isSameDay(now) ? dateString : 'Today';
+  }
+
   String get dateString {
     return '${day} / ${month} / ${year}';
   }
@@ -22,6 +38,8 @@ extension DatetimeXts on DateTime {
   DateTime withTime(TimeOfDay time) {
     return DateTime(year, month, day, time.hour, time.minute);
   }
+
+  TimeOfDay get timeOfDay => TimeOfDay(hour: hour, minute: minute);
 
   String get asDateTimeString {
     TimeOfDay timeOfDay = TimeOfDay(hour: hour, minute: minute);

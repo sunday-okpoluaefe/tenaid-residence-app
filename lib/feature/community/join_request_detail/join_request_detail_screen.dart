@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/ds/component/app_scrollview.dart';
 import 'package:tenaid_mobile/ds/component/app_widget.dart';
 import 'package:tenaid_mobile/ds/component/horizontal_line.dart';
-import 'package:tenaid_mobile/ds/component/icon_size.dart';
 import 'package:tenaid_mobile/ds/component/page_loader.dart';
 import 'package:tenaid_mobile/ds/component/primary_button.dart';
 import 'package:tenaid_mobile/ds/component/spacing.dart';
@@ -15,9 +14,9 @@ import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../assets/assets.gen.dart';
 import '../../../ds/component/app_table_view.dart';
+import '../../../ds/component/large_profile_image.dart';
 import '../../../ds/component/secondary_button.dart';
 import '../../../utils/xts/global_notifier.dart';
-import '../../home/components/profile_image.dart';
 
 class JoinRequestDetailScreen extends AppStatefulWidget {
   final JoinRequestDomain? request;
@@ -72,14 +71,15 @@ class _State extends State<JoinRequestDetailScreen> {
   Widget _screen(BuildContext context, JoinRequestDetailState state) =>
       AppScrollView(
           bottom: Padding(
-            padding: EdgeInsets.all(Spacing.small),
+            padding: EdgeInsets.symmetric(
+                horizontal: Spacing.small_w, vertical: Spacing.small_h),
             child: Column(
               children: [
                 PrimaryButton(
                   title: 'Approve',
                   loading: state.approving,
                   onClick: () => bloc.handleUiEvent(OnApproveRequest()),
-                  modifier: EdgeInsets.only(bottom: Spacing.small),
+                  modifier: EdgeInsets.only(bottom: Spacing.small_h),
                 ),
                 SecondaryButton(
                   title: 'Decline',
@@ -94,9 +94,9 @@ class _State extends State<JoinRequestDetailScreen> {
             children: [
               Padding(
                 padding: EdgeInsets.only(
-                    left: Spacing.small,
-                    right: Spacing.small,
-                    bottom: Spacing.small),
+                    left: Spacing.small_w,
+                    right: Spacing.small_w,
+                    bottom: Spacing.small_h),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -119,7 +119,7 @@ class _State extends State<JoinRequestDetailScreen> {
                           children: [
                             Assets.location.svg(),
                             SizedBox(
-                              width: Spacing.extraSmall,
+                              width: Spacing.extraSmall_w,
                             ),
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.6,
@@ -135,38 +135,22 @@ class _State extends State<JoinRequestDetailScreen> {
                         //
                       ],
                     ),
-                    Stack(
-                      children: [
-                        ProfileImage(
-                          path: '${state.requestDetail?.account?.photo}',
-                          size: IconSize.extraLargeProfile,
-                        ),
-                        Positioned(
-                            top: 0,
-                            left: 0,
-                            right: 0,
-                            bottom: 0,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                      color: context.color.primary, width: 1)),
-                            ))
-                      ],
-                    )
+                    LargeProfileImage(
+                        image: '${state.requestDetail?.account?.photo}')
                   ],
                 ),
               ),
               HorizontalLine(),
               Padding(
-                padding: EdgeInsets.all(Spacing.small),
+                padding: EdgeInsets.symmetric(
+                    horizontal: Spacing.small_w, vertical: Spacing.small_h),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(context.locale.address,
                         style: context.text.titleMedium),
                     SizedBox(
-                      height: Spacing.extraExtraSmall,
+                      height: Spacing.extraExtraSmall_h,
                     ),
                     AppTableView(
                       items: [
@@ -182,12 +166,12 @@ class _State extends State<JoinRequestDetailScreen> {
                       ],
                     ),
                     SizedBox(
-                      height: Spacing.medium,
+                      height: Spacing.medium_h,
                     ),
                     Text('About ${state.requestDetail?.account?.firstName}',
                         style: context.text.titleMedium),
                     SizedBox(
-                      height: Spacing.extraExtraSmall,
+                      height: Spacing.extraExtraSmall_h,
                     ),
                     AppTableView(
                       items: [

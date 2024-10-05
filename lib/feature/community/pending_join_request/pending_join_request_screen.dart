@@ -77,21 +77,21 @@ class _State extends State<PendingJoinRequestScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+            padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
             child: PageHeader(
               title: 'Join Requests',
               descriptionWidget: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Assets.location.svg(height: Spacing.small),
+                  Assets.location.svg(height: Spacing.small_h),
                   SizedBox(
-                    width: Spacing.extraSmall,
+                    width: Spacing.extraSmall_w,
                   ),
                   Text('${state.primaryCommunity?.community?.name}',
                       style: context.text.bodyMedium?.fade(context))
                 ],
               ),
-              bottom: Spacing.small,
+              bottom: Spacing.small_h,
             ),
           ),
           _content(context, state)
@@ -124,7 +124,7 @@ class _State extends State<PendingJoinRequestScreen> {
                       onTryAgain: () => _pagingController.refresh(),
                     )),
             separatorBuilder: (BuildContext context, int index) => Container(
-              height: Spacing.extraSmall,
+              height: Spacing.extraExtraSmall_h,
               color: context.color.surfaceContainer,
             ),
           ));

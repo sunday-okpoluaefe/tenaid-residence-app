@@ -17,7 +17,7 @@ class InviteCodeStatus extends StatelessWidget {
     Status status = Pair(first: start, second: end).status(context);
     return Container(
       padding: EdgeInsets.symmetric(
-          horizontal: Spacing.small, vertical: Spacing.extraExtraSmall),
+          horizontal: Spacing.small_w, vertical: Spacing.extraExtraSmall_h),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(15)),
           color: status.color),

@@ -20,8 +20,9 @@ class StartingBanner extends StatelessWidget {
   Widget build(BuildContext context) => GestureDetector(
         onTap: onTap,
         child: Container(
-          margin: EdgeInsets.only(bottom: Spacing.small),
-          padding: EdgeInsets.all(Spacing.small),
+          margin: EdgeInsets.only(bottom: Spacing.small_h),
+          padding: EdgeInsets.symmetric(
+              horizontal: Spacing.small_w, vertical: Spacing.small_h),
           decoration: BoxDecoration(
             color: context.color.surfaceContainer,
             borderRadius: BorderRadius.circular(10),
@@ -34,7 +35,7 @@ class StartingBanner extends StatelessWidget {
                 children: [
                   icon,
                   SizedBox(
-                    width: Spacing.small,
+                    width: Spacing.small_w,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,7 +45,7 @@ class StartingBanner extends StatelessWidget {
                         style: context.text.titleMedium,
                       ),
                       SizedBox(
-                        height: Spacing.extraExtraSmall,
+                        height: Spacing.extraExtraSmall_h,
                       ),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 0.6,

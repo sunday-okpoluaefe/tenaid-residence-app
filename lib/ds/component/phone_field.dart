@@ -59,7 +59,7 @@ class _State extends State<PhoneField> {
       supportText: widget.supportText,
       inputType: TextInputType.phone,
       prefixIcon: Padding(
-        padding: EdgeInsets.only(left: Spacing.small),
+        padding: EdgeInsets.only(left: Spacing.small_w),
         child: Row(
           children: [
             Text(

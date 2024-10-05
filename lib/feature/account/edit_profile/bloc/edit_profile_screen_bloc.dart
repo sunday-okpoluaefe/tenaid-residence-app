@@ -31,6 +31,7 @@ class EditProfileScreenBloc
   DateTime? dob;
   String phone = '';
   String imageUrl = '';
+  String gender = '';
   String imagePath = '';
   late Country selectedCountry;
 
@@ -39,7 +40,8 @@ class EditProfileScreenBloc
       lName.isNotEmpty &&
       dob != null &&
       phone.isNotEmpty &&
-      imageUrl.isNotEmpty;
+      gender.isNotEmpty &&
+      (imageUrl.isNotEmpty || imagePath.isNotEmpty);
 
   EditProfileScreenBloc(this.getAccount, this.uploadFile, this.updateInfo)
       : super(EditProfileScreenState()) {
@@ -54,7 +56,8 @@ class EditProfileScreenBloc
     });
 
     on<OnGenderChanged>((event, emit) async {
-      emit(state.copyWith(gender: event.gender));
+      gender = event.gender;
+      emit(state.copyWith(gender: event.gender, validated: validated));
     });
 
     on<OnPhotoAdded>((event, emit) async {
@@ -121,6 +124,7 @@ class EditProfileScreenBloc
         emit(state.copyWith(
             account: account,
             initializing: false,
+            gender: account.gender,
             selectedCountry: selectedCountry));
       } catch (error) {
         Log.e(error);

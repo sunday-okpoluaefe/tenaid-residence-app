@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/feature/account/account_navigator.dart';
 import 'package:tenaid_mobile/feature/home/home_navigator.dart';
@@ -74,22 +75,28 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Tenaid',
-      navigatorKey: navigatorKey,
-      initialRoute:
-          isLoggedIn ? HomeNavigator.home : AccountNavigator.onboarding,
-      routes: {...AccountNavigator.accountRoutes, ...HomeNavigator.homeRoutes},
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-        AppLocalizations.delegate,
-      ],
-      supportedLocales: AppLocalizations.supportedLocales,
-      debugShowCheckedModeBanner: false,
-      theme: TAppTheme.light,
-      //darkTheme: TAppTheme.dark,
+    return ScreenUtilInit(
+      designSize: Size(411.2, 891.2),
+      builder: (_, child) => MaterialApp(
+        title: 'Tenaid',
+        navigatorKey: navigatorKey,
+        initialRoute:
+            isLoggedIn ? HomeNavigator.home : AccountNavigator.onboarding,
+        routes: {
+          ...AccountNavigator.accountRoutes,
+          ...HomeNavigator.homeRoutes
+        },
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          AppLocalizations.delegate,
+        ],
+        supportedLocales: AppLocalizations.supportedLocales,
+        debugShowCheckedModeBanner: false,
+        theme: TAppTheme.light,
+        //darkTheme: TAppTheme.dark,
+      ),
     );
   }
 }

@@ -41,20 +41,21 @@ class _State extends State<CreateCommunityScreen> {
             onClick: () => navigator.toCommunityAddress(
                 param: CreateCommunityParam(
                     name: state.name, description: state.description)),
-            modifier: EdgeInsets.all(Spacing.small),
+            modifier: EdgeInsets.symmetric(
+                horizontal: Spacing.small_w, vertical: Spacing.small_h),
           ),
           body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+            padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PageHeader(
                   title: context.locale.create_community,
                   description: context.locale.create_community_body,
-                  top: Spacing.extraSmall,
+                  top: Spacing.extraSmall_h,
                 ),
                 SizedBox(
-                  height: Spacing.medium,
+                  height: Spacing.medium_h,
                 ),
                 TTextField(
                   label: 'Give your community name',
@@ -62,7 +63,7 @@ class _State extends State<CreateCommunityScreen> {
                   inputType: TextInputType.name,
                 ),
                 SizedBox(
-                  height: Spacing.medium,
+                  height: Spacing.medium_h,
                 ),
                 TTextField(
                     label: 'Say something about your community',

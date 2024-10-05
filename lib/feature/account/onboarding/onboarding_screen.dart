@@ -1,10 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get_it/get_it.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tenaid_mobile/assets/assets.gen.dart';
+import 'package:tenaid_mobile/ds/component/linear_progress_indicator.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../ds/component/primary_button.dart';
@@ -22,7 +23,6 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _State extends State<OnboardingScreen> {
-  final _controller = PageController();
   final AccountNavigator _accountNavigator =
       GetIt.instance.get<AccountNavigator>();
 
@@ -40,7 +40,7 @@ class _State extends State<OnboardingScreen> {
           (timer) {
             setState(
               () {
-                if (currentPage < 2) {
+                if (currentPage < 3) {
                   currentPage++;
                 } else {
                   currentPage = 0;
@@ -55,7 +55,6 @@ class _State extends State<OnboardingScreen> {
 
   @override
   void dispose() {
-    _controller.dispose();
     timer.cancel();
     super.dispose();
   }
@@ -65,19 +64,24 @@ class _State extends State<OnboardingScreen> {
     List<Widget> pages = [
       OnBoardingItem(
           key: Key('page1'),
-          icon: Assets.gifting.svg(height: 200),
+          icon: Assets.inviteFriends.svg(height: 300.h),
           title: context.locale.invite_friends_intro,
           body: context.locale.invite_friends_intro_body),
       OnBoardingItem(
           key: Key('page2'),
-          icon: Assets.pricing.svg(height: 200),
+          icon: Assets.payments.svg(height: 300.h),
           title: context.locale.payment_intro,
           body: context.locale.payment_intro_body),
       OnBoardingItem(
           key: Key('page3'),
-          icon: Assets.team.svg(height: 200),
+          icon: Assets.offlineService.svg(height: 300.h),
           title: context.locale.offline_intro,
-          body: context.locale.offline_intro_body)
+          body: context.locale.offline_intro_body),
+      OnBoardingItem(
+          key: Key('page4'),
+          icon: Assets.announce.svg(height: 300.h),
+          title: context.locale.message_intro,
+          body: context.locale.message_intro_body)
     ];
 
     return Stack(
@@ -87,9 +91,9 @@ class _State extends State<OnboardingScreen> {
         SafeArea(
             child: Padding(
           padding: EdgeInsets.only(
-              top: Spacing.extraExtraLarge,
-              left: Spacing.small,
-              right: Spacing.small),
+              top: Spacing.extraExtraLarge_h,
+              left: Spacing.small_w,
+              right: Spacing.small_w),
           child: Column(
             children: [
               AnimatedSwitcher(
@@ -97,11 +101,9 @@ class _State extends State<OnboardingScreen> {
                 child: pages[currentPage],
               ),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: Spacing.small),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [_pageIndicator(context)],
-                ),
+                padding: EdgeInsets.symmetric(vertical: Spacing.small_h),
+                child: TLinearProgressIndicator(
+                    steps: 4, current: currentPage + 1),
               )
             ],
           ),
@@ -114,9 +116,9 @@ class _State extends State<OnboardingScreen> {
                 child: PrimaryButton(
                     title: context.locale.get_started,
                     modifier: EdgeInsets.only(
-                        bottom: Spacing.small,
-                        left: Spacing.small,
-                        right: Spacing.small),
+                        bottom: Spacing.small_h,
+                        left: Spacing.small_w,
+                        right: Spacing.small_w),
                     loading: false,
                     enabled: true,
                     onClick: () {
@@ -125,13 +127,4 @@ class _State extends State<OnboardingScreen> {
       ],
     );
   }
-
-  _pageIndicator(BuildContext context) => SmoothPageIndicator(
-        controller: _controller,
-        count: 3,
-        effect: ExpandingDotsEffect(
-            dotHeight: 10,
-            dotWidth: 10,
-            activeDotColor: context.color.onSurface),
-      );
 }

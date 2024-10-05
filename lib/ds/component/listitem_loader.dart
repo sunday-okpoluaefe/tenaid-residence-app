@@ -19,20 +19,21 @@ class ListItemLoader extends StatelessWidget {
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
           itemBuilder: (_, __) => Padding(
-                padding: EdgeInsets.all(Spacing.small),
+                padding: EdgeInsets.symmetric(
+                    horizontal: Spacing.small_w, vertical: Spacing.small_h),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Container(
-                      width: Spacing.extraLarge,
-                      height: Spacing.extraLarge,
+                      width: Spacing.extraLarge_w,
+                      height: Spacing.extraLarge_h,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12.0),
                         color: context.color.surface,
                       ),
                     ),
                     SizedBox(
-                      width: Spacing.small,
+                      width: Spacing.small_w,
                     ),
                     TitlePlaceholder(
                         width: MediaQuery.of(context).size.width * 0.65)

@@ -8,7 +8,9 @@ class TermsConditions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(Spacing.extraExtraSmall),
+      padding: EdgeInsets.symmetric(
+          horizontal: Spacing.extraExtraSmall_w,
+          vertical: Spacing.extraExtraSmall_h),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
         color: Theme.of(context).colorScheme.surfaceContainer,

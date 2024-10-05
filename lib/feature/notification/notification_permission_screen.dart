@@ -20,7 +20,8 @@ class _State extends AppState<NotificationPermissionScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         body: Padding(
-          padding: EdgeInsets.all(Spacing.small),
+          padding: EdgeInsets.symmetric(
+              horizontal: Spacing.small_w, vertical: Spacing.small_h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -28,17 +29,17 @@ class _State extends AppState<NotificationPermissionScreen> {
                 children: [
                   Assets.notification.svg(fit: BoxFit.scaleDown, width: 256),
                   SizedBox(
-                    height: Spacing.large,
+                    height: Spacing.large_h,
                   ),
                   Text(
                     'Enable Notifications',
                     style: context.text.headlineSmall,
                   ),
                   SizedBox(
-                    height: Spacing.small,
+                    height: Spacing.small_h,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: Spacing.large),
+                    padding: EdgeInsets.symmetric(horizontal: Spacing.large_w),
                     child: Text(
                       'Get reminders on important updates and stay informed about any changes that happen',
                       textAlign: TextAlign.center,
@@ -48,7 +49,7 @@ class _State extends AppState<NotificationPermissionScreen> {
                 ],
               ),
               SizedBox(
-                height: Spacing.large,
+                height: Spacing.large_h,
               ),
               PrimaryButton(
                   title: 'Continue',

@@ -34,7 +34,7 @@ class PictureItem extends StatelessWidget {
                 fallBackImage: Assets.manAvatar.svg(),
               ),
               SizedBox(
-                width: Spacing.small,
+                width: Spacing.small_w,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +49,7 @@ class PictureItem extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: Spacing.extraExtraSmall,
+                    height: Spacing.extraExtraSmall_h,
                   ),
                   community != null
                       ? SizedBox(

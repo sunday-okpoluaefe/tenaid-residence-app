@@ -15,11 +15,13 @@ class ListDetailItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.only(
-            top: Spacing.small, left: Spacing.small, right: Spacing.small),
+            top: Spacing.small_h,
+            left: Spacing.small_w,
+            right: Spacing.small_w),
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(right: Spacing.small),
+              padding: EdgeInsets.only(right: Spacing.small_w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -43,7 +45,7 @@ class ListDetailItem extends StatelessWidget {
                           ),
                           Padding(
                             padding:
-                                EdgeInsets.only(top: Spacing.extraExtraSmall),
+                                EdgeInsets.only(top: Spacing.extraExtraSmall_h),
                             child: SizedBox(
                               width: MediaQuery.of(context).size.width * 0.7,
                               child: Text(value,
@@ -60,7 +62,7 @@ class ListDetailItem extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: Spacing.extraSmall,
+              height: Spacing.extraSmall_h,
             ),
             HorizontalLine()
           ],

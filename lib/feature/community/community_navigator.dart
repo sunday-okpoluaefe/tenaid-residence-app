@@ -26,6 +26,7 @@ import 'community_image/community_image_screen.dart';
 import 'community_street/community_street_screen.dart';
 import 'confirm_create/confirm_create_screen.dart';
 import 'create_community/create_community_screen.dart';
+import 'create_community_street/create_community_street_screen.dart';
 import 'join_request_detail/confirm_decline_join_request/confirm_decline_join_request_screen.dart';
 import 'join_request_detail/join_request_detail_screen.dart';
 import 'list_community/list_community_screen.dart';
@@ -109,6 +110,9 @@ class CommunityNavigator extends BaseNavigator {
   Future toPendingJoinRequests() =>
       toScreen(screen: PendingJoinRequestScreen());
 
+  Future toCreateCommunityStreet({required String community}) =>
+      toScreen(screen: CreateCommunityStreetScreen(community));
+
   Future toConfirmRequestDecline({required JoinRequestDomain request}) =>
       toScreen(screen: ConfirmDeclineJoinRequestScreen(request));
 
@@ -124,7 +128,8 @@ class CommunityNavigator extends BaseNavigator {
 
   Future toCommunities() => toScreen(screen: ListCommunityScreen());
 
-  Future toAddAccessPoint() => toScreen(screen: AddAccessPointScreen());
+  Future toAddAccessPoint({required String community}) =>
+      toScreen(screen: AddAccessPointScreen(community));
 
   Future toCommunityStreets({required String community}) =>
       toScreen(screen: CommunityStreetScreen(community: community));
@@ -132,14 +137,15 @@ class CommunityNavigator extends BaseNavigator {
   Future toCommunityDetail({required AccountCommunityDomain community}) =>
       toScreen(screen: CommunityDetailScreen(community: community));
 
-  Future toCommunityAccessPointScreen() =>
-      toScreen(screen: CommunityAccessPointScreen());
+  Future toCommunityAccessPointScreen({required String community}) => toScreen(
+          screen: CommunityAccessPointScreen(
+        community: community,
+      ));
 
-  Future<void> parse(
-      {required String route, required Map<String, dynamic> param}) async {
+  Future<void> parse({required String route, String? param}) async {
     switch (route) {
       case 'community/join-request':
-        toJoinRequestDetails(requestId: param['request']);
+        toJoinRequestDetails(requestId: param);
         return;
     }
   }

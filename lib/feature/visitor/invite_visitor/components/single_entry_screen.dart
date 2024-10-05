@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tenaid_mobile/ds/component/icon_size.dart';
 import 'package:tenaid_mobile/ds/component/spacing.dart';
 import 'package:tenaid_mobile/feature/visitor/invite_visitor/bloc/invite_visitor_screen_bloc.dart';
-import 'package:tenaid_mobile/utils/xts/datetime_xts.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../../assets/assets.gen.dart';
@@ -45,17 +44,17 @@ class _State extends State<SingleEntryScreen> {
       if (widget.state?.name != null) nameController.text = widget.state!.name!;
       if (widget.state?.purpose != null)
         purposeController.text = widget.state!.purpose!;
-      if (widget.state?.startDate != null)
-        dateController.text = widget.state!.startDate!.toFormat(DATE_FORMAT);
-      if (widget.state?.startTime != null)
-        timeController.text = widget.state!.startTime!.timeString;
+      if (widget.state?.dateString != null)
+        dateController.text = widget.state?.dateTimeString ?? '';
+      // if (widget.state?.startTime != null)
+      //   timeController.text = widget.state!.startTime!.timeString;
     }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text('Guest details', style: context.text.titleMedium),
         SizedBox(
-          height: Spacing.extraSmall,
+          height: Spacing.extraSmall_h,
         ),
         TTextField(
           label: 'Enter guest name',
@@ -64,7 +63,7 @@ class _State extends State<SingleEntryScreen> {
           inputType: TextInputType.name,
         ),
         SizedBox(
-          height: Spacing.small,
+          height: Spacing.small_h,
         ),
         TTextField(
             label: 'Purpose of visit (Optional)',
@@ -72,15 +71,16 @@ class _State extends State<SingleEntryScreen> {
             onChanged: (x) => widget.onPurposeChanged(x),
             inputType: TextInputType.name),
         SizedBox(
-          height: Spacing.medium,
+          height: Spacing.medium_h,
         ),
         Text('Date & time', style: context.text.titleMedium),
         SizedBox(
-          height: Spacing.extraSmall,
+          height: Spacing.extraSmall_h,
         ),
         TTextField(
           label: 'Select invite date',
           controller: dateController,
+          errorText: widget.timeError ? 'Time must be in the future' : null,
           readOnly: true,
           prefixIcon: Assets.calendar.svg(fit: BoxFit.scaleDown),
           onTap: () {
@@ -92,46 +92,48 @@ class _State extends State<SingleEntryScreen> {
                 .then((dt) {
               if (dt != null) {
                 widget.onStartDateChanged(dt);
+
+                showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                    builder: (BuildContext context, Widget? child) {
+                      return Theme(
+                        data: Theme.of(context),
+                        child: Directionality(
+                          textDirection: TextDirection.ltr,
+                          child: MediaQuery(
+                            data: MediaQuery.of(context).copyWith(
+                              alwaysUse24HourFormat: false,
+                            ),
+                            child: child!,
+                          ),
+                        ),
+                      );
+                    }).then((t) {
+                  if (t != null) {
+                    widget.onTimeChanged(t);
+                  }
+                });
               }
             });
           },
           suffixIcon: Assets.chevronDown.svg(fit: BoxFit.scaleDown),
         ),
         SizedBox(
-          height: Spacing.small,
+          height: Spacing.small_h,
         ),
-        TTextField(
-            label: 'Select invite time',
-            controller: timeController,
-            prefixIcon: Assets.clock.svg(fit: BoxFit.scaleDown),
-            errorText: widget.timeError ? 'Time must be in the future' : null,
-            onTap: () {
-              showTimePicker(
-                  context: context,
-                  initialTime: TimeOfDay.now(),
-                  builder: (BuildContext context, Widget? child) {
-                    return Theme(
-                      data: Theme.of(context),
-                      child: Directionality(
-                        textDirection: TextDirection.ltr,
-                        child: MediaQuery(
-                          data: MediaQuery.of(context).copyWith(
-                            alwaysUse24HourFormat: false,
-                          ),
-                          child: child!,
-                        ),
-                      ),
-                    );
-                  }).then((t) {
-                if (t != null) {
-                  widget.onTimeChanged(t);
-                }
-              });
-            },
-            readOnly: true,
-            suffixIcon: Assets.chevronDown.svg(fit: BoxFit.scaleDown)),
+        // TTextField(
+        //     label: 'Select invite time',
+        //     controller: timeController,
+        //     prefixIcon: Assets.clock.svg(fit: BoxFit.scaleDown),
+        //     errorText: widget.timeError ? 'Time must be in the future' : null,
+        //     onTap: () {
+        //
+        //     },
+        //     readOnly: true,
+        //     suffixIcon: Assets.chevronDown.svg(fit: BoxFit.scaleDown)),
         SizedBox(
-          height: Spacing.medium,
+          height: Spacing.medium_h,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

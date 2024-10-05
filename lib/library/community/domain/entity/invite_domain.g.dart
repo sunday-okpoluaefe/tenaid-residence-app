@@ -16,6 +16,7 @@ abstract class _$InviteDomainCWProxy {
   InviteDomain call({
     AccountCommunityDomain? community,
     String? code,
+    bool? exitOnly,
     InviteType? type,
     String? name,
     String? purpose,
@@ -42,6 +43,7 @@ class _$InviteDomainCWProxyImpl implements _$InviteDomainCWProxy {
   InviteDomain call({
     Object? community = const $CopyWithPlaceholder(),
     Object? code = const $CopyWithPlaceholder(),
+    Object? exitOnly = const $CopyWithPlaceholder(),
     Object? type = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? purpose = const $CopyWithPlaceholder(),
@@ -58,6 +60,10 @@ class _$InviteDomainCWProxyImpl implements _$InviteDomainCWProxy {
           ? _value.code
           // ignore: cast_nullable_to_non_nullable
           : code as String,
+      exitOnly: exitOnly == const $CopyWithPlaceholder() || exitOnly == null
+          ? _value.exitOnly
+          // ignore: cast_nullable_to_non_nullable
+          : exitOnly as bool,
       type: type == const $CopyWithPlaceholder() || type == null
           ? _value.type
           // ignore: cast_nullable_to_non_nullable

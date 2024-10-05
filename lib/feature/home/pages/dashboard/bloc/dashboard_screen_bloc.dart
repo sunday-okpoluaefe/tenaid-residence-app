@@ -91,6 +91,7 @@ class DashboardScreenBloc
         emit(state.copyWith(
             communities: response,
             loading: false,
+            primaryCommunity: response.primary,
             pendingCreate: response.pendingCreate,
             pendingJoin: response.pendingJoin));
       } on ApiException catch (_) {

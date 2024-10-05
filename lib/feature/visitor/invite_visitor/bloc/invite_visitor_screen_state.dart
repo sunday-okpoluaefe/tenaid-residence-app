@@ -8,6 +8,8 @@ class InviteVisitorScreenState extends Equatable {
   final bool loading;
   final DateTime? startDate;
   final DateTime? endDate;
+  final String? dateTimeString;
+  final String? dateString;
   final bool startTimeError;
   final bool endDateError;
   final TimeOfDay? startTime;
@@ -21,6 +23,8 @@ class InviteVisitorScreenState extends Equatable {
   InviteVisitorScreenState(
       {this.validated = false,
       this.loading = false,
+      this.dateTimeString = '',
+      this.dateString = '',
       this.error,
       this.showDetailsScreen,
       this.startTimeError = false,
@@ -41,12 +45,14 @@ class InviteVisitorScreenState extends Equatable {
         endDateError,
         startDate,
         endDate,
+        dateString,
         error,
         startTime,
         validity,
         name,
         purpose,
         loading,
-        type
+        type,
+        dateTimeString
       ];
 }

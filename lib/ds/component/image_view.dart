@@ -31,14 +31,14 @@ class ImageView extends StatelessWidget {
         child: path != null
             ? Image.file(
                 File(path!),
-                width: size.width,
+                width: size.height,
                 height: size.height,
                 fit: BoxFit.cover,
               )
             : CachedNetworkImage(
                 fit: BoxFit.cover,
                 height: size.height,
-                width: size.width,
+                width: size.height,
                 imageUrl: url.isNotEmpty ? url : '',
                 errorWidget: (_, __, ___) =>
                     fallBackImage != null ? fallBackImage! : SizedBox(),

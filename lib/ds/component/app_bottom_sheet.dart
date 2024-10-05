@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/ds/component/spacing.dart';
@@ -33,14 +34,14 @@ class AppBottomSheet {
               ),
               decoration: BoxDecoration(
                   color: backgroundColor,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      topRight: Radius.circular(15.0))),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0.h),
+                      topRight: Radius.circular(15.0.h))),
               child: Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.symmetric(
-                        vertical: Spacing.small, horizontal: Spacing.small),
+                        vertical: Spacing.small_h, horizontal: Spacing.small_w),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [

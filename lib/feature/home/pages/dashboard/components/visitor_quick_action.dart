@@ -30,11 +30,12 @@ class VisitorQuickAction extends StatelessWidget {
           children: [
             Avatar(
               size: IconSize.extraLarge.height,
+              opacity: 0.5,
               title: title,
               status: badge ? status : null,
             ),
             SizedBox(
-              height: Spacing.extraSmall,
+              height: Spacing.extraSmall_h,
             ),
             SizedBox(
                 width: MediaQuery.of(context).size.width * 0.2,

@@ -19,7 +19,7 @@ class _State extends State<VisitorsScreen> {
           body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+            padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
             child: AnimatedAppTab(
                 onChanged: (x) {
                   setState(() {

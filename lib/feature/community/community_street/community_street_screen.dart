@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:tenaid_mobile/ds/component/horizontal_line.dart';
+import 'package:tenaid_mobile/feature/community/community_navigator.dart';
+import 'package:tenaid_mobile/utils/xts/global_notifier.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import '../../../assets/assets.gen.dart';
@@ -25,6 +28,7 @@ class CommunityStreetScreen extends StatefulWidget {
 
 class _State extends State<CommunityStreetScreen> {
   final CommunityStreetBloc _bloc = GetIt.instance.get();
+  final CommunityNavigator navigator = GetIt.instance.get();
 
   final PagingController<int, StreetDomain> _pagingController =
       PagingController(firstPageKey: 1);
@@ -32,6 +36,11 @@ class _State extends State<CommunityStreetScreen> {
   @override
   void initState() {
     super.initState();
+
+    syncRequiredNotifier.addListener(() {
+      if (syncRequiredNotifier.syncType == DataSyncType.streets)
+        _pagingController.refresh();
+    });
 
     _pagingController.addPageRequestListener((pageKey) {
       _bloc.handleUiEvent(
@@ -43,7 +52,18 @@ class _State extends State<CommunityStreetScreen> {
   Widget build(BuildContext context) => BlocConsumer(
       bloc: _bloc,
       builder: (_, CommunityStreetState state) => Scaffold(
-            appBar: AppBar(),
+            appBar: AppBar(
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  InkWell(
+                    onTap: () => navigator.toCreateCommunityStreet(
+                        community: widget.community),
+                    child: Assets.penAdd.svg(),
+                  )
+                ],
+              ),
+            ),
             body: SafeArea(
               child: _screen(context, state),
             ),
@@ -71,15 +91,15 @@ class _State extends State<CommunityStreetScreen> {
           SliverList(
               delegate: SliverChildListDelegate([
             Padding(
-              padding: EdgeInsets.only(top: Spacing.extraSmall),
+              padding: EdgeInsets.only(top: Spacing.extraSmall_h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+                    padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
                     child: PageHeader(
                       title: context.locale.streets,
-                      bottom: Spacing.small,
+                      bottom: Spacing.small_h,
                     ),
                   ),
                   SizedBox(
@@ -93,11 +113,12 @@ class _State extends State<CommunityStreetScreen> {
                             itemBuilder: (_, street, index) {
                               return Padding(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: Spacing.small),
+                                    horizontal: Spacing.small_w),
                                 child: ListItem(
                                   itemModel: ListItemModel(
                                       icon: Assets.signpost.svg(height: 24),
-                                      title: street.name ?? ""),
+                                      title: street.name ?? "",
+                                      description: street.description),
                                 ),
                               );
                             },
@@ -112,13 +133,12 @@ class _State extends State<CommunityStreetScreen> {
                                 ),
                             noItemsFoundIndicatorBuilder: (_) => EmptyScreen(
                                   retryTitle: 'Add street',
-                                  onTryAgain: () => _pagingController.refresh(),
+                                  onTryAgain: () =>
+                                      navigator.toCreateCommunityStreet(
+                                          community: widget.community),
                                 )),
                         separatorBuilder: (BuildContext context, int index) =>
-                            Container(
-                          height: Spacing.extraSmall,
-                          color: context.color.surfaceContainer,
-                        ),
+                            HorizontalLine(),
                       )),
                 ],
               ),

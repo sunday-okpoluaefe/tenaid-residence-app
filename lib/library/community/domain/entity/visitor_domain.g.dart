@@ -18,6 +18,7 @@ abstract class _$VisitorDomainCWProxy {
     StreetDomain? street,
     String? name,
     String? photo,
+    bool? exitOnly,
     String? code,
     String? date,
     String? start,
@@ -46,6 +47,7 @@ class _$VisitorDomainCWProxyImpl implements _$VisitorDomainCWProxy {
     Object? street = const $CopyWithPlaceholder(),
     Object? name = const $CopyWithPlaceholder(),
     Object? photo = const $CopyWithPlaceholder(),
+    Object? exitOnly = const $CopyWithPlaceholder(),
     Object? code = const $CopyWithPlaceholder(),
     Object? date = const $CopyWithPlaceholder(),
     Object? start = const $CopyWithPlaceholder(),
@@ -70,6 +72,10 @@ class _$VisitorDomainCWProxyImpl implements _$VisitorDomainCWProxy {
           ? _value.photo
           // ignore: cast_nullable_to_non_nullable
           : photo as String?,
+      exitOnly: exitOnly == const $CopyWithPlaceholder()
+          ? _value.exitOnly
+          // ignore: cast_nullable_to_non_nullable
+          : exitOnly as bool?,
       code: code == const $CopyWithPlaceholder()
           ? _value.code
           // ignore: cast_nullable_to_non_nullable

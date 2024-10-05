@@ -54,13 +54,13 @@ class _State extends State<SelectCountryScreen> {
       );
 
   _screen(BuildContext context) => Padding(
-        padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+        padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PageHeader(title: context.locale.select_country),
             SizedBox(
-              height: Spacing.medium,
+              height: Spacing.medium_h,
             ),
             TTextField(
               label: context.locale.search_country,

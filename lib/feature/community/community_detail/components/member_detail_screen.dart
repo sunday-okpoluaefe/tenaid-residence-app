@@ -16,7 +16,9 @@ class MemberDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.only(
-            left: Spacing.small, right: Spacing.small, top: Spacing.large),
+            left: Spacing.small_w,
+            right: Spacing.small_w,
+            top: Spacing.large_h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -36,7 +38,7 @@ class MemberDetailScreen extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height: Spacing.medium,
+              height: Spacing.medium_h,
             ),
             SettingsItem(
               label: 'Authorized access',

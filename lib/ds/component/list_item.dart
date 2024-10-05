@@ -27,7 +27,7 @@ class ListItem extends StatelessWidget {
           if (onClick != null) onClick!(itemModel);
         },
         child: Padding(
-          padding: EdgeInsets.symmetric(vertical: Spacing.small),
+          padding: EdgeInsets.symmetric(vertical: Spacing.small_h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -39,7 +39,7 @@ class ListItem extends StatelessWidget {
                     children: [
                       if (itemModel.icon != null)
                         Padding(
-                          padding: EdgeInsets.only(right: Spacing.small),
+                          padding: EdgeInsets.only(right: Spacing.small_w),
                           child: itemModel.icon!,
                         ),
                       Column(
@@ -58,8 +58,8 @@ class ListItem extends StatelessWidget {
                           ),
                           if (itemModel.description != null)
                             Padding(
-                              padding:
-                                  EdgeInsets.only(top: Spacing.extraExtraSmall),
+                              padding: EdgeInsets.only(
+                                  top: Spacing.extraExtraSmall_h),
                               child: SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.7,
                                 child: Text(itemModel.description!,

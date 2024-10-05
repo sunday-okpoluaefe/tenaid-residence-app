@@ -21,7 +21,7 @@ class ChipGroup extends StatelessWidget {
   Widget build(BuildContext context) => Wrap(
         alignment: wrapAlignment,
         crossAxisAlignment: wrapCrossAlignment,
-        spacing: Spacing.small,
+        spacing: Spacing.small_w,
         children: _chips(context),
       );
 
@@ -33,7 +33,7 @@ class ChipGroup extends StatelessWidget {
       chips.add(ChoiceChip(
         backgroundColor: context.color.surface,
         padding: EdgeInsets.symmetric(
-            horizontal: Spacing.small, vertical: Spacing.extraSmall),
+            horizontal: Spacing.small_w, vertical: Spacing.extraSmall_h),
         label: Text(
           choice,
           style: context.text.bodyMedium?.copyWith(

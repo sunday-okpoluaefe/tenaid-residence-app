@@ -69,13 +69,15 @@ class _Sheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
         padding: EdgeInsets.only(
-            left: Spacing.small, right: Spacing.small, bottom: Spacing.small),
+            left: Spacing.small_w,
+            right: Spacing.small_w,
+            bottom: Spacing.small_h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             type != null ? _icon(type!) : Container(),
             SizedBox(
-              height: Spacing.small,
+              height: Spacing.small_h,
             ),
             Text(
               message,
@@ -83,7 +85,7 @@ class _Sheet extends StatelessWidget {
                   ?.copyWith(color: context.color.onSurface.withOpacity(0.8)),
             ),
             SizedBox(
-              height: Spacing.small,
+              height: Spacing.small_h,
             ),
             PrimaryButton(
                 title: primaryButtonText,

@@ -121,6 +121,7 @@ class Account {
     final map = <String, dynamic>{};
     map['id'] = _id;
     map['lastName'] = _lastName;
+    map['gender'] = _gender;
     map['flags'] = _flags?.toJson();
     map['firstName'] = _firstName;
     if (_email != null) {

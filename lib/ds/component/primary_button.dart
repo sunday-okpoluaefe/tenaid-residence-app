@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
 import 'dotted_loader.dart';
@@ -27,7 +28,9 @@ class PrimaryButton extends StatelessWidget {
       child: ElevatedButton(
           style: ElevatedButton.styleFrom(
               backgroundColor: loading
-                  ? context.color.secondaryContainer
+                  ? (isBottomSheet
+                      ? context.color.onSurface
+                      : context.color.secondaryContainer)
                   : (isBottomSheet
                       ? context.color.secondary
                       : context.color.primary)),
@@ -38,11 +41,11 @@ class PrimaryButton extends StatelessWidget {
                 }
               : null,
           child: SizedBox(
-            height: 64,
+            height: 64.h,
             child: loading
                 ? DottedLoader(
                     color: Theme.of(context).colorScheme.surfaceContainer,
-                    size: 38,
+                    size: 38.w,
                   )
                 : Center(child: Text(title)),
           )),

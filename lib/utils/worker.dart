@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:tenaid_mobile/core/network/api_error_parser.dart';
 import 'package:tenaid_mobile/library/core/data/local_cache.dart';
 import 'package:uuid/uuid.dart';
 import 'package:workmanager/workmanager.dart';
@@ -25,14 +24,15 @@ void callbackDispatcher() {
       'Authorization': 'Bearer ${token.trim()}'
     }));
 
+    String path = inputData != null ? inputData['path'] : '';
+
     try {
-      await dio.post('community/invite', data: inputData);
-    } on ApiException catch (_) {
+      await dio.post(path, data: inputData);
+      return Future.value(true);
+    } catch (_) {
       // manual schedule for IOS
       return Future.value(false);
     }
-
-    return Future.value(true);
   });
 }
 

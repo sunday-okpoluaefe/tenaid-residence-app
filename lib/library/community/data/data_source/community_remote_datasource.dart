@@ -3,14 +3,17 @@ import 'package:tenaid_mobile/core/network/network_response.dart';
 import 'package:tenaid_mobile/library/community/data/model/access_point.dart';
 import 'package:tenaid_mobile/library/community/data/model/account_community.dart';
 import 'package:tenaid_mobile/library/community/data/model/community.dart';
+import 'package:tenaid_mobile/library/community/data/model/invite_activity.dart';
 import 'package:tenaid_mobile/library/community/data/model/join_request.dart';
 import 'package:tenaid_mobile/library/community/data/model/street.dart';
 import 'package:tenaid_mobile/library/community/data/model/visitor.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/create_access_point_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/create_community_param.dart';
+import 'package:tenaid_mobile/library/community/domain/entity/create_street_param.dart';
 import 'package:tenaid_mobile/library/community/domain/entity/request_join_param.dart';
 import 'package:tenaid_mobile/library/core/data/model/address.dart';
 import 'package:tenaid_mobile/library/core/domain/entity/paginated_result.dart';
+import 'package:tenaid_mobile/utils/pair.dart';
 
 import '../../../../core/network/api.dart';
 
@@ -74,6 +77,17 @@ class CommunityRemoteDataSource {
   Future<void> sendInvite(Map<String, dynamic> data) async {
     await api(
         url: 'community/invite', body: data, requestType: RequestType.post);
+  }
+
+  Future<Street> createCommunityStreet(CreateStreetParam param) async {
+    Map<String, dynamic> map = Map();
+    map['community'] = param.community;
+    map['name'] = param.name;
+    map['description'] = param.description;
+    NetworkResponse response = await api(
+        url: 'community/path', body: map, requestType: RequestType.post);
+
+    return Street.fromJson(response.data);
   }
 
   Future<PaginatedResult> getAllVisitors(
@@ -266,5 +280,31 @@ class CommunityRemoteDataSource {
         requestType: RequestType.post);
 
     return AccountCommunity.fromJson(response.data);
+  }
+
+  Future<Pair<Invite, PaginatedResult>> getInviteActivities(
+      {required String community,
+      required String request,
+      required int page,
+      required int limit}) async {
+    Map<String, dynamic> map = Map();
+    map['page'] = page;
+    map['limit'] = limit;
+
+    NetworkResponse response = await api(
+        url: 'community/$community/$request/activities',
+        requestType: RequestType.get,
+        params: map);
+
+    PaginatedResult result = PaginatedResult.parse(response.data['activities']);
+    Invite invite = Invite.fromJson(response.data['invite']);
+
+    dynamic docs = response.data['activities']['docs'];
+
+    return Pair(
+        first: invite,
+        second: result.copyWith(
+            data: List<InviteActivity>.from(
+                docs.map((data) => InviteActivity.fromJson(data)))));
   }
 }

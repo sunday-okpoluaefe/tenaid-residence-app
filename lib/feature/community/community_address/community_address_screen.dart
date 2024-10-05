@@ -58,23 +58,24 @@ class _State extends State<CommunityAddressScreen> {
               navigator.toCommunityImage(
                   param: widget.param.copyWith(address: state.address));
             },
-            modifier: EdgeInsets.all(Spacing.small),
+            modifier: EdgeInsets.symmetric(
+                horizontal: Spacing.small_w, vertical: Spacing.small_h),
           ),
           body: Padding(
             padding: EdgeInsets.only(
-                left: Spacing.small,
-                right: Spacing.small,
-                top: Spacing.extraSmall),
+                left: Spacing.small_w,
+                right: Spacing.small_w,
+                top: Spacing.extraSmall_h),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 PageHeader(
                   title: context.locale.community_address_title,
                   description: context.locale.community_address_body,
-                  top: Spacing.extraSmall,
+                  top: Spacing.extraSmall_h,
                 ),
                 SizedBox(
-                  height: Spacing.medium,
+                  height: Spacing.medium_h,
                 ),
                 TTextField(
                   label: 'Enter community address',
@@ -87,7 +88,7 @@ class _State extends State<CommunityAddressScreen> {
                   suffixIcon: Assets.chevronDown.svg(fit: BoxFit.scaleDown),
                 ),
                 SizedBox(
-                  height: Spacing.small,
+                  height: Spacing.small_h,
                 ),
                 TTextField(
                     label: 'Select country',
@@ -104,7 +105,7 @@ class _State extends State<CommunityAddressScreen> {
                     },
                     suffixIcon: Assets.chevronDown.svg(fit: BoxFit.scaleDown)),
                 SizedBox(
-                  height: Spacing.small,
+                  height: Spacing.small_h,
                 ),
                 TTextField(
                     label: 'Select city',

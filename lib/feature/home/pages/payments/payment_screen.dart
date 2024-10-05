@@ -15,7 +15,7 @@ class _State extends State<PaymentScreen> {
           SliverList(
               delegate: SliverChildListDelegate([
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+              padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
               child: AnimatedAppTab(
                   onChanged: (c) {}, items: ['Community', 'Utility']),
             )

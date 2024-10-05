@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_it/get_it.dart';
 import 'package:tenaid_mobile/ds/component/app_widget.dart';
-import 'package:tenaid_mobile/ds/component/spacing.dart';
 import 'package:tenaid_mobile/feature/account/account_navigator.dart';
 import 'package:tenaid_mobile/feature/home/bloc/home_screen_bloc.dart';
 import 'package:tenaid_mobile/feature/home/pages/dashboard/dashboard_screen.dart';
@@ -13,6 +12,7 @@ import 'package:tenaid_mobile/feature/home/pages/visitors/visitors_screen.dart';
 import 'package:tenaid_mobile/feature/notification/notification_navigator.dart';
 import 'package:tenaid_mobile/utils/notification_service/notification_service.dart';
 
+import '../../ds/component/horizontal_line.dart';
 import '../../utils/notification_service/notification_config.dart';
 import '../notification/notification_permission_screen.dart';
 import 'components/bottom_bar.dart';
@@ -76,30 +76,35 @@ class _State extends AppState<HomeScreen> {
             onProfileClicked: () => accountNavigator.toProfile(),
             onNotificationsClicked: () =>
                 notificationNavigator.toNotifications()),
-        body: Padding(
-          padding: EdgeInsets.only(top: Spacing.none),
-          child: SafeArea(
-              child: IndexedStack(
-            children: [
-              state.notificationGranted
-                  ? dashboard
-                  : NotificationPermissionScreen(() {
-                      context
-                          .read<HomeScreenBloc>()
-                          .handleUiEvent(OnCheckPermission());
-                    }),
-              messages,
-              payments,
-              visitors
-            ],
-            index: state.selectedPage,
-          )),
-        ),
-        bottomNavigationBar: BottomBar(
-          onTap: (int index) {
-            context.read<HomeScreenBloc>().handleUiEvent(OnPageSelected(index));
-          },
-          selected: state.selectedPage,
+        body: SafeArea(
+            child: IndexedStack(
+          children: [
+            state.notificationGranted
+                ? dashboard
+                : NotificationPermissionScreen(() {
+                    context
+                        .read<HomeScreenBloc>()
+                        .handleUiEvent(OnCheckPermission());
+                  }),
+            messages,
+            payments,
+            visitors
+          ],
+          index: state.selectedPage,
+        )),
+        bottomNavigationBar: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            HorizontalLine(),
+            BottomBar(
+              onTap: (int index) {
+                context
+                    .read<HomeScreenBloc>()
+                    .handleUiEvent(OnPageSelected(index));
+              },
+              selected: state.selectedPage,
+            )
+          ],
         ),
       ),
       listener: (BuildContext context, HomeScreenState state) {

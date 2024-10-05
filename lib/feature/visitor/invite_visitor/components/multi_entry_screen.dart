@@ -40,8 +40,8 @@ class _State extends State<MultiEntryScreen> {
       if (widget.state?.name != null) nameController.text = widget.state!.name!;
       if (widget.state?.purpose != null)
         purposeController.text = widget.state!.purpose!;
-      if (widget.state?.startDate != null)
-        startController.text = widget.state!.startDate!.toFormat(DATE_FORMAT);
+      if (widget.state?.dateString != null)
+        startController.text = widget.state!.dateString ?? '';
       if (widget.state?.endDate != null)
         endController.text = widget.state!.endDate!.toFormat(DATE_FORMAT);
     }
@@ -51,7 +51,7 @@ class _State extends State<MultiEntryScreen> {
       children: [
         Text('Guest details', style: context.text.titleMedium),
         SizedBox(
-          height: Spacing.extraSmall,
+          height: Spacing.extraSmall_h,
         ),
         TTextField(
           label: 'Enter guest name',
@@ -61,7 +61,7 @@ class _State extends State<MultiEntryScreen> {
           },
         ),
         SizedBox(
-          height: Spacing.small,
+          height: Spacing.small_h,
         ),
         TTextField(
           label: 'Purpose of visit (Optional)',
@@ -71,11 +71,11 @@ class _State extends State<MultiEntryScreen> {
           },
         ),
         SizedBox(
-          height: Spacing.medium,
+          height: Spacing.medium_h,
         ),
         Text('Start & end date', style: context.text.titleMedium),
         SizedBox(
-          height: Spacing.extraSmall,
+          height: Spacing.extraSmall_h,
         ),
         TTextField(
             label: 'Enter start date',
@@ -96,7 +96,7 @@ class _State extends State<MultiEntryScreen> {
             },
             suffixIcon: Assets.chevronDown.svg(fit: BoxFit.scaleDown)),
         SizedBox(
-          height: Spacing.small,
+          height: Spacing.small_h,
         ),
         TTextField(
             label: 'Enter end date',

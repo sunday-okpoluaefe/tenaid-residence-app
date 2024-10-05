@@ -22,7 +22,8 @@ class CommunityAccessPointBloc
       emit(state.copyWith(loading: true));
 
       try {
-        List<AccessPointDomain> result = await getCommunityAccessPoints(true);
+        List<AccessPointDomain> result =
+            await getCommunityAccessPoints(event.community);
         emit(state.copyWith(accessPoints: result, loading: false));
       } on ApiException catch (_) {
         emit(state.copyWith(loading: false, error: true));

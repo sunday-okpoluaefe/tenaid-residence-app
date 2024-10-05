@@ -15,7 +15,6 @@ import '../../../ds/component/icon_size.dart';
 import '../../../ds/component/image_view.dart';
 import '../../../ds/component/list_detail_item.dart';
 import '../../../library/community/domain/entity/create_community_param.dart';
-import '../../home/home_screen.dart';
 import '../community_navigator.dart';
 
 class ConfirmCreateScreen extends AppStatefulWidget {
@@ -65,26 +64,27 @@ class _State extends State<ConfirmCreateScreen> {
             title: context.locale.continue_button,
             loading: state.loading,
             onClick: () => bloc.handleUiEvent(OnContinueClicked()),
-            modifier: EdgeInsets.all(Spacing.small),
+            modifier: EdgeInsets.symmetric(
+                horizontal: Spacing.small_w, vertical: Spacing.small_h),
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: Spacing.small),
+                padding: EdgeInsets.symmetric(horizontal: Spacing.small_w),
                 child: PageHeader(
                   title: context.locale.confirm_details,
                   description: context.locale.confirm_details_body,
-                  top: Spacing.extraSmall,
-                  bottom: Spacing.small,
+                  top: Spacing.extraSmall_h,
+                  bottom: Spacing.small_h,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: Spacing.small, vertical: Spacing.medium),
+                    horizontal: Spacing.small_w, vertical: Spacing.medium_h),
                 child: Wrap(
-                  spacing: Spacing.small,
-                  runSpacing: Spacing.small,
+                  spacing: Spacing.small_w,
+                  runSpacing: Spacing.small_h,
                   children: widget.param.images
                       .map((image) => ImageView(
                             path: image,

@@ -18,7 +18,7 @@ class DetailText extends StatelessWidget {
             textAlign: TextAlign.start,
           ),
           SizedBox(
-            height: Spacing.extraExtraSmall,
+            height: Spacing.extraExtraSmall_h,
           ),
           Text(
             detail,
