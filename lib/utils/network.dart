@@ -1,25 +1,25 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
+import 'package:tenaid_mobile/env/config.dart';
+
+late final InternetConnection internetConnection;
 
 class NetworkUtil {
-  static Future<bool> hasConnectivity() async {
-    final List<ConnectivityResult> connectivityResult =
-        await (Connectivity().checkConnectivity());
-
-    return (connectivityResult.contains(ConnectivityResult.wifi) ||
-        connectivityResult.contains(ConnectivityResult.mobile) ||
-        connectivityResult.contains(ConnectivityResult.vpn));
-  }
+  static Future<bool> hasConnectivity() async =>
+      await internetConnection.hasInternetAccess;
 }
 
 ValueNotifier<bool> networkNotifier = ValueNotifier<bool>(false);
 
 void setupNetworkNotifier() {
-  Connectivity()
-      .onConnectivityChanged
-      .listen((List<ConnectivityResult> result) {
-    networkNotifier.value = result.contains(ConnectivityResult.wifi) ||
-        result.contains(ConnectivityResult.mobile) ||
-        result.contains(ConnectivityResult.vpn);
+  internetConnection = InternetConnection.createInstance(
+    customCheckOptions: [
+      InternetCheckOption(
+          uri: Uri.parse('${Config.shared.baseUrl}health/status')),
+    ],
+  );
+
+  internetConnection.onStatusChange.listen((InternetStatus status) {
+    networkNotifier.value = status == InternetStatus.connected;
   });
 }

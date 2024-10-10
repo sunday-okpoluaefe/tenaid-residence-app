@@ -25,10 +25,12 @@ import 'feature/home/pages/messages/bloc/message_screen_bloc.dart';
 import 'feature/home/pages/payments/bloc/payment_screen_bloc.dart';
 import 'feature/home/pages/visitors/bloc/visitor_screen_bloc.dart';
 import 'firebase_options.dart';
-import 'library/account/domain/use_cases/islogin_usecase.dart';
+import 'library/account/domain/use_cases/get_authorization_usecase.dart';
 import 'utils/notification_service/notification_config.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
+AppLifecycleState? appLifecycleState;
+AppLifecycleListener? appLifecycleListener;
 
 Future run() async {
   configureDependencies();
@@ -38,8 +40,8 @@ Future run() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  final IsLoginUseCase isLoggedIn = GetIt.instance.get<IsLoginUseCase>();
-  final bool loggedIn = await isLoggedIn(true);
+  final GetAuthorizationUseCase getAuthorization = GetIt.instance.get();
+  final String auth = await getAuthorization(true);
 
   await setupFirebaseNotification();
   await NotificationService.initializeLocalNotification();
@@ -65,13 +67,14 @@ Future run() async {
     BlocProvider(create: (_) => payments),
     BlocProvider(create: (_) => visitors),
     BlocProvider(create: (_) => home),
-  ], child: App(isLoggedIn: loggedIn)));
+  ], child: App(isLoggedIn: auth.isNotEmpty)));
 }
 
 class App extends StatelessWidget {
   final bool isLoggedIn;
+  final AppNavigatorObserver appObserver = AppNavigatorObserver();
 
-  const App({super.key, required this.isLoggedIn});
+  App({super.key, required this.isLoggedIn});
 
   @override
   Widget build(BuildContext context) {
@@ -79,6 +82,8 @@ class App extends StatelessWidget {
       designSize: Size(411.2, 891.2),
       builder: (_, child) => MaterialApp(
         title: 'Tenaid',
+        navigatorObservers: [appObserver],
+        // Pass the custom observer
         navigatorKey: navigatorKey,
         initialRoute:
             isLoggedIn ? HomeNavigator.home : AccountNavigator.onboarding,
@@ -98,5 +103,30 @@ class App extends StatelessWidget {
         //darkTheme: TAppTheme.dark,
       ),
     );
+  }
+}
+
+// Create a custom NavigatorObserver to track route changes
+class AppNavigatorObserver extends NavigatorObserver {
+  // Variable to store the current route
+  static Route? currentRoute;
+
+  @override
+  void didPush(Route route, Route? previousRoute) {
+    super.didPush(route, previousRoute);
+    currentRoute = route; // Set the current route when a new route is pushed
+  }
+
+  @override
+  void didPop(Route route, Route? previousRoute) {
+    super.didPop(route, previousRoute);
+    currentRoute =
+        previousRoute; // Set the current route when a route is popped
+  }
+
+  @override
+  void didReplace({Route? newRoute, Route? oldRoute}) {
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+    currentRoute = newRoute; // Set the current route when a route is replaced
   }
 }

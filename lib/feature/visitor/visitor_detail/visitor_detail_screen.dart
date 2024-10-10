@@ -177,13 +177,13 @@ class _State extends State<VisitorDetailScreen> {
     List<StepperData> steps = [];
     steps.add(_step(
         title: 'Invite Sent',
-        subtitle: data.first.createdAt.asDateTimeString,
+        subtitle: data.first.createdAt.periodDateTimeString,
         icon: Assets.send.svg(color: context.color.primaryFixed)));
 
     List<StepperData> activities = data.second
         .map((activity) => _step(
             title: _stepTitle(activity.type!),
-            subtitle: activity.createdAt.asDateTimeString,
+            subtitle: activity.createdAt.periodDateTimeString,
             icon: _stepIcon(activity.type!)))
         .toList();
 

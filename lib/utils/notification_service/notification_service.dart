@@ -26,15 +26,19 @@ class NotificationService {
     handleNavigation(notificationResponse.payload);
   }
 
-  static void handleNavigation(String? notificationPayload) {
-    // navigate to a specific screen
+  static void navigatedToScreen(Map<String, dynamic> json) {
     NavigationHandler navigationHandler = GetIt.instance.get();
-    if (notificationPayload == null) return;
-
-    Map<String, dynamic> json = jsonDecode(notificationPayload);
     NotificationPayload payload = NotificationPayload.fromJson(json);
     navigationHandler.parse(
         route: payload.link, param: payload.contentId ?? '');
+  }
+
+  static void handleNavigation(String? notificationPayload) {
+    // navigate to a specific screen
+    if (notificationPayload == null) return;
+
+    Map<String, dynamic> json = jsonDecode(notificationPayload);
+    navigatedToScreen(json);
   }
 
   static Future<NotificationResponse?> getBackgroundNotification() async {
@@ -96,21 +100,38 @@ class NotificationService {
     await NotificationBox.put(uniqueId(), jsonEncode(notify.toJson()));
   }
 
-  static void showNotification(RemoteMessage message) {
-    RemoteNotification? notification = message.notification;
-    if (notification != null && notification.body?.isNotEmpty == true) {
-      NotificationPayload payload = NotificationPayload.fromJson(message.data);
-
-      saveNotification(notification.title ?? "", payload);
-
+  static _show(
+          {required String title,
+          required String body,
+          required dynamic data}) =>
       flutterLocalNotificationsPlugin.show(
           _notificationId(),
-          notification.title ?? "",
-          payload.description,
-          payload: jsonEncode(message.data),
+          title,
+          body,
+          payload: jsonEncode(data),
           NotificationDetails(
               android: androidNotificationDetails,
               iOS: darwinNotificationDetails));
-    }
+
+  static void showNotification(RemoteMessage message) {
+    NotificationPayload payload = NotificationPayload.fromJson(message.data);
+
+    saveNotification(payload.title, payload);
+
+    _show(title: payload.title, body: payload.description, data: message.data);
+  }
+
+  static void showMessageNotification(
+      {required String title,
+      required String body,
+      required String community}) {
+    NotificationPayload payload = NotificationPayload(
+        title: title,
+        type: 'message',
+        community: community,
+        description: body,
+        link: 'home/message');
+
+    _show(title: title, body: body, data: payload.toJson());
   }
 }

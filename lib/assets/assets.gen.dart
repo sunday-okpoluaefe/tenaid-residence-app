@@ -78,6 +78,8 @@ class Assets {
       SvgGenImage('assets/empty_activity.svg');
   static const SvgGenImage emptyContent =
       SvgGenImage('assets/empty_content.svg');
+  static const SvgGenImage emptyMessages =
+      SvgGenImage('assets/empty_messages.svg');
   static const SvgGenImage error = SvgGenImage('assets/error.svg');
   static const SvgGenImage gifting = SvgGenImage('assets/gifting.svg');
   static const SvgGenImage icon = SvgGenImage('assets/icon.svg');
@@ -111,6 +113,7 @@ class Assets {
       SvgGenImage('assets/notifications_empty.svg');
   static const SvgGenImage offlineService =
       SvgGenImage('assets/offline_service.svg');
+  static const SvgGenImage paperclip = SvgGenImage('assets/paperclip.svg');
   static const SvgGenImage passwordChange =
       SvgGenImage('assets/password_change.svg');
   static const SvgGenImage pattern = SvgGenImage('assets/pattern.svg');
@@ -134,6 +137,9 @@ class Assets {
   static const SvgGenImage securityUser =
       SvgGenImage('assets/security_user.svg');
   static const SvgGenImage send = SvgGenImage('assets/send.svg');
+  static const SvgGenImage sendChat = SvgGenImage('assets/send_chat.svg');
+  static const SvgGenImage sendNewMessage =
+      SvgGenImage('assets/send_new_message.svg');
   static const SvgGenImage shield = SvgGenImage('assets/shield.svg');
   static const SvgGenImage signpost = SvgGenImage('assets/signpost.svg');
   static const SvgGenImage sms = SvgGenImage('assets/sms.svg');
@@ -185,6 +191,7 @@ class Assets {
         edit,
         emptyActivity,
         emptyContent,
+        emptyMessages,
         error,
         gifting,
         icon,
@@ -210,6 +217,7 @@ class Assets {
         notification,
         notificationsEmpty,
         offlineService,
+        paperclip,
         passwordChange,
         pattern,
         payments,
@@ -228,6 +236,8 @@ class Assets {
         securitySafe,
         securityUser,
         send,
+        sendChat,
+        sendNewMessage,
         shield,
         signpost,
         sms,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tenaid_mobile/utils/log.dart';
 import 'package:tenaid_mobile/utils/route_utils/route_transition.dart';
 
 Object? _rootWidget;
@@ -11,6 +10,7 @@ abstract class AppRouter {
       AnimationType animationType = AnimationType.slideRight,
       Object? root = null}) {
     _rootWidget = root ?? _rootWidget;
+
     return !clearStack
         ? Navigator.of(context).push(RouteTransition(
             animationType: animationType,
@@ -37,7 +37,6 @@ abstract class AppRouter {
     if (!toRoot) {
       Navigator.of(context, rootNavigator: rootNavigator).pop(result);
     } else if (_rootWidget != null) {
-      Log.d(_rootWidget.runtimeType);
       Navigator.popUntil(context, (route) {
         // Check if the route is a MaterialPageRoute
         if (route is MaterialPageRoute) {

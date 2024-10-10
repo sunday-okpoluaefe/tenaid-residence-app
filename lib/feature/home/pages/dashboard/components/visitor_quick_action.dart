@@ -27,6 +27,7 @@ class VisitorQuickAction extends StatelessWidget {
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Avatar(
               size: IconSize.extraLarge.height,
@@ -41,7 +42,7 @@ class VisitorQuickAction extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.2,
                 child: Text(
                   title,
-                  maxLines: 2,
+                  maxLines: 1,
                   overflow: TextOverflow.clip,
                   textAlign: TextAlign.center,
                   style: context.text.labelMedium,

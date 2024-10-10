@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tenaid_mobile/ds/component/spacing.dart';
 import 'package:tenaid_mobile/utils/xts/material_xt.dart';
 
@@ -15,11 +16,12 @@ class InfoText extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: Spacing.extraSmall_w, vertical: Spacing.extraSmall_h),
         child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Icon(
               Icons.info_outline_rounded,
               color: context.color.primary,
+              size: 24.h,
             ),
             SizedBox(
               width: Spacing.extraSmall_w,

@@ -20,7 +20,9 @@ extension EmailValidator on String {
   }
 
   String get asCode {
-    return '${substring(0, 3)}-${substring(3)}';
+    return length > 7
+        ? '${substring(0, 3)}-${substring(3, 6)}-${substring(6)}'
+        : '${substring(0, 3)}-${substring(3)}';
   }
 
   String get avatar {

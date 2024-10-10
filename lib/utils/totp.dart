@@ -6,10 +6,11 @@ import 'otp.dart';
 const String _PREF_VARIABLE_TOKEN = '_PREF_VARIABLE_TOKEN';
 const int MAX_INTERVAL = 9;
 const int MAX_VARIABLE = 99;
+const int MAX_CODE_LENGTH = 11;
 
 const int MEMBER_CODE_LENGTH = 4;
 const int MAX_VARIABLE_LENGTH = 2;
-const int MAX_TOTP_LENGTH = 7;
+const int MAX_TOTP_LENGTH = 6;
 
 class Code {
   final String totp;
@@ -63,7 +64,7 @@ class TOTP {
   }
 
 // convert to customer base 26
-  String _toBase26(int number) {
+  String toBase26(int number) {
     String result = '';
 
     while (number > 0) {
@@ -84,10 +85,9 @@ class TOTP {
       {required String secret,
       required String code,
       required DateTime start,
-      int? variable,
       required int hours}) async {
     // convert to seconds
-    String variableIdentifier = await _variableIdentifier(variable: variable);
+    String variableIdentifier = await _variableIdentifier();
 
     String otp = OTP.generateTOTP(
         secretKey: '$variableIdentifier$secret',
@@ -95,9 +95,9 @@ class TOTP {
         codeLength: MAX_TOTP_LENGTH);
 
     String accessCode =
-        _shuffle('$otp${code.padLeft(MEMBER_CODE_LENGTH, '0')}');
+        _shuffle('$otp${code.padLeft(MEMBER_CODE_LENGTH, '0')}${hours - 1}');
 
-    return _toBase26(int.parse(accessCode));
+    return toBase26(int.parse(accessCode));
   }
 
   Future<String> generateDayOtp(
@@ -108,6 +108,7 @@ class TOTP {
       int? variable}) async {
     // convert to seconds
     String variableIdentifier = await _variableIdentifier(variable: variable);
+    int days = end.difference(start).inDays;
 
     String otp = OTP.generateTOTP(
         secretKey: '$variableIdentifier$secret',
@@ -116,9 +117,9 @@ class TOTP {
         codeLength: MAX_TOTP_LENGTH);
 
     String accessCode =
-        _shuffle('$otp${code.padLeft(MEMBER_CODE_LENGTH, '0')}');
+        _shuffle('$otp${code.padLeft(MEMBER_CODE_LENGTH, '0')}${days - 1}');
 
-    return _toBase26(int.parse(accessCode));
+    return toBase26(int.parse(accessCode));
   }
 
   Future<String> generateExitCode(
@@ -131,8 +132,8 @@ class TOTP {
         codeLength: MAX_TOTP_LENGTH);
 
     String accessCode =
-        _shuffle('$otp${code.padLeft(MEMBER_CODE_LENGTH, '0')}');
+        _shuffle('$otp${code.padLeft(MEMBER_CODE_LENGTH, '0')}0');
 
-    return _toBase26(int.parse(accessCode));
+    return toBase26(int.parse(accessCode));
   }
 }

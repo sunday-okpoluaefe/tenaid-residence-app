@@ -90,8 +90,8 @@ Pair<DateTime, DateTime> get today {
 Pair<DateTime, DateTime> get recent {
   DateTime now = DateTime.now();
   DateTime startDate = DateTime(now.year, now.month, now.day);
+  DateTime prevDay = startDate.subtract(Duration(days: 1));
+  DateTime end = DateTime(prevDay.year, prevDay.month, prevDay.day, 23, 59, 59);
 
-  return Pair(
-      first: startDate.subtract(Duration(days: 29)),
-      second: startDate.subtract(Duration(days: 1)));
+  return Pair(first: startDate.subtract(Duration(days: 29)), second: end);
 }

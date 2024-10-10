@@ -13,14 +13,14 @@ class CommunityDomain {
   final String? updatedAt;
 
   CommunityDomain(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.code,
-      required this.members,
-      required this.type,
-      required this.images,
-      required this.address,
-      required this.createdAt,
-      required this.updatedAt});
+      {this.id,
+      this.name,
+      this.description,
+      this.code,
+      this.members,
+      this.type,
+      this.images = const [],
+      this.address,
+      this.createdAt,
+      this.updatedAt});
 }

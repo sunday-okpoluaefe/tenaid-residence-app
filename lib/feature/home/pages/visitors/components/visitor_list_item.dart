@@ -8,11 +8,16 @@ import 'package:tenaid_mobile/utils/xts/visitor_xts.dart';
 
 class VisitorListItem extends StatelessWidget {
   final VisitorDomain visitor;
+  final EdgeInsets? padding;
   final bool showStatus;
   final Function()? onTap;
 
   const VisitorListItem(
-      {super.key, required this.visitor, this.showStatus = true, this.onTap});
+      {super.key,
+      required this.visitor,
+      this.showStatus = true,
+      this.padding,
+      this.onTap});
 
   @override
   Widget build(BuildContext context) => GestureDetector(
@@ -20,8 +25,9 @@ class VisitorListItem extends StatelessWidget {
           if (onTap != null) onTap!();
         },
         child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: Spacing.small_w, vertical: Spacing.small_h),
+          padding: padding ??
+              EdgeInsets.symmetric(
+                  horizontal: Spacing.small_w, vertical: Spacing.small_h),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -29,7 +35,7 @@ class VisitorListItem extends StatelessWidget {
                 children: [
                   Avatar(
                       title: visitor.name ?? "",
-                      opacity: 0.5,
+                      opacity: 0.3,
                       status: showStatus ? visitor.status : null,
                       size: IconSize.extraLarge.height),
                   SizedBox(
@@ -40,7 +46,7 @@ class VisitorListItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       SizedBox(
-                        width: MediaQuery.of(context).size.width * 0.7,
+                        width: MediaQuery.of(context).size.width * 0.6,
                         child: Text(
                           visitor.name ?? "",
                           softWrap: true,
@@ -53,7 +59,7 @@ class VisitorListItem extends StatelessWidget {
                         padding:
                             EdgeInsets.only(top: Spacing.extraExtraSmall_h),
                         child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.7,
+                          width: MediaQuery.of(context).size.width * 0.6,
                           child: Text(visitor.dateTime,
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,

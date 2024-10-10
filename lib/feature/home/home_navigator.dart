@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:injectable/injectable.dart';
+import 'package:tenaid_mobile/app.dart';
 import 'package:tenaid_mobile/feature/home/home_screen.dart';
 import 'package:tenaid_mobile/feature/home/pages/dashboard/dashboard_screen.dart';
 import 'package:tenaid_mobile/feature/home/pages/messages/message_screen.dart';
@@ -6,6 +8,9 @@ import 'package:tenaid_mobile/feature/home/pages/payments/payment_screen.dart';
 import 'package:tenaid_mobile/feature/home/pages/visitors/visitors_screen.dart';
 import 'package:tenaid_mobile/utils/route_utils/base_navigator.dart';
 
+ValueNotifier<int> homeNavigationListener = ValueNotifier(-1);
+
+@injectable
 class HomeNavigator extends BaseNavigator {
   static const String home = '/home';
   static const String dashboard = '/home/dashboard';
@@ -21,8 +26,13 @@ class HomeNavigator extends BaseNavigator {
     visitors: (BuildContext context) => VisitorsScreen()
   };
 
-  Future parse({required String route, Map<String, dynamic>? param}) {
-    // TODO: implement parse
-    throw UnimplementedError();
+  Future parse({required String route, String? param}) async {
+    if (route.contains('message')) {
+      if (AppNavigatorObserver.currentRoute?.settings.name != null &&
+          AppNavigatorObserver.currentRoute?.settings.name?.isNotEmpty ==
+              true) {
+        homeNavigationListener.value = 1;
+      }
+    }
   }
 }

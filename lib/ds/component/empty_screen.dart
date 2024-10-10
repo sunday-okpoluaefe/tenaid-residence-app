@@ -7,6 +7,8 @@ import '../../../ds/component/spacing.dart';
 
 class EmptyScreen extends StatelessWidget {
   final bool hasError;
+  final String? title;
+  final String? body;
   SvgGenImage? emptyWidget;
   final String? retryTitle;
   final Function()? onTryAgain;
@@ -14,6 +16,8 @@ class EmptyScreen extends StatelessWidget {
   EmptyScreen(
       {super.key,
       this.hasError = false,
+      this.title,
+      this.body,
       this.retryTitle,
       this.onTryAgain,
       this.emptyWidget = Assets.nothingFoundDark});
@@ -33,7 +37,9 @@ class EmptyScreen extends StatelessWidget {
               height: Spacing.extraLarge_h,
             ),
             Text(
-              hasError ? 'Something went wrong' : 'Result not found',
+              hasError
+                  ? 'Something went wrong'
+                  : (title?.isNotEmpty == true ? title! : 'Result not found'),
               textAlign: TextAlign.center,
               style: context.text.titleLarge,
             ),
@@ -43,7 +49,9 @@ class EmptyScreen extends StatelessWidget {
             Text(
               hasError
                   ? 'Whoops! we encountered an issue. kindly try again'
-                  : 'We\'ve looked everywhere, could not find anything.',
+                  : (body?.isNotEmpty == true
+                      ? body!
+                      : 'We\'ve looked everywhere, could not find anything.'),
               textAlign: TextAlign.center,
               style: context.text.titleMedium?.fade(context),
             ),

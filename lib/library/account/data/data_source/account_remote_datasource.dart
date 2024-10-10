@@ -66,8 +66,10 @@ class AccountRemoteDataSource {
     final body = <String, dynamic>{};
     body['token'] = token;
     body['device'] = Platform.isAndroid ? 'android' : 'ios';
-    await api(
-        url: 'account/push-token', requestType: RequestType.post, body: body);
+    try {
+      await api(
+          url: 'account/push-token', requestType: RequestType.post, body: body);
+    } catch (_) {}
   }
 
   Future<void> logout() async {

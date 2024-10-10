@@ -152,7 +152,7 @@ class _State extends State<DashboardScreen> {
             _banner(Assets.adsUtilityCard)
           ],
           options: CarouselOptions(
-              height: 120.0,
+              height: 120.h,
               enlargeCenterPage: true,
               autoPlay: true,
               viewportFraction: 0.9),
@@ -291,13 +291,14 @@ class _State extends State<DashboardScreen> {
       bool hasBadge = false,
       required bool loading}) {
     if (!loading && visitors.isEmpty)
-      return SizedBox();
+      return SizedBox.shrink();
     else if (loading)
       return Padding(
         padding: EdgeInsets.only(top: Spacing.small_h),
-        child: QuickActionsLoader(size: 48),
+        child: QuickActionsLoader(size: 48.w),
       );
     return Container(
+      margin: EdgeInsets.only(top: Spacing.extraSmall_h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -133,7 +133,7 @@ class _State extends State<SingleEntryScreen> {
         //     readOnly: true,
         //     suffixIcon: Assets.chevronDown.svg(fit: BoxFit.scaleDown)),
         SizedBox(
-          height: Spacing.medium_h,
+          height: Spacing.small_h,
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,

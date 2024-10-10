@@ -3,6 +3,7 @@ import 'package:path_provider/path_provider.dart' as path;
 
 import '../../library/community/data/data_source/community_local_datasource.dart';
 import '../../library/core/data/core_repository_impl.dart';
+import '../../library/message/data/datasource/local_message_datasource.dart';
 
 Future<void> setupDatabase() async {
   final appDirectory = await path.getApplicationDocumentsDirectory();
@@ -14,4 +15,5 @@ Future<void> setupDatabase() async {
   CommunityBox = await Hive.openLazyBox('communityBox');
   VisitorBox = await Hive.openLazyBox('visitorBox');
   NotificationBox = await Hive.openLazyBox('appNotificationBox');
+  CommunityMessageBox = await Hive.openLazyBox('communityMessageBox');
 }

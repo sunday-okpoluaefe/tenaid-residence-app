@@ -88,6 +88,9 @@ class _State extends State<VisitorsListScreen> {
                   itemBuilder: (_, item, index) {
                     return VisitorListItem(
                       visitor: item,
+                      padding: EdgeInsets.symmetric(
+                          vertical: Spacing.small_h,
+                          horizontal: Spacing.small_w),
                       showStatus: widget.type != ListType.upcoming,
                       onTap: () {
                         AppBottomSheet(InviteStatusScreen(

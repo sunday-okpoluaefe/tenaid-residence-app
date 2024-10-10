@@ -4,6 +4,7 @@ part 'notification_payload.g.dart';
 
 @JsonSerializable()
 class NotificationPayload {
+  final String title;
   final String type;
   final String description;
   final String community;
@@ -12,6 +13,7 @@ class NotificationPayload {
 
   NotificationPayload(
       {required this.type,
+      required this.title,
       required this.community,
       required this.description,
       required this.link,
@@ -19,4 +21,6 @@ class NotificationPayload {
 
   factory NotificationPayload.fromJson(dynamic json) =>
       _$NotificationPayloadFromJson(json);
+
+  Map<String, dynamic> toJson() => _$NotificationPayloadToJson(this);
 }

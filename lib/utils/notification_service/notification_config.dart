@@ -5,6 +5,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import '../network.dart';
 import 'notification_handler.dart';
 
+Future<String?> getDeviceToken() async {
+  return (Platform.isIOS)
+      ? await FirebaseMessaging.instance.getAPNSToken()
+      : await FirebaseMessaging.instance.getToken();
+}
+
 Future sendDevicePushToken() async {
   // only run when there is internet connection
   if (await NetworkUtil.hasConnectivity()) {
@@ -30,12 +36,13 @@ Future<void> unSubscribeFromTopic({required String topic}) async =>
 Future<void> setupFirebaseNotification() async {
   FirebaseMessaging.onMessage.listen(foregroundHandler);
 
-  FirebaseMessaging.onMessageOpenedApp.listen(backgroundHandler);
+  //FirebaseMessaging.onMessageOpenedApp.listen(backgroundHandler);
+  //FirebaseMessaging.onBackgroundMessage(backgroundHandler);
 
-  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-
-  // await FirebaseMessaging.instance
-  //     .subscribeToTopic("${Config.shared.flavor.name}-global");
+  // FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+  //   if (message.data.isNotEmpty)
+  //     NotificationService.navigatedToScreen(message.data);
+  // });
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true, // Required to display a heads up notification

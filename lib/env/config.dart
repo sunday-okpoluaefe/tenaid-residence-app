@@ -3,6 +3,7 @@ enum Flavor { development, production }
 class Config {
   String appName = "";
   String baseUrl = "";
+  String baseSocketUrl = "";
   String webBaseUrl = "";
   Flavor flavor = Flavor.development;
 
@@ -12,9 +13,11 @@ class Config {
       {String baseUrl = "",
       String appName = "",
       String webBaseUrl = "",
+      String baseSocketUrl = "",
       Flavor flavor = Flavor.development}) {
     return shared = Config(
         appName: appName,
+        baseSocketUrl: baseSocketUrl,
         flavor: flavor,
         webBaseUrl: webBaseUrl,
         baseUrl: baseUrl);
@@ -24,5 +27,6 @@ class Config {
       {required this.flavor,
       required this.webBaseUrl,
       required this.baseUrl,
+      required this.baseSocketUrl,
       required this.appName});
 }
